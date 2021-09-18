@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "reinfchest:diamond_chest"
+    ]
+  },
+  "criteria": {
+    "has_gold_chest": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "reinfchest:gold_chest"
+            ]
+          }
+        ]
+      }
+    },
+    "has_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:diamond"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "reinfchest:diamond_chest"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_chest",
+      "has_diamond",
+      "has_the_recipe"
+    ]
+  ]
+}
