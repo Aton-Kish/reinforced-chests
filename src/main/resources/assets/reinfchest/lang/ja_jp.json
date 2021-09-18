@@ -1,0 +1,7 @@
+{
+  "stat.reinfchest.open_copper_chest": "銅のチェストを開いた回数",
+  "stat.reinfchest.open_iron_chest": "鉄のチェストを開いた回数",
+  "stat.reinfchest.open_gold_chest": "金のチェストを開いた回数",
+  "stat.reinfchest.open_diamond_chest": "ダイヤモンドのチェストを開いた回数",
+  "stat.reinfchest.open_netherite_chest": "ネザライトのチェストを開いた回数"
+}

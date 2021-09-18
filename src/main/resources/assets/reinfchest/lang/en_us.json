@@ -1,0 +1,7 @@
+{
+  "stat.reinfchest.open_copper_chest": "Copper Chests Opened",
+  "stat.reinfchest.open_iron_chest": "Iron Chests Opened",
+  "stat.reinfchest.open_gold_chest": "Gold Chests Opened",
+  "stat.reinfchest.open_diamond_chest": "Diamond Chests Opened",
+  "stat.reinfchest.open_netherite_chest": "Netherite Chests Opened"
+}
