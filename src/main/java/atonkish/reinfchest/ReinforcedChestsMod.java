@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
+import atonkish.reinfchest.item.ModItems;
 import atonkish.reinfchest.stat.ModStats;
 
 public class ReinforcedChestsMod implements ModInitializer {
@@ -21,5 +22,8 @@ public class ReinforcedChestsMod implements ModInitializer {
 		// Blocks
 		ModBlocks.init();
 		ModBlockEntityType.init();
+
+		// Items
+		ModItems.init();
 	}
 }
