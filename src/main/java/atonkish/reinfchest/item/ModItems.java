@@ -2,6 +2,7 @@ package atonkish.reinfchest.item;
 
 import java.util.HashMap;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -17,8 +18,10 @@ public class ModItems {
     public static final HashMap<ReinforcingMaterial, Item> REINFORCED_CHEST_MAP;
 
     public static void init() {
-        Item iconItem = REINFORCED_CHEST_MAP.get(ReinforcingMaterial.NETHERITE);
-        ((ItemGroupInterface) ModItemGroup.REINFORCED_STORAGE).setIcon(iconItem);
+        if (!FabricLoader.getInstance().isModLoaded("reinfshulker")) {
+            Item iconItem = REINFORCED_CHEST_MAP.get(ReinforcingMaterial.NETHERITE);
+            ((ItemGroupInterface) ModItemGroup.REINFORCED_STORAGE).setIcon(iconItem);
+        }
     }
 
     private static Item register(BlockItem item) {
