@@ -1,0 +1,22 @@
+{
+  "container.reinfchest.copperChest": "Copper Chest",
+  "container.reinfchest.ironChest": "Iron Chest",
+  "container.reinfchest.goldChest": "Gold Chest",
+  "container.reinfchest.diamondChest": "Diamond Chest",
+  "container.reinfchest.netheriteChest": "Netherite Chest",
+  "container.reinfchest.copperChestDouble": "Large Copper Chest",
+  "container.reinfchest.ironChestDouble": "Large Iron Chest",
+  "container.reinfchest.goldChestDouble": "Large Gold Chest",
+  "container.reinfchest.diamondChestDouble": "Large Diamond Chest",
+  "container.reinfchest.netheriteChestDouble": "Large Netherite Chest",
+  "block.reinfchest.copper_chest": "Copper Chest",
+  "block.reinfchest.iron_chest": "Iron Chest",
+  "block.reinfchest.gold_chest": "Gold Chest",
+  "block.reinfchest.diamond_chest": "Diamond Chest",
+  "block.reinfchest.netherite_chest": "Netherite Chest",
+  "stat.reinfchest.open_copper_chest": "Copper Chests Opened",
+  "stat.reinfchest.open_iron_chest": "Iron Chests Opened",
+  "stat.reinfchest.open_gold_chest": "Gold Chests Opened",
+  "stat.reinfchest.open_diamond_chest": "Diamond Chests Opened",
+  "stat.reinfchest.open_netherite_chest": "Netherite Chests Opened"
+}

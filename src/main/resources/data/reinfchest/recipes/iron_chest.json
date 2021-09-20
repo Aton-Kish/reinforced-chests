@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MCM",
+    "MMM"
+  ],
+  "key": {
+    "C": {
+      "item": "reinfchest:copper_chest"
+    },
+    "M": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "reinfchest:iron_chest"
+  }
+}

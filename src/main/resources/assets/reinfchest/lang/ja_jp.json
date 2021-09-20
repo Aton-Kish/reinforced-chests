@@ -1,0 +1,22 @@
+{
+  "container.reinfchest.copperChest": "銅のチェスト",
+  "container.reinfchest.ironChest": "鉄のチェスト",
+  "container.reinfchest.goldChest": "金のチェスト",
+  "container.reinfchest.diamondChest": "ダイヤモンドのチェスト",
+  "container.reinfchest.netheriteChest": "ネザライトのチェスト",
+  "container.reinfchest.copperChestDouble": "銅のラージチェスト",
+  "container.reinfchest.ironChestDouble": "鉄のラージチェスト",
+  "container.reinfchest.goldChestDouble": "金のラージチェスト",
+  "container.reinfchest.diamondChestDouble": "ダイヤモンドのラージチェスト",
+  "container.reinfchest.netheriteChestDouble": "ネザライトのラージチェスト",
+  "block.reinfchest.copper_chest": "銅のチェスト",
+  "block.reinfchest.iron_chest": "鉄のチェスト",
+  "block.reinfchest.gold_chest": "金のチェスト",
+  "block.reinfchest.diamond_chest": "ダイヤモンドのチェスト",
+  "block.reinfchest.netherite_chest": "ネザライトのチェスト",
+  "stat.reinfchest.open_copper_chest": "銅のチェストを開いた回数",
+  "stat.reinfchest.open_iron_chest": "鉄のチェストを開いた回数",
+  "stat.reinfchest.open_gold_chest": "金のチェストを開いた回数",
+  "stat.reinfchest.open_diamond_chest": "ダイヤモンドのチェストを開いた回数",
+  "stat.reinfchest.open_netherite_chest": "ネザライトのチェストを開いた回数"
+}
