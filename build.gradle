@@ -11,7 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 ext {
-	reinforcedCoreVersion = "1.0.2"
+	reinforcedCoreVersion = "1.1.0"
 }
 
 repositories {
