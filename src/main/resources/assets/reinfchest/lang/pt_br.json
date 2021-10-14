@@ -1,0 +1,22 @@
+{
+  "container.reinfchest.copperChest": "Baú de cobre",
+  "container.reinfchest.ironChest": "Baú de ferro",
+  "container.reinfchest.goldChest": "Baú de ouro",
+  "container.reinfchest.diamondChest": "Baú de diamante",
+  "container.reinfchest.netheriteChest": "Baú de netherita",
+  "container.reinfchest.copperChestDouble": "Báu grande de cobre",
+  "container.reinfchest.ironChestDouble": "Báu grande de ferro",
+  "container.reinfchest.goldChestDouble": "Báu grande de ouro",
+  "container.reinfchest.diamondChestDouble": "Báu grande de diamante",
+  "container.reinfchest.netheriteChestDouble": "Báu grande de netherita",
+  "block.reinfchest.copper_chest": "Baú de cobre",
+  "block.reinfchest.iron_chest": "Baú de ferro",
+  "block.reinfchest.gold_chest": "Baú de ouro",
+  "block.reinfchest.diamond_chest": "Baú de diamante",
+  "block.reinfchest.netherite_chest": "Baú de netherita",
+  "stat.reinfchest.open_copper_chest": "Baús de cobre abertos",
+  "stat.reinfchest.open_iron_chest": "Baús de ferro abertos",
+  "stat.reinfchest.open_gold_chest": "Baús de ouro abertos",
+  "stat.reinfchest.open_diamond_chest": "Baús de diamante abertos",
+  "stat.reinfchest.open_netherite_chest": "Baús de netherita abertos"
+}
