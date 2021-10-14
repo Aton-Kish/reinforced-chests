@@ -8,8 +8,9 @@
     "Aton-Kish"
   ],
   "contact": {
-    "homepage": "https://github.com/Aton-Kish/reinforced-chests",
-    "sources": "https://github.com/Aton-Kish/reinforced-chests"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/reinforced-chests",
+    "sources": "https://github.com/Aton-Kish/reinforced-chests",
+    "issues": "https://github.com/Aton-Kish/reinforced-chests/issues"
   },
   "license": "MIT",
   "icon": "assets/reinfchest/icon.png",
@@ -30,8 +31,5 @@
     "fabric": "*",
     "minecraft": "1.17.x",
     "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
