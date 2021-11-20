@@ -4,7 +4,7 @@
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
 [![Downloads](https://raw.githubusercontent.com/Aton-Kish/mcmod-stats/main/reinforced-chests/downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/reinforced-chests)
 [![MIT License](https://img.shields.io/static/v1?label=licence&message=MIT&color=blue)](./LICENSE)
-[![build](https://github.com/Aton-Kish/reinforced-chests/actions/workflows/build.yml/badge.svg?branch=1.17)](https://github.com/Aton-Kish/reinforced-chests/actions/workflows/build.yml?query=branch:1.17)
+[![build](https://github.com/Aton-Kish/reinforced-chests/actions/workflows/build.yml/badge.svg?branch=1.18)](https://github.com/Aton-Kish/reinforced-chests/actions/workflows/build.yml?query=branch:1.18)
 
 # Reinforced Chests
 
