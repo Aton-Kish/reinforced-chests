@@ -3,7 +3,6 @@ package atonkish.reinfchest.block;
 import java.util.HashMap;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
@@ -28,30 +27,29 @@ public class ModBlocks {
     private static FabricBlockSettings createMaterialSettings(ReinforcingMaterial material) {
         FabricBlockSettings settings;
         switch (material) {
-            case COPPER:
-                settings = FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).strength(2.5F, 6.0F)
-                        .sounds(BlockSoundGroup.COPPER);
-                break;
-            case IRON:
-                settings = FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).strength(2.5F, 6.0F)
-                        .sounds(BlockSoundGroup.METAL);
-                break;
-            case GOLD:
-                settings = FabricBlockSettings.of(Material.METAL, MapColor.GOLD).strength(2.5F, 6.0F)
-                        .sounds(BlockSoundGroup.METAL);
-                break;
-            case DIAMOND:
-                settings = FabricBlockSettings.of(Material.METAL, MapColor.DIAMOND_BLUE).strength(2.5F, 6.0F)
-                        .sounds(BlockSoundGroup.METAL);
-                break;
-            case NETHERITE:
-                settings = FabricBlockSettings.of(Material.METAL, MapColor.BLACK).strength(2.5F, 1200.0F)
-                        .sounds(BlockSoundGroup.NETHERITE);
-                break;
-            default:
-                settings = FabricBlockSettings.of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD);
+        case COPPER:
+            settings = FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).strength(2.5F, 6.0F)
+                    .sounds(BlockSoundGroup.COPPER);
+            break;
+        case IRON:
+            settings = FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).strength(2.5F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL);
+            break;
+        case GOLD:
+            settings = FabricBlockSettings.of(Material.METAL, MapColor.GOLD).strength(2.5F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL);
+            break;
+        case DIAMOND:
+            settings = FabricBlockSettings.of(Material.METAL, MapColor.DIAMOND_BLUE).strength(2.5F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL);
+            break;
+        case NETHERITE:
+            settings = FabricBlockSettings.of(Material.METAL, MapColor.BLACK).strength(2.5F, 1200.0F)
+                    .sounds(BlockSoundGroup.NETHERITE);
+            break;
+        default:
+            settings = FabricBlockSettings.of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD);
         }
-        settings = settings.breakByTool(FabricToolTags.AXES);
         return settings;
     }
 

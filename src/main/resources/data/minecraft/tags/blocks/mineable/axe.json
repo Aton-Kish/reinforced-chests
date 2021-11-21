@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "reinfchest:copper_chest",
+    "reinfchest:iron_chest",
+    "reinfchest:gold_chest",
+    "reinfchest:diamond_chest",
+    "reinfchest:netherite_chest"
+  ]
+}
