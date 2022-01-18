@@ -10,10 +10,6 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-ext {
-	reinforcedCoreVersion = "1.1.2+1.18"
-}
-
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -35,8 +31,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Reinforced Core
-	modImplementation "atonkish.reinfcore:reinforced-core:${reinforcedCoreVersion}"
-	include "atonkish.reinfcore:reinforced-core:${reinforcedCoreVersion}"
+	modImplementation "atonkish.reinfcore:reinforced-core:${project.reinforced_core_version}"
+	include "atonkish.reinfcore:reinforced-core:${project.reinforced_core_version}"
 }
 
 processResources {
