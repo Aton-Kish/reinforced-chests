@@ -1,0 +1,22 @@
+{
+  "container.reinfchest.copperChest": "铜箱子",
+  "container.reinfchest.ironChest": "铁箱子",
+  "container.reinfchest.goldChest": "金箱子",
+  "container.reinfchest.diamondChest": "钻石箱子",
+  "container.reinfchest.netheriteChest": "下界合金箱子",
+  "container.reinfchest.copperChestDouble": "大型铜箱子",
+  "container.reinfchest.ironChestDouble": "大型铁箱子",
+  "container.reinfchest.goldChestDouble": "大型金箱子",
+  "container.reinfchest.diamondChestDouble": "大型钻石箱子",
+  "container.reinfchest.netheriteChestDouble": "大型下界合金箱子",
+  "block.reinfchest.copper_chest": "铜箱子",
+  "block.reinfchest.iron_chest": "铁箱子",
+  "block.reinfchest.gold_chest": "金箱子",
+  "block.reinfchest.diamond_chest": "钻石箱子",
+  "block.reinfchest.netherite_chest": "下界合金箱子",
+  "stat.reinfchest.open_copper_chest": "铜箱子打开次数",
+  "stat.reinfchest.open_iron_chest": "铁箱子打开次数",
+  "stat.reinfchest.open_gold_chest": "金箱子打开次数",
+  "stat.reinfchest.open_diamond_chest": "钻石箱子打开次数",
+  "stat.reinfchest.open_netherite_chest": "下界合金箱子打开次数"
+}
