@@ -1,12 +1,5 @@
 package atonkish.reinfchest;
 
-import atonkish.reinfchest.block.ModBlocks;
-import atonkish.reinfchest.block.ReinforcedChestBlock;
-import atonkish.reinfchest.block.entity.ModBlockEntityType;
-import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
-import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntityRenderer;
-import atonkish.reinfcore.util.ReinforcingMaterial;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -22,15 +15,35 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
+import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
+import atonkish.reinfcore.api.ReinforcedCoreClientRegistry;
+import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfchest.block.ModBlocks;
+import atonkish.reinfchest.block.ReinforcedChestBlock;
+import atonkish.reinfchest.block.entity.ModBlockEntityType;
+import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
+import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntityRenderer;
+
 @Environment(EnvType.CLIENT)
-public class ReinforcedChestsClientMod implements ClientModInitializer {
+public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitializer {
 	@Override
-	public void onInitializeClient() {
+	public void onInitializeReinforcedCoreClient() {
+		// init Reinforced Core
+		initializeReinforcedCoreClient();
+
 		// Block Entity Renderer
 		registerBlockEntityRenderer();
 
 		// Item Renderer
 		registerBuiltinItemRenderer();
+	}
+
+	private static void initializeReinforcedCoreClient() {
+		for (ReinforcingMaterial material : ReinforcedChestsMod.MATERIALS) {
+			// Reinforced Storage Screen
+			ReinforcedCoreClientRegistry.registerSingleBlockScreen(material);
+			ReinforcedCoreClientRegistry.registerDoubleBlockScreen(material);
+		}
 	}
 
 	private static void registerBlockEntityRenderer() {
