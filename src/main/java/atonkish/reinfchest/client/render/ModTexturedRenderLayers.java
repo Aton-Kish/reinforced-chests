@@ -12,6 +12,7 @@ import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfcore.util.ReinforcingMaterials;
 import atonkish.reinfchest.ReinforcedChestsMod;
 
 @Environment(EnvType.CLIENT)
@@ -65,10 +66,10 @@ public class ModTexturedRenderLayers {
         REINFORCED_CHEST_SINGLE_MAP = new HashMap<>();
         REINFORCED_CHEST_LEFT_MAP = new HashMap<>();
         REINFORCED_CHEST_RIGHT_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
+        for (ReinforcingMaterial material : ReinforcingMaterials.MAP.values()) {
             // Atlas Texture
             Identifier atlasTexture = new Identifier(ReinforcedChestsMod.MOD_ID,
-                    "textures/atlas/" + material + "_chest.png");
+                    "textures/atlas/" + material.getName() + "_chest.png");
             REINFORCED_CHEST_ATLAS_TEXTURE_MAP.put(material, atlasTexture);
 
             // Render Layer

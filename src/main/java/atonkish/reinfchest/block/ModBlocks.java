@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfcore.util.ReinforcingMaterials;
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
 
@@ -26,36 +27,36 @@ public class ModBlocks {
 
     private static FabricBlockSettings createMaterialSettings(ReinforcingMaterial material) {
         FabricBlockSettings settings;
-        switch (material) {
-        case COPPER:
-            settings = FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).strength(2.5F, 6.0F)
-                    .sounds(BlockSoundGroup.COPPER);
-            break;
-        case IRON:
-            settings = FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).strength(2.5F, 6.0F)
-                    .sounds(BlockSoundGroup.METAL);
-            break;
-        case GOLD:
-            settings = FabricBlockSettings.of(Material.METAL, MapColor.GOLD).strength(2.5F, 6.0F)
-                    .sounds(BlockSoundGroup.METAL);
-            break;
-        case DIAMOND:
-            settings = FabricBlockSettings.of(Material.METAL, MapColor.DIAMOND_BLUE).strength(2.5F, 6.0F)
-                    .sounds(BlockSoundGroup.METAL);
-            break;
-        case NETHERITE:
-            settings = FabricBlockSettings.of(Material.METAL, MapColor.BLACK).strength(2.5F, 1200.0F)
-                    .sounds(BlockSoundGroup.NETHERITE);
-            break;
-        default:
-            settings = FabricBlockSettings.of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD);
+        switch (material.getName()) {
+            case "copper":
+                settings = FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).strength(2.5F, 6.0F)
+                        .sounds(BlockSoundGroup.COPPER);
+                break;
+            case "iron":
+                settings = FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).strength(2.5F, 6.0F)
+                        .sounds(BlockSoundGroup.METAL);
+                break;
+            case "gold":
+                settings = FabricBlockSettings.of(Material.METAL, MapColor.GOLD).strength(2.5F, 6.0F)
+                        .sounds(BlockSoundGroup.METAL);
+                break;
+            case "diamond":
+                settings = FabricBlockSettings.of(Material.METAL, MapColor.DIAMOND_BLUE).strength(2.5F, 6.0F)
+                        .sounds(BlockSoundGroup.METAL);
+                break;
+            case "netherite":
+                settings = FabricBlockSettings.of(Material.METAL, MapColor.BLACK).strength(2.5F, 1200.0F)
+                        .sounds(BlockSoundGroup.NETHERITE);
+                break;
+            default:
+                settings = FabricBlockSettings.of(Material.WOOD).strength(2.5F).sounds(BlockSoundGroup.WOOD);
         }
         return settings;
     }
 
     static {
         REINFORCED_CHEST_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
+        for (ReinforcingMaterial material : ReinforcingMaterials.MAP.values()) {
             Block block = register(material.getName() + "_chest",
                     new ReinforcedChestBlock(material, createMaterialSettings(material), () -> {
                         return ModBlockEntityType.REINFORCED_CHEST_MAP.get(material);

@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import atonkish.reinfcore.screen.ReinforcedStorageScreenHandler;
 import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfcore.util.ReinforcingMaterials;
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.stat.ModStats;
@@ -62,7 +63,7 @@ public class ReinforcedChestBlock extends ChestBlock {
 
     static {
         NAME_RETRIEVER_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
+        for (ReinforcingMaterial material : ReinforcingMaterials.MAP.values()) {
             DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> nameRetriever = new DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>() {
                 public Optional<NamedScreenHandlerFactory> getFromBoth(ChestBlockEntity chestBlockEntity,
                         ChestBlockEntity chestBlockEntity2) {

@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfcore.util.ReinforcingMaterials;
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.ModBlocks;
 
@@ -33,7 +34,7 @@ public class ModBlockEntityType {
 
     static {
         REINFORCED_CHEST_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
+        for (ReinforcingMaterial material : ReinforcingMaterials.MAP.values()) {
             BlockEntityType<ReinforcedChestBlockEntity> blockEntityType = create(material.getName() + "_chest",
                     FabricBlockEntityTypeBuilder.create(createBlockEntityTypeFactory(material),
                             ModBlocks.REINFORCED_CHEST_MAP.get(material)));
