@@ -7,6 +7,7 @@ import net.minecraft.block.MapColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
+
 import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.item.ModItemGroup;
 import atonkish.reinfcore.util.ReinforcingMaterial;
