@@ -15,14 +15,14 @@ import atonkish.reinfchest.block.ModBlocks;
 
 public class ModItems {
     public static final LinkedHashMap<ReinforcingMaterial, Item> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
-    public static final LinkedHashMap<ReinforcingMaterial, Item.Settings> REINFORCED_CHEST_SETTING_MAP = new LinkedHashMap<>();
+    public static final LinkedHashMap<ReinforcingMaterial, Item.Settings> REINFORCED_CHEST_SETTINGS_MAP = new LinkedHashMap<>();
 
     public static Item registerMaterial(ReinforcingMaterial material, Item.Settings settings) {
-        REINFORCED_CHEST_SETTING_MAP.put(material, settings);
+        REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
 
         Item item = register(
                 new BlockItem(ModBlocks.REINFORCED_CHEST_MAP.get(material),
-                        REINFORCED_CHEST_SETTING_MAP.get(material)));
+                        REINFORCED_CHEST_SETTINGS_MAP.get(material)));
 
         REINFORCED_CHEST_MAP.put(material, item);
 
