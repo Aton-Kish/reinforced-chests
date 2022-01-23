@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import atonkish.reinfcore.api.ReinforcedCoreModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
 
 public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
@@ -29,7 +28,6 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 		initializeReinforcedCore();
 
 		// Blocks
-		ModBlocks.init();
 		ModBlockEntityType.init();
 	}
 
