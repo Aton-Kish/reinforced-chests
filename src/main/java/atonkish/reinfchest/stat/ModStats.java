@@ -1,6 +1,6 @@
 package atonkish.reinfchest.stat;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.Stats;
@@ -8,13 +8,18 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 import atonkish.reinfchest.ReinforcedChestsMod;
 
 public class ModStats {
-    public static final HashMap<ReinforcingMaterial, Identifier> OPEN_REINFORCED_CHEST_MAP;
+    public static final LinkedHashMap<ReinforcingMaterial, Identifier> OPEN_REINFORCED_CHEST_MAP = new LinkedHashMap<>();
 
-    public static void init() {
+    public static Identifier registerMaterialOpen(ReinforcingMaterial material) {
+        String id = "open_" + material.getName() + "_chest";
+        Identifier identifier = register(id, StatFormatter.DEFAULT);
+
+        OPEN_REINFORCED_CHEST_MAP.put(material, identifier);
+
+        return identifier;
     }
 
     private static Identifier register(String id, StatFormatter formatter) {
@@ -22,13 +27,5 @@ public class ModStats {
         Registry.register(Registry.CUSTOM_STAT, id, identifier);
         Stats.CUSTOM.getOrCreateStat(identifier, formatter);
         return identifier;
-    }
-
-    static {
-        OPEN_REINFORCED_CHEST_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterials.MAP.values()) {
-            Identifier identifier = register("open_" + material.getName() + "_chest", StatFormatter.DEFAULT);
-            OPEN_REINFORCED_CHEST_MAP.put(material, identifier);
-        }
     }
 }
