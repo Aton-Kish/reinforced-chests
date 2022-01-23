@@ -58,11 +58,11 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 			ReinforcingMaterial material = materialSettings.getMaterial();
 
 			// Textured Render Layers
-			ReinforcedChestsClientRegistry.registerMaterialAtlasTexture(material);
-			ReinforcedChestsClientRegistry.registerMaterialRenderLayer(material);
-			ReinforcedChestsClientRegistry.registerMaterialSingleSprite(material);
-			ReinforcedChestsClientRegistry.registerMaterialLeftSprite(material);
-			ReinforcedChestsClientRegistry.registerMaterialRightSprite(material);
+			ReinforcedChestsClientRegistry.registerMaterialAtlasTexture(ReinforcedChestsMod.MOD_ID, material);
+			ReinforcedChestsClientRegistry.registerMaterialRenderLayer(ReinforcedChestsMod.MOD_ID, material);
+			ReinforcedChestsClientRegistry.registerMaterialSingleSprite(ReinforcedChestsMod.MOD_ID, material);
+			ReinforcedChestsClientRegistry.registerMaterialLeftSprite(ReinforcedChestsMod.MOD_ID, material);
+			ReinforcedChestsClientRegistry.registerMaterialRightSprite(ReinforcedChestsMod.MOD_ID, material);
 
 			// Block Entity Renderer
 			BlockEntityRendererRegistry

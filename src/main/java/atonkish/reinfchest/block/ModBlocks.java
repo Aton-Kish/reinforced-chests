@@ -7,17 +7,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
 
 public class ModBlocks {
     public static final LinkedHashMap<ReinforcingMaterial, Block> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
     public static final LinkedHashMap<ReinforcingMaterial, Block.Settings> REINFORCED_CHEST_SETTINGS_MAP = new LinkedHashMap<>();
 
-    public static Block registerMaterial(ReinforcingMaterial material, Block.Settings settings) {
+    public static Block registerMaterial(String namespace, ReinforcingMaterial material, Block.Settings settings) {
         REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
 
-        Block block = register(material.getName() + "_chest",
+        Block block = register(namespace, material.getName() + "_chest",
                 new ReinforcedChestBlock(material, REINFORCED_CHEST_SETTINGS_MAP.get(material), () -> {
                     return ModBlockEntityType.REINFORCED_CHEST_MAP.get(material);
                 }));
@@ -27,7 +26,7 @@ public class ModBlocks {
         return block;
     }
 
-    private static Block register(String id, Block block) {
-        return Registry.register(Registry.BLOCK, new Identifier(ReinforcedChestsMod.MOD_ID, id), block);
+    private static Block register(String namespace, String id, Block block) {
+        return Registry.register(Registry.BLOCK, new Identifier(namespace, id), block);
     }
 }

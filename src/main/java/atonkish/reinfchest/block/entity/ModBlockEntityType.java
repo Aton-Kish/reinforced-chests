@@ -10,27 +10,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.ModBlocks;
 
 public class ModBlockEntityType {
     public static final LinkedHashMap<ReinforcingMaterial, BlockEntityType<ReinforcedChestBlockEntity>> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
 
-    public static BlockEntityType<ReinforcedChestBlockEntity> registerMaterial(ReinforcingMaterial material) {
+    public static BlockEntityType<ReinforcedChestBlockEntity> registerMaterial(String namespace,
+            ReinforcingMaterial material) {
         String id = material.getName() + "_chest";
         FabricBlockEntityTypeBuilder<ReinforcedChestBlockEntity> builder = FabricBlockEntityTypeBuilder.create(
                 createBlockEntityTypeFactory(material),
                 ModBlocks.REINFORCED_CHEST_MAP.get(material));
-        BlockEntityType<ReinforcedChestBlockEntity> blockEntityType = create(id, builder);
+        BlockEntityType<ReinforcedChestBlockEntity> blockEntityType = create(namespace, id, builder);
 
         REINFORCED_CHEST_MAP.put(material, blockEntityType);
 
         return blockEntityType;
     }
 
-    private static BlockEntityType<ReinforcedChestBlockEntity> create(String id,
+    private static BlockEntityType<ReinforcedChestBlockEntity> create(String namespace, String id,
             FabricBlockEntityTypeBuilder<ReinforcedChestBlockEntity> builder) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(ReinforcedChestsMod.MOD_ID, id),
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(namespace, id),
                 builder.build(null));
     }
 

@@ -13,24 +13,24 @@ import atonkish.reinfchest.item.ModItems;
 import atonkish.reinfchest.stat.ModStats;
 
 public class ReinforcedChestsRegistry {
-    public static Identifier registerMaterialOpenStat(ReinforcingMaterial material) {
-        return ModStats.registerMaterialOpen(material);
+    public static Identifier registerMaterialOpenStat(String namespace, ReinforcingMaterial material) {
+        return ModStats.registerMaterialOpen(namespace, material);
     }
 
-    public static Block registerMaterialBlock(ReinforcingMaterial material, Block.Settings settings) {
-        return ModBlocks.registerMaterial(material, settings);
+    public static Block registerMaterialBlock(String namespace, ReinforcingMaterial material, Block.Settings settings) {
+        return ModBlocks.registerMaterial(namespace, material, settings);
     }
 
     public static BlockEntityType<ReinforcedChestBlockEntity> registerMaterialBlockEntityType(
-            ReinforcingMaterial material) {
-        return ModBlockEntityType.registerMaterial(material);
+            String namespace, ReinforcingMaterial material) {
+        return ModBlockEntityType.registerMaterial(namespace, material);
     }
 
-    public static Item registerMaterialItem(ReinforcingMaterial material, Item.Settings settings) {
+    public static Item registerMaterialItem(String namespace, ReinforcingMaterial material, Item.Settings settings) {
         return ModItems.registerMaterial(material, settings);
     }
 
-    public static void registerMaterialItemGroupIcon(ReinforcingMaterial material) {
+    public static void registerMaterialItemGroupIcon(String namespace, ReinforcingMaterial material) {
         ModItems.registerMaterialItemGroupIcon(material);
     }
 }

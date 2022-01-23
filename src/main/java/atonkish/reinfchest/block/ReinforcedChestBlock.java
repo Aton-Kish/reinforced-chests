@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import atonkish.reinfcore.screen.ReinforcedStorageScreenHandler;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfcore.util.ReinforcingMaterials;
-import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.stat.ModStats;
 
@@ -87,9 +86,10 @@ public class ReinforcedChestBlock extends ChestBlock {
                             if (chestBlockEntity.hasCustomName()) {
                                 return chestBlockEntity.getDisplayName();
                             } else {
+                                String namespace = BlockEntityType.getId(chestBlockEntity.getType()).getNamespace();
                                 return (Text) (chestBlockEntity2.hasCustomName() ? chestBlockEntity2.getDisplayName()
-                                        : new TranslatableText("container." + ReinforcedChestsMod.MOD_ID + "."
-                                                + material.getName() + "ChestDouble"));
+                                        : new TranslatableText(
+                                                "container." + namespace + "." + material.getName() + "ChestDouble"));
                             }
                         }
                     });

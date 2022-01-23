@@ -49,19 +49,20 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 			ReinforcingMaterial material = materialSettings.getMaterial();
 
 			// Stats
-			ReinforcedChestsRegistry.registerMaterialOpenStat(material);
+			ReinforcedChestsRegistry.registerMaterialOpenStat(MOD_ID, material);
 
 			// Blocks
-			ReinforcedChestsRegistry.registerMaterialBlock(material, materialSettings.getBlockSettings());
-			ReinforcedChestsRegistry.registerMaterialBlockEntityType(material);
+			ReinforcedChestsRegistry.registerMaterialBlock(MOD_ID, material, materialSettings.getBlockSettings());
+			ReinforcedChestsRegistry.registerMaterialBlockEntityType(MOD_ID, material);
 
 			// Items
-			ReinforcedChestsRegistry.registerMaterialItem(material, materialSettings.getItemSettings());
+			ReinforcedChestsRegistry.registerMaterialItem(MOD_ID, material, materialSettings.getItemSettings());
 		}
 
 		// Item Group Icon
 		if (!FabricLoader.getInstance().isModLoaded("reinfshulker")) {
-			ReinforcedChestsRegistry.registerMaterialItemGroupIcon(ReinforcingMaterialSettings.NETHERITE.getMaterial());
+			ReinforcedChestsRegistry.registerMaterialItemGroupIcon(MOD_ID,
+					ReinforcingMaterialSettings.NETHERITE.getMaterial());
 		}
 	}
 }
