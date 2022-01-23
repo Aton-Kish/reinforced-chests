@@ -1,10 +1,12 @@
 package atonkish.reinfchest;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Items;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import atonkish.reinfchest.api.ReinforcedChestsModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
@@ -25,6 +27,11 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 	public void onInitializeReinforcedCore() {
 		// init Reinforced Core
 		initializeReinforcedCore();
+
+		// entrypoint: "reinfchest"
+		FabricLoader.getInstance()
+				.getEntrypoints(MOD_ID, ReinforcedChestsModInitializer.class)
+				.forEach(ReinforcedChestsModInitializer::onInitializeReinforcedChests);
 	}
 
 	private static void initializeReinforcedCore() {

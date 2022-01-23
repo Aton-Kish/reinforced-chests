@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.Direction;
 import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreClientRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfchest.api.ReinforcedChestsClientModInitializer;
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.block.ReinforcedChestBlock;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
@@ -36,6 +38,11 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 
 		// Item Renderer
 		registerBuiltinItemRenderer();
+
+		// entrypoint: "reinfchestclient"
+		FabricLoader.getInstance()
+				.getEntrypoints(ReinforcedChestsMod.MOD_ID + "client", ReinforcedChestsClientModInitializer.class)
+				.forEach(ReinforcedChestsClientModInitializer::onInitializeReinforcedChestsClient);
 	}
 
 	private static void initializeReinforcedCoreClient() {
