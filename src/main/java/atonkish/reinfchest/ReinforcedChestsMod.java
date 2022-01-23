@@ -1,27 +1,20 @@
 package atonkish.reinfchest;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.Items;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import atonkish.reinfchest.api.ReinforcedChestsModInitializer;
+import atonkish.reinfchest.api.ReinforcedChestsRegistry;
+import atonkish.reinfchest.util.ReinforcingMaterialSettings;
 import atonkish.reinfcore.api.ReinforcedCoreModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 
-public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
+public class ReinforcedChestsMod implements ReinforcedCoreModInitializer, ReinforcedChestsModInitializer {
 	public static final String MOD_ID = "reinfchest";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-
-	public static final ReinforcingMaterial[] MATERIALS = new ReinforcingMaterial[] {
-			new ReinforcingMaterial("copper", 45, Items.COPPER_INGOT),
-			new ReinforcingMaterial("iron", 54, Items.IRON_INGOT),
-			new ReinforcingMaterial("gold", 81, Items.GOLD_INGOT),
-			new ReinforcingMaterial("diamond", 108, Items.DIAMOND),
-			new ReinforcingMaterial("netherite", 108, Items.NETHERITE_INGOT),
-	};
 
 	@Override
 	public void onInitializeReinforcedCore() {
@@ -34,8 +27,16 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 				.forEach(ReinforcedChestsModInitializer::onInitializeReinforcedChests);
 	}
 
+	@Override
+	public void onInitializeReinforcedChests() {
+		// init Reinforced Chests
+		initializeReinforcedChests();
+	}
+
 	private static void initializeReinforcedCore() {
-		for (ReinforcingMaterial material : MATERIALS) {
+		for (ReinforcingMaterialSettings materialSettings : ReinforcingMaterialSettings.values()) {
+			ReinforcingMaterial material = materialSettings.getMaterial();
+
 			// Reinforcing Material
 			ReinforcedCoreRegistry.registerReinforcingMaterial(material);
 
@@ -46,6 +47,27 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 			// Reinforced Storage Screen Handler
 			ReinforcedCoreRegistry.registerSingleBlockScreenHandler(material);
 			ReinforcedCoreRegistry.registerDoubleBlockScreenHandler(material);
+		}
+	}
+
+	private static void initializeReinforcedChests() {
+		for (ReinforcingMaterialSettings materialSettings : ReinforcingMaterialSettings.values()) {
+			ReinforcingMaterial material = materialSettings.getMaterial();
+
+			// Stats
+			ReinforcedChestsRegistry.registerMaterialOpenStat(material);
+
+			// Blocks
+			ReinforcedChestsRegistry.registerMaterialBlock(material, materialSettings.getBlockSettings());
+			ReinforcedChestsRegistry.registerMaterialBlockEntityType(material);
+
+			// Items
+			ReinforcedChestsRegistry.registerMaterialItem(material, materialSettings.getItemSettings());
+		}
+
+		// Item Group Icon
+		if (!FabricLoader.getInstance().isModLoaded("reinfshulker")) {
+			ReinforcedChestsRegistry.registerMaterialItemGroupIcon(ReinforcingMaterialSettings.NETHERITE.getMaterial());
 		}
 	}
 }

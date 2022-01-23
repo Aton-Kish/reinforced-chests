@@ -19,9 +19,16 @@
     "reinfcore": [
       "atonkish.reinfchest.ReinforcedChestsMod"
     ],
+    "reinfchest": [
+      "atonkish.reinfchest.ReinforcedChestsMod"
+    ],
     "reinfcoreclient": [
       "atonkish.reinfchest.ReinforcedChestsClientMod"
+    ],
+    "reinfchestclient": [
+      "atonkish.reinfchest.ReinforcedChestsClientMod"
     ]
+
   },
   "mixins": [
     "reinfchest.mixins.json"
