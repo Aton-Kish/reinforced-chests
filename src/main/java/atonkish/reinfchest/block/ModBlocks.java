@@ -14,7 +14,9 @@ public class ModBlocks {
     public static final LinkedHashMap<ReinforcingMaterial, Block> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
     public static final LinkedHashMap<ReinforcingMaterial, Block.Settings> REINFORCED_CHEST_SETTING_MAP = new LinkedHashMap<>();
 
-    public static Block registerMaterial(ReinforcingMaterial material) {
+    public static Block registerMaterial(ReinforcingMaterial material, Block.Settings settings) {
+        REINFORCED_CHEST_SETTING_MAP.put(material, settings);
+
         Block block = register(material.getName() + "_chest",
                 new ReinforcedChestBlock(material, REINFORCED_CHEST_SETTING_MAP.get(material), () -> {
                     return ModBlockEntityType.REINFORCED_CHEST_MAP.get(material);
@@ -23,12 +25,6 @@ public class ModBlocks {
         REINFORCED_CHEST_MAP.put(material, block);
 
         return block;
-    }
-
-    public static Block.Settings registerMaterialSetting(ReinforcingMaterial material, Block.Settings settings) {
-        REINFORCED_CHEST_SETTING_MAP.put(material, settings);
-
-        return settings;
     }
 
     private static Block register(String id, Block block) {
