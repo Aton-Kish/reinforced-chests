@@ -10,7 +10,6 @@ import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
-import atonkish.reinfchest.item.ModItems;
 
 public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 	public static final String MOD_ID = "reinfchest";
@@ -32,9 +31,6 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 		// Blocks
 		ModBlocks.init();
 		ModBlockEntityType.init();
-
-		// Items
-		ModItems.init();
 	}
 
 	private static void initializeReinforcedCore() {
