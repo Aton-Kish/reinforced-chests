@@ -37,16 +37,13 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer, Reinfo
 		for (ReinforcingMaterialSettings materialSettings : ReinforcingMaterialSettings.values()) {
 			ReinforcingMaterial material = materialSettings.getMaterial();
 
-			// Reinforcing Material
-			ReinforcedCoreRegistry.registerReinforcingMaterial(material);
-
 			// Reinforced Storage Screen Model
-			ReinforcedCoreRegistry.registerSingleBlockScreenModel(material);
-			ReinforcedCoreRegistry.registerDoubleBlockScreenModel(material);
+			ReinforcedCoreRegistry.registerMaterialSingleBlockScreenModel(material);
+			ReinforcedCoreRegistry.registerMaterialDoubleBlockScreenModel(material);
 
 			// Reinforced Storage Screen Handler
-			ReinforcedCoreRegistry.registerSingleBlockScreenHandler(material);
-			ReinforcedCoreRegistry.registerDoubleBlockScreenHandler(material);
+			ReinforcedCoreRegistry.registerMaterialSingleBlockScreenHandler(material);
+			ReinforcedCoreRegistry.registerMaterialDoubleBlockScreenHandler(material);
 		}
 	}
 

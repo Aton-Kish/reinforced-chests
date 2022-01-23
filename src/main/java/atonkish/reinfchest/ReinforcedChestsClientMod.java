@@ -52,8 +52,8 @@ public class ReinforcedChestsClientMod
 			ReinforcingMaterial material = materialSettings.getMaterial();
 
 			// Reinforced Storage Screen
-			ReinforcedCoreClientRegistry.registerSingleBlockScreen(material);
-			ReinforcedCoreClientRegistry.registerDoubleBlockScreen(material);
+			ReinforcedCoreClientRegistry.registerMaterialSingleBlockScreen(material);
+			ReinforcedCoreClientRegistry.registerMaterialDoubleBlockScreen(material);
 		}
 	}
 

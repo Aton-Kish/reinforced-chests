@@ -7,28 +7,28 @@ import net.minecraft.block.MapColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
-
+import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.item.ModItemGroup;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 
 public enum ReinforcingMaterialSettings {
-    COPPER(new ReinforcingMaterial("copper", 45, Items.COPPER_INGOT),
+    COPPER(ReinforcedCoreRegistry.registerReinforcingMaterial("copper", 45, Items.COPPER_INGOT),
             FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.COPPER),
             new Item.Settings().group(ModItemGroup.REINFORCED_STORAGE)),
-    IRON(new ReinforcingMaterial("iron", 54, Items.IRON_INGOT),
+    IRON(ReinforcedCoreRegistry.registerReinforcingMaterial("iron", 54, Items.IRON_INGOT),
             FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY).strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings().group(ModItemGroup.REINFORCED_STORAGE)),
-    GOLD(new ReinforcingMaterial("gold", 81, Items.GOLD_INGOT),
+    GOLD(ReinforcedCoreRegistry.registerReinforcingMaterial("gold", 81, Items.GOLD_INGOT),
             FabricBlockSettings.of(Material.METAL, MapColor.GOLD).strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings().group(ModItemGroup.REINFORCED_STORAGE)),
-    DIAMOND(new ReinforcingMaterial("diamond", 108, Items.DIAMOND),
+    DIAMOND(ReinforcedCoreRegistry.registerReinforcingMaterial("diamond", 108, Items.DIAMOND),
             FabricBlockSettings.of(Material.METAL, MapColor.DIAMOND_BLUE).strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings().group(ModItemGroup.REINFORCED_STORAGE)),
-    NETHERITE(new ReinforcingMaterial("netherite", 108, Items.NETHERITE_INGOT),
+    NETHERITE(ReinforcedCoreRegistry.registerReinforcingMaterial("netherite", 108, Items.NETHERITE_INGOT),
             FabricBlockSettings.of(Material.METAL, MapColor.BLACK).strength(2.5F, 1200.0F)
                     .sounds(BlockSoundGroup.NETHERITE),
             new Item.Settings().group(ModItemGroup.REINFORCED_STORAGE).fireproof());
