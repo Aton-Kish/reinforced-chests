@@ -28,23 +28,19 @@ import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntity
 import atonkish.reinfchest.util.ReinforcingMaterialSettings;
 
 @Environment(EnvType.CLIENT)
-public class ReinforcedChestsClientMod
-		implements ReinforcedCoreClientModInitializer, ReinforcedChestsClientModInitializer {
+public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitializer {
 	@Override
 	public void onInitializeReinforcedCoreClient() {
 		// init Reinforced Core
 		initializeReinforcedCoreClient();
 
+		// init Reinforced Chests
+		initializeReinforcedChestsClient();
+
 		// entrypoint: "reinfchestclient"
 		FabricLoader.getInstance()
 				.getEntrypoints(ReinforcedChestsMod.MOD_ID + "client", ReinforcedChestsClientModInitializer.class)
 				.forEach(ReinforcedChestsClientModInitializer::onInitializeReinforcedChestsClient);
-	}
-
-	@Override
-	public void onInitializeReinforcedChestsClient() {
-		// init Reinforced Chests
-		initializeReinforcedChestsClient();
 	}
 
 	private static void initializeReinforcedCoreClient() {

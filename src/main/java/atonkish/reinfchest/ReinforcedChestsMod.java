@@ -12,7 +12,7 @@ import atonkish.reinfcore.api.ReinforcedCoreModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 
-public class ReinforcedChestsMod implements ReinforcedCoreModInitializer, ReinforcedChestsModInitializer {
+public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 	public static final String MOD_ID = "reinfchest";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
@@ -21,16 +21,13 @@ public class ReinforcedChestsMod implements ReinforcedCoreModInitializer, Reinfo
 		// init Reinforced Core
 		initializeReinforcedCore();
 
+		// init Reinforced Chests
+		initializeReinforcedChests();
+
 		// entrypoint: "reinfchest"
 		FabricLoader.getInstance()
 				.getEntrypoints(MOD_ID, ReinforcedChestsModInitializer.class)
 				.forEach(ReinforcedChestsModInitializer::onInitializeReinforcedChests);
-	}
-
-	@Override
-	public void onInitializeReinforcedChests() {
-		// init Reinforced Chests
-		initializeReinforcedChests();
 	}
 
 	private static void initializeReinforcedCore() {
