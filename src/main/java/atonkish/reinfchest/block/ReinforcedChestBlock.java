@@ -1,6 +1,7 @@
 package atonkish.reinfchest.block;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -32,7 +33,7 @@ import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.stat.ModStats;
 
 public class ReinforcedChestBlock extends ChestBlock {
-    private static final LinkedHashMap<ReinforcingMaterial, DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>> NAME_RETRIEVER_MAP = new LinkedHashMap<>();
+    private static final Map<ReinforcingMaterial, DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>> NAME_RETRIEVER_MAP = new LinkedHashMap<>();
     private final ReinforcingMaterial material;
 
     protected ReinforcedChestBlock(ReinforcingMaterial material, AbstractBlock.Settings settings,
@@ -45,50 +46,51 @@ public class ReinforcedChestBlock extends ChestBlock {
 
     protected static DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> registerMaterialNameRetriever(
             ReinforcingMaterial material) {
-        DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> nameRetriever = new DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>() {
-            public Optional<NamedScreenHandlerFactory> getFromBoth(ChestBlockEntity chestBlockEntity,
-                    ChestBlockEntity chestBlockEntity2) {
-                final Inventory inventory = new DoubleInventory(chestBlockEntity, chestBlockEntity2);
-                return Optional.of(new NamedScreenHandlerFactory() {
-                    @Nullable
-                    public ScreenHandler createMenu(int i, PlayerInventory playerInventory,
-                            PlayerEntity playerEntity) {
-                        if (chestBlockEntity.checkUnlocked(playerEntity)
-                                && chestBlockEntity2.checkUnlocked(playerEntity)) {
-                            chestBlockEntity.checkLootInteraction(playerInventory.player);
-                            chestBlockEntity2.checkLootInteraction(playerInventory.player);
-                            return ReinforcedStorageScreenHandler.createDoubleBlockScreen(material, i,
-                                    playerInventory, inventory);
-                        } else {
-                            return null;
+        if (!NAME_RETRIEVER_MAP.containsKey(material)) {
+            DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> nameRetriever = new DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>() {
+                public Optional<NamedScreenHandlerFactory> getFromBoth(ChestBlockEntity chestBlockEntity,
+                        ChestBlockEntity chestBlockEntity2) {
+                    final Inventory inventory = new DoubleInventory(chestBlockEntity, chestBlockEntity2);
+                    return Optional.of(new NamedScreenHandlerFactory() {
+                        @Nullable
+                        public ScreenHandler createMenu(int i, PlayerInventory playerInventory,
+                                PlayerEntity playerEntity) {
+                            if (chestBlockEntity.checkUnlocked(playerEntity)
+                                    && chestBlockEntity2.checkUnlocked(playerEntity)) {
+                                chestBlockEntity.checkLootInteraction(playerInventory.player);
+                                chestBlockEntity2.checkLootInteraction(playerInventory.player);
+                                return ReinforcedStorageScreenHandler.createDoubleBlockScreen(material, i,
+                                        playerInventory, inventory);
+                            } else {
+                                return null;
+                            }
                         }
-                    }
 
-                    public Text getDisplayName() {
-                        if (chestBlockEntity.hasCustomName()) {
-                            return chestBlockEntity.getDisplayName();
-                        } else {
-                            String namespace = BlockEntityType.getId(chestBlockEntity.getType()).getNamespace();
-                            return (Text) (chestBlockEntity2.hasCustomName() ? chestBlockEntity2.getDisplayName()
-                                    : new TranslatableText(
-                                            "container." + namespace + "." + material.getName() + "ChestDouble"));
+                        public Text getDisplayName() {
+                            if (chestBlockEntity.hasCustomName()) {
+                                return chestBlockEntity.getDisplayName();
+                            } else {
+                                String namespace = BlockEntityType.getId(chestBlockEntity.getType()).getNamespace();
+                                return (Text) (chestBlockEntity2.hasCustomName() ? chestBlockEntity2.getDisplayName()
+                                        : new TranslatableText(
+                                                "container." + namespace + "." + material.getName() + "ChestDouble"));
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
 
-            public Optional<NamedScreenHandlerFactory> getFrom(ChestBlockEntity chestBlockEntity) {
-                return Optional.of(chestBlockEntity);
-            }
+                public Optional<NamedScreenHandlerFactory> getFrom(ChestBlockEntity chestBlockEntity) {
+                    return Optional.of(chestBlockEntity);
+                }
 
-            public Optional<NamedScreenHandlerFactory> getFallback() {
-                return Optional.empty();
-            }
-        };
+                public Optional<NamedScreenHandlerFactory> getFallback() {
+                    return Optional.empty();
+                }
+            };
+            NAME_RETRIEVER_MAP.put(material, nameRetriever);
+        }
 
-        NAME_RETRIEVER_MAP.put(material, nameRetriever);
-
-        return nameRetriever;
+        return NAME_RETRIEVER_MAP.get(material);
     }
 
     protected Stat<Identifier> getOpenStat() {

@@ -1,6 +1,7 @@
 package atonkish.reinfchest.item;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -14,19 +15,22 @@ import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfchest.block.ModBlocks;
 
 public class ModItems {
-    public static final LinkedHashMap<ReinforcingMaterial, Item> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
-    public static final LinkedHashMap<ReinforcingMaterial, Item.Settings> REINFORCED_CHEST_SETTINGS_MAP = new LinkedHashMap<>();
+    public static final Map<ReinforcingMaterial, Item> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
+    public static final Map<ReinforcingMaterial, Item.Settings> REINFORCED_CHEST_SETTINGS_MAP = new LinkedHashMap<>();
 
     public static Item registerMaterial(ReinforcingMaterial material, Item.Settings settings) {
-        REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
+        if (!REINFORCED_CHEST_SETTINGS_MAP.containsKey(material)) {
+            REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
+        }
 
-        Item item = register(
-                new BlockItem(ModBlocks.REINFORCED_CHEST_MAP.get(material),
-                        REINFORCED_CHEST_SETTINGS_MAP.get(material)));
+        if (!REINFORCED_CHEST_MAP.containsKey(material)) {
+            Item item = register(
+                    new BlockItem(ModBlocks.REINFORCED_CHEST_MAP.get(material),
+                            REINFORCED_CHEST_SETTINGS_MAP.get(material)));
+            REINFORCED_CHEST_MAP.put(material, item);
+        }
 
-        REINFORCED_CHEST_MAP.put(material, item);
-
-        return item;
+        return REINFORCED_CHEST_MAP.get(material);
     }
 
     public static void registerMaterialItemGroupIcon(ReinforcingMaterial material) {
