@@ -2,8 +2,8 @@ package atonkish.reinfchest;
 
 import net.fabricmc.loader.api.FabricLoader;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import atonkish.reinfchest.api.ReinforcedChestsModInitializer;
 import atonkish.reinfchest.api.ReinforcedChestsRegistry;
@@ -14,7 +14,7 @@ import atonkish.reinfcore.util.ReinforcingMaterial;
 
 public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 	public static final String MOD_ID = "reinfchest";
-	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitializeReinforcedCore() {
