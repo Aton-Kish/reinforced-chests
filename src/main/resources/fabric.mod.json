@@ -16,10 +16,10 @@
   "icon": "assets/reinfchest/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "reinfcore": [
       "atonkish.reinfchest.ReinforcedChestsMod"
     ],
-    "client": [
+    "reinfcoreclient": [
       "atonkish.reinfchest.ReinforcedChestsClientMod"
     ]
   },

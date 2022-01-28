@@ -1,6 +1,7 @@
 package atonkish.reinfchest.client.render;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,23 +13,68 @@ import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfchest.ReinforcedChestsMod;
 
 @Environment(EnvType.CLIENT)
 public class ModTexturedRenderLayers {
-    public static final HashMap<ReinforcingMaterial, Identifier> REINFORCED_CHEST_ATLAS_TEXTURE_MAP;
-    private static final HashMap<ReinforcingMaterial, RenderLayer> REINFORCED_CHEST_RENDER_LAYER_MAP;
-    public static final HashMap<ReinforcingMaterial, SpriteIdentifier> REINFORCED_CHEST_SINGLE_MAP;
-    public static final HashMap<ReinforcingMaterial, SpriteIdentifier> REINFORCED_CHEST_LEFT_MAP;
-    public static final HashMap<ReinforcingMaterial, SpriteIdentifier> REINFORCED_CHEST_RIGHT_MAP;
+    public static final Map<ReinforcingMaterial, Identifier> REINFORCED_CHEST_ATLAS_TEXTURE_MAP = new LinkedHashMap<>();
+    private static final Map<ReinforcingMaterial, RenderLayer> REINFORCED_CHEST_RENDER_LAYER_MAP = new LinkedHashMap<>();
+    public static final Map<ReinforcingMaterial, SpriteIdentifier> REINFORCED_CHEST_SINGLE_MAP = new LinkedHashMap<>();
+    public static final Map<ReinforcingMaterial, SpriteIdentifier> REINFORCED_CHEST_LEFT_MAP = new LinkedHashMap<>();
+    public static final Map<ReinforcingMaterial, SpriteIdentifier> REINFORCED_CHEST_RIGHT_MAP = new LinkedHashMap<>();
+
+    public static Identifier registerMaterialAtlasTexture(String namespace, ReinforcingMaterial material) {
+        if (!REINFORCED_CHEST_ATLAS_TEXTURE_MAP.containsKey(material)) {
+            Identifier identifier = new Identifier(namespace, "textures/atlas/" + material.getName() + "_chest.png");
+            REINFORCED_CHEST_ATLAS_TEXTURE_MAP.put(material, identifier);
+        }
+
+        return REINFORCED_CHEST_ATLAS_TEXTURE_MAP.get(material);
+    }
+
+    public static RenderLayer registerMaterialRenderLayer(ReinforcingMaterial material) {
+        if (!REINFORCED_CHEST_RENDER_LAYER_MAP.containsKey(material)) {
+            RenderLayer renderLayer = RenderLayer.getEntityCutout(REINFORCED_CHEST_ATLAS_TEXTURE_MAP.get(material));
+            REINFORCED_CHEST_RENDER_LAYER_MAP.put(material, renderLayer);
+        }
+
+        return REINFORCED_CHEST_RENDER_LAYER_MAP.get(material);
+    }
+
+    public static SpriteIdentifier registerMaterialSingleSprite(String namespace, ReinforcingMaterial material) {
+        if (!REINFORCED_CHEST_SINGLE_MAP.containsKey(material)) {
+            SpriteIdentifier identifier = getReinforcedChestTextureId(namespace, material, "single");
+            REINFORCED_CHEST_SINGLE_MAP.put(material, identifier);
+        }
+
+        return REINFORCED_CHEST_SINGLE_MAP.get(material);
+    }
+
+    public static SpriteIdentifier registerMaterialLeftSprite(String namespace, ReinforcingMaterial material) {
+        if (!REINFORCED_CHEST_LEFT_MAP.containsKey(material)) {
+            SpriteIdentifier identifier = getReinforcedChestTextureId(namespace, material, "left");
+            REINFORCED_CHEST_LEFT_MAP.put(material, identifier);
+        }
+
+        return REINFORCED_CHEST_LEFT_MAP.get(material);
+    }
+
+    public static SpriteIdentifier registerMaterialRightSprite(String namespace, ReinforcingMaterial material) {
+        if (!REINFORCED_CHEST_RIGHT_MAP.containsKey(material)) {
+            SpriteIdentifier identifier = getReinforcedChestTextureId(namespace, material, "right");
+            REINFORCED_CHEST_RIGHT_MAP.put(material, identifier);
+        }
+
+        return REINFORCED_CHEST_RIGHT_MAP.get(material);
+    }
 
     public static RenderLayer getReinforcedChest(ReinforcingMaterial material) {
         return REINFORCED_CHEST_RENDER_LAYER_MAP.get(material);
     }
 
-    private static SpriteIdentifier getReinforcedChestTextureId(ReinforcingMaterial material, String variant) {
+    private static SpriteIdentifier getReinforcedChestTextureId(String namespace, ReinforcingMaterial material,
+            String variant) {
         Identifier atlasTexture = REINFORCED_CHEST_ATLAS_TEXTURE_MAP.get(material);
-        Identifier textureId = new Identifier(ReinforcedChestsMod.MOD_ID,
+        Identifier textureId = new Identifier(namespace,
                 "entity/reinforced_chest/" + material.getName() + "/" + variant);
         return new SpriteIdentifier(atlasTexture, textureId);
     }
@@ -56,32 +102,6 @@ public class ModTexturedRenderLayers {
             case SINGLE:
             default:
                 return single;
-        }
-    }
-
-    static {
-        REINFORCED_CHEST_ATLAS_TEXTURE_MAP = new HashMap<>();
-        REINFORCED_CHEST_RENDER_LAYER_MAP = new HashMap<>();
-        REINFORCED_CHEST_SINGLE_MAP = new HashMap<>();
-        REINFORCED_CHEST_LEFT_MAP = new HashMap<>();
-        REINFORCED_CHEST_RIGHT_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
-            // Atlas Texture
-            Identifier atlasTexture = new Identifier(ReinforcedChestsMod.MOD_ID,
-                    "textures/atlas/" + material + "_chest.png");
-            REINFORCED_CHEST_ATLAS_TEXTURE_MAP.put(material, atlasTexture);
-
-            // Render Layer
-            RenderLayer renderLayer = RenderLayer.getEntityCutout(atlasTexture);
-            REINFORCED_CHEST_RENDER_LAYER_MAP.put(material, renderLayer);
-
-            // Sprite Identifiers
-            SpriteIdentifier single = getReinforcedChestTextureId(material, "single");
-            SpriteIdentifier left = getReinforcedChestTextureId(material, "left");
-            SpriteIdentifier right = getReinforcedChestTextureId(material, "right");
-            REINFORCED_CHEST_SINGLE_MAP.put(material, single);
-            REINFORCED_CHEST_LEFT_MAP.put(material, left);
-            REINFORCED_CHEST_RIGHT_MAP.put(material, right);
         }
     }
 }

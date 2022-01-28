@@ -1,8 +1,8 @@
 package atonkish.reinfchest.item;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -15,13 +15,27 @@ import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfchest.block.ModBlocks;
 
 public class ModItems {
-    public static final HashMap<ReinforcingMaterial, Item> REINFORCED_CHEST_MAP;
+    public static final Map<ReinforcingMaterial, Item> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
+    public static final Map<ReinforcingMaterial, Item.Settings> REINFORCED_CHEST_SETTINGS_MAP = new LinkedHashMap<>();
 
-    public static void init() {
-        if (!FabricLoader.getInstance().isModLoaded("reinfshulker")) {
-            Item iconItem = REINFORCED_CHEST_MAP.get(ReinforcingMaterial.NETHERITE);
-            ((ItemGroupInterface) ModItemGroup.REINFORCED_STORAGE).setIcon(iconItem);
+    public static Item registerMaterial(ReinforcingMaterial material, Item.Settings settings) {
+        if (!REINFORCED_CHEST_SETTINGS_MAP.containsKey(material)) {
+            REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
         }
+
+        if (!REINFORCED_CHEST_MAP.containsKey(material)) {
+            Item item = register(
+                    new BlockItem(ModBlocks.REINFORCED_CHEST_MAP.get(material),
+                            REINFORCED_CHEST_SETTINGS_MAP.get(material)));
+            REINFORCED_CHEST_MAP.put(material, item);
+        }
+
+        return REINFORCED_CHEST_MAP.get(material);
+    }
+
+    public static void registerMaterialItemGroupIcon(ReinforcingMaterial material) {
+        Item item = REINFORCED_CHEST_MAP.get(material);
+        ((ItemGroupInterface) ModItemGroup.REINFORCED_STORAGE).setIcon(item);
     }
 
     private static Item register(BlockItem item) {
@@ -38,30 +52,5 @@ public class ModItems {
         }
 
         return Registry.register(Registry.ITEM, id, item);
-    }
-
-    private static Item.Settings createMaterialSettings(ReinforcingMaterial material) {
-        Item.Settings settings = new Item.Settings().group(ModItemGroup.REINFORCED_STORAGE);
-        switch (material) {
-            default:
-            case COPPER:
-            case IRON:
-            case GOLD:
-            case DIAMOND:
-                break;
-            case NETHERITE:
-                settings = settings.fireproof();
-                break;
-        }
-        return settings;
-    }
-
-    static {
-        REINFORCED_CHEST_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
-            Item item = register(
-                    new BlockItem(ModBlocks.REINFORCED_CHEST_MAP.get(material), createMaterialSettings(material)));
-            REINFORCED_CHEST_MAP.put(material, item);
-        }
     }
 }
