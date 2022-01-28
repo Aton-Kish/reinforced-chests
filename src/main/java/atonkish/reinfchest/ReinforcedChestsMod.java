@@ -5,12 +5,12 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import atonkish.reinfchest.api.ReinforcedChestsModInitializer;
-import atonkish.reinfchest.api.ReinforcedChestsRegistry;
-import atonkish.reinfchest.util.ReinforcingMaterialSettings;
 import atonkish.reinfcore.api.ReinforcedCoreModInitializer;
 import atonkish.reinfcore.api.ReinforcedCoreRegistry;
 import atonkish.reinfcore.util.ReinforcingMaterial;
+import atonkish.reinfchest.api.ReinforcedChestsModInitializer;
+import atonkish.reinfchest.api.ReinforcedChestsRegistry;
+import atonkish.reinfchest.util.ReinforcingMaterialSettings;
 
 public class ReinforcedChestsMod implements ReinforcedCoreModInitializer {
 	public static final String MOD_ID = "reinfchest";
