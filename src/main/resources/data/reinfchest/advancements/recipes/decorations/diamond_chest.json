@@ -1,9 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "rewards": {
-    "recipes": [
-      "reinfchest:diamond_chest"
-    ]
+    "recipes": ["reinfchest:diamond_chest"]
   },
   "criteria": {
     "has_gold_chest": {
@@ -11,9 +9,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "reinfchest:gold_chest"
-            ]
+            "items": ["reinfchest:gold_chest"]
           }
         ]
       }
@@ -23,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:diamond"
-            ]
+            "items": ["minecraft:diamond"]
           }
         ]
       }
@@ -37,11 +31,5 @@
       }
     }
   },
-  "requirements": [
-    [
-      "has_gold_chest",
-      "has_diamond",
-      "has_the_recipe"
-    ]
-  ]
+  "requirements": [["has_gold_chest", "has_diamond", "has_the_recipe"]]
 }

@@ -4,9 +4,7 @@
   "version": "${version}",
   "name": "Reinforced Chests",
   "description": "Adds reinforced chests.",
-  "authors": [
-    "Aton-Kish"
-  ],
+  "authors": ["Aton-Kish"],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/reinforced-chests",
     "sources": "https://github.com/Aton-Kish/reinforced-chests",
@@ -16,16 +14,10 @@
   "icon": "assets/reinfchest/icon.png",
   "environment": "*",
   "entrypoints": {
-    "reinfcore": [
-      "atonkish.reinfchest.ReinforcedChestsMod"
-    ],
-    "reinfcoreclient": [
-      "atonkish.reinfchest.ReinforcedChestsClientMod"
-    ]
+    "reinfcore": ["atonkish.reinfchest.ReinforcedChestsMod"],
+    "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"]
   },
-  "mixins": [
-    "reinfchest.mixins.json"
-  ],
+  "mixins": ["reinfchest.mixins.json"],
   "depends": {
     "fabricloader": ">=0.14.6",
     "fabric": "*",

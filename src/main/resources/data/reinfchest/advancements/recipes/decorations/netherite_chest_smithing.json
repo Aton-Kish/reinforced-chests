@@ -1,9 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "rewards": {
-    "recipes": [
-      "reinfchest:netherite_chest_smithing"
-    ]
+    "recipes": ["reinfchest:netherite_chest_smithing"]
   },
   "criteria": {
     "has_diamond_chest": {
@@ -11,9 +9,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "reinfchest:diamond_chest"
-            ]
+            "items": ["reinfchest:diamond_chest"]
           }
         ]
       }
@@ -23,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:netherite_ingot"
-            ]
+            "items": ["minecraft:netherite_ingot"]
           }
         ]
       }
@@ -38,10 +32,6 @@
     }
   },
   "requirements": [
-    [
-      "has_diamond_chest",
-      "has_netherite_ingot",
-      "has_the_recipe"
-    ]
+    ["has_diamond_chest", "has_netherite_ingot", "has_the_recipe"]
   ]
 }
