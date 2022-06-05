@@ -1,10 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "MMM",
-    "MCM",
-    "MMM"
-  ],
+  "pattern": ["MMM", "MCM", "MMM"],
   "key": {
     "C": {
       "item": "reinfchest:gold_chest"
