@@ -16,8 +16,8 @@ import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.LidOpenable;
 import net.minecraft.block.enums.ChestType;
-import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
@@ -42,8 +42,7 @@ import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.ModTexturedRenderLayers;
 
 @Environment(EnvType.CLIENT)
-public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & ChestAnimationProgress>
-        implements BlockEntityRenderer<T> {
+public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     private static final String BASE = "bottom";
     private static final String LID = "lid";
     private static final String LATCH = "lock";
@@ -141,7 +140,7 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & ChestAni
             }
 
             float g = ((Float2FloatFunction) propertySource2
-                    .apply(ChestBlock.getAnimationProgressRetriever((ChestAnimationProgress) entity))).get(tickDelta);
+                    .apply(ChestBlock.getAnimationProgressRetriever((LidOpenable) entity))).get(tickDelta);
             g = 1.0F - g;
             g = 1.0F - g * g * g;
             int i = ((Int2IntFunction) propertySource2.apply(new LightmapCoordinatesRetriever<>())).applyAsInt(light);

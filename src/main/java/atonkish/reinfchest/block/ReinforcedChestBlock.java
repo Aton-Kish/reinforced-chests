@@ -21,7 +21,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -72,7 +71,7 @@ public class ReinforcedChestBlock extends ChestBlock {
                             } else {
                                 String namespace = BlockEntityType.getId(chestBlockEntity.getType()).getNamespace();
                                 return (Text) (chestBlockEntity2.hasCustomName() ? chestBlockEntity2.getDisplayName()
-                                        : new TranslatableText(
+                                        : Text.translatable(
                                                 "container." + namespace + "." + material.getName() + "ChestDouble"));
                             }
                         }
