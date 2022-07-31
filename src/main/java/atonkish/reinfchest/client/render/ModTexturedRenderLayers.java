@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.render.RenderLayer;
@@ -25,6 +26,16 @@ public class ModTexturedRenderLayers {
     public static Identifier registerMaterialAtlasTexture(String namespace, ReinforcingMaterial material) {
         if (!REINFORCED_CHEST_ATLAS_TEXTURE_MAP.containsKey(material)) {
             Identifier identifier = new Identifier(namespace, "textures/atlas/" + material.getName() + "_chest.png");
+
+            ClientSpriteRegistryCallback.event(identifier).register((atlasTexture, registry) -> {
+                String singlePath = "entity/reinforced_chest/" + material.getName() + "/single";
+                String leftPath = "entity/reinforced_chest/" + material.getName() + "/left";
+                String rightPath = "entity/reinforced_chest/" + material.getName() + "/right";
+                registry.register(new Identifier(namespace, singlePath));
+                registry.register(new Identifier(namespace, leftPath));
+                registry.register(new Identifier(namespace, rightPath));
+            });
+
             REINFORCED_CHEST_ATLAS_TEXTURE_MAP.put(material, identifier);
         }
 
