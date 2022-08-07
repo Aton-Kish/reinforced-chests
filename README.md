@@ -43,7 +43,7 @@ Screen type is `SINGLE` or `SCROLL`. (default: `SINGLE`)
 | --------------------------------------------- | ---------------------------------------------- |
 | ![Single Screen](./images/modmenu/single.png) | ![Scroll Screen](./images/modmenu/scroll6.png) |
 
-### Screen Scroll
+### Scroll Screen
 
 #### Rows
 
