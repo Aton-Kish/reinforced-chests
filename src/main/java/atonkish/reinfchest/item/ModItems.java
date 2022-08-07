@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import atonkish.reinfcore.item.ItemGroupInterface;
 import atonkish.reinfcore.item.ModItemGroup;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfchest.block.ModBlocks;
@@ -35,7 +34,7 @@ public class ModItems {
 
     public static void registerMaterialItemGroupIcon(ReinforcingMaterial material) {
         Item item = REINFORCED_CHEST_MAP.get(material);
-        ((ItemGroupInterface) ModItemGroup.REINFORCED_STORAGE).setIcon(item);
+        ModItemGroup.setIcon(ModItemGroup.REINFORCED_STORAGE, item);
     }
 
     private static Item register(BlockItem item) {
