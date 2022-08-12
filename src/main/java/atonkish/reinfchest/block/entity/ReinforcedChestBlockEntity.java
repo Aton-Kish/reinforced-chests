@@ -58,10 +58,12 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
         this.cachedMaterial = material;
     }
 
+    @Override
     public int size() {
         return this.cachedMaterial.getSize();
     }
 
+    @Override
     protected Text getContainerName() {
         String namespace = BlockEntityType.getId(this.getType()).getNamespace();
         return Text.translatable(
@@ -85,23 +87,27 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
         }
     }
 
+    @Override
     public void onOpen(PlayerEntity player) {
         if (!this.removed && !player.isSpectator()) {
             this.stateManager.openContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
 
+    @Override
     public void onClose(PlayerEntity player) {
         if (!this.removed && !player.isSpectator()) {
             this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
 
+    @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
         return ReinforcedStorageScreenHandler.createSingleBlockScreen(this.cachedMaterial, syncId, playerInventory,
                 this);
     }
 
+    @Override
     public void onScheduledTick() {
         if (!this.removed) {
             this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
