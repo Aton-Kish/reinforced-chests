@@ -2,6 +2,7 @@ package atonkish.reinfchest.block.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.block.enums.ChestType;
@@ -23,7 +24,6 @@ import net.minecraft.world.World;
 
 import atonkish.reinfcore.screen.ReinforcedStorageScreenHandler;
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfchest.ReinforcedChestsMod;
 
 public class ReinforcedChestBlockEntity extends ChestBlockEntity {
     private final ViewerCountManager stateManager;
@@ -59,13 +59,16 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
         this.cachedMaterial = material;
     }
 
+    @Override
     public int size() {
         return this.cachedMaterial.getSize();
     }
 
+    @Override
     protected Text getContainerName() {
+        String namespace = BlockEntityType.getId(this.getType()).getNamespace();
         return new TranslatableText(
-                "container." + ReinforcedChestsMod.MOD_ID + "." + this.cachedMaterial.getName() + "Chest");
+                "container." + namespace + "." + this.cachedMaterial.getName() + "Chest");
     }
 
     static void playSound(World world, BlockPos pos, BlockState state, SoundEvent soundEvent) {
@@ -85,23 +88,27 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
         }
     }
 
+    @Override
     public void onOpen(PlayerEntity player) {
         if (!this.removed && !player.isSpectator()) {
             this.stateManager.openContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
 
+    @Override
     public void onClose(PlayerEntity player) {
         if (!this.removed && !player.isSpectator()) {
             this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
 
+    @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
         return ReinforcedStorageScreenHandler.createSingleBlockScreen(this.cachedMaterial, syncId, playerInventory,
                 this);
     }
 
+    @Override
     public void onScheduledTick() {
         if (!this.removed) {
             this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
