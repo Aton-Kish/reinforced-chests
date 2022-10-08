@@ -4,9 +4,7 @@
   "package": "atonkish.reinfchest.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [],
-  "client": [
-    "TexturedRenderLayersMixin"
-  ],
+  "client": ["TexturedRenderLayersMixin"],
   "injectors": {
     "defaultRequire": 1
   }

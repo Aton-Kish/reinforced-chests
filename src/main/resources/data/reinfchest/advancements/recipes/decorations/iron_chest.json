@@ -1,9 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "rewards": {
-    "recipes": [
-      "reinfchest:iron_chest"
-    ]
+    "recipes": ["reinfchest:iron_chest"]
   },
   "criteria": {
     "has_copper_chest": {
@@ -11,9 +9,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "reinfchest:copper_chest"
-            ]
+            "items": ["reinfchest:copper_chest"]
           }
         ]
       }
@@ -23,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:iron_ingot"
-            ]
+            "items": ["minecraft:iron_ingot"]
           }
         ]
       }
@@ -37,11 +31,5 @@
       }
     }
   },
-  "requirements": [
-    [
-      "has_copper_chest",
-      "has_iron_ingot",
-      "has_the_recipe"
-    ]
-  ]
+  "requirements": [["has_copper_chest", "has_iron_ingot", "has_the_recipe"]]
 }

@@ -1,6 +1,7 @@
 package atonkish.reinfchest.block;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -28,41 +29,24 @@ import org.jetbrains.annotations.Nullable;
 
 import atonkish.reinfcore.screen.ReinforcedStorageScreenHandler;
 import atonkish.reinfcore.util.ReinforcingMaterial;
-import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.stat.ModStats;
 
 public class ReinforcedChestBlock extends ChestBlock {
-    private static final HashMap<ReinforcingMaterial, DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>> NAME_RETRIEVER_MAP;
+    private static final Map<ReinforcingMaterial, DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>> NAME_RETRIEVER_MAP = new LinkedHashMap<>();
     private final ReinforcingMaterial material;
 
     protected ReinforcedChestBlock(ReinforcingMaterial material, AbstractBlock.Settings settings,
             Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
         super(settings, supplier);
         this.material = material;
+
+        registerMaterialNameRetriever(material);
     }
 
-    protected Stat<Identifier> getOpenStat() {
-        return Stats.CUSTOM.getOrCreateStat(ModStats.OPEN_REINFORCED_CHEST_MAP.get(this.material));
-    }
-
-    @Nullable
-    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-        return ((Optional<NamedScreenHandlerFactory>) this.getBlockEntitySource(state, world, pos, false)
-                .apply(NAME_RETRIEVER_MAP.get(this.material))).orElse((NamedScreenHandlerFactory) null);
-    }
-
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ReinforcedChestBlockEntity(this.material, pos, state);
-    }
-
-    public ReinforcingMaterial getMaterial() {
-        return this.material;
-    }
-
-    static {
-        NAME_RETRIEVER_MAP = new HashMap<>();
-        for (ReinforcingMaterial material : ReinforcingMaterial.values()) {
+    protected static DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> registerMaterialNameRetriever(
+            ReinforcingMaterial material) {
+        if (!NAME_RETRIEVER_MAP.containsKey(material)) {
             DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> nameRetriever = new DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>() {
                 public Optional<NamedScreenHandlerFactory> getFromBoth(ChestBlockEntity chestBlockEntity,
                         ChestBlockEntity chestBlockEntity2) {
@@ -86,9 +70,10 @@ public class ReinforcedChestBlock extends ChestBlock {
                             if (chestBlockEntity.hasCustomName()) {
                                 return chestBlockEntity.getDisplayName();
                             } else {
+                                String namespace = BlockEntityType.getId(chestBlockEntity.getType()).getNamespace();
                                 return (Text) (chestBlockEntity2.hasCustomName() ? chestBlockEntity2.getDisplayName()
-                                        : new TranslatableText("container." + ReinforcedChestsMod.MOD_ID + "."
-                                                + material.getName() + "ChestDouble"));
+                                        : new TranslatableText(
+                                                "container." + namespace + "." + material.getName() + "ChestDouble"));
                             }
                         }
                     });
@@ -104,5 +89,28 @@ public class ReinforcedChestBlock extends ChestBlock {
             };
             NAME_RETRIEVER_MAP.put(material, nameRetriever);
         }
+
+        return NAME_RETRIEVER_MAP.get(material);
+    }
+
+    @Override
+    protected Stat<Identifier> getOpenStat() {
+        return Stats.CUSTOM.getOrCreateStat(ModStats.OPEN_REINFORCED_CHEST_MAP.get(this.material));
+    }
+
+    @Override
+    @Nullable
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        return ((Optional<NamedScreenHandlerFactory>) this.getBlockEntitySource(state, world, pos, false)
+                .apply(NAME_RETRIEVER_MAP.get(this.material))).orElse((NamedScreenHandlerFactory) null);
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new ReinforcedChestBlockEntity(this.material, pos, state);
+    }
+
+    public ReinforcingMaterial getMaterial() {
+        return this.material;
     }
 }
