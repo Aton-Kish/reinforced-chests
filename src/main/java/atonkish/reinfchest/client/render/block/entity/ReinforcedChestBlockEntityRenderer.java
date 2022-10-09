@@ -42,8 +42,7 @@ import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.ModTexturedRenderLayers;
 
 @Environment(EnvType.CLIENT)
-public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & ChestAnimationProgress>
-        implements BlockEntityRenderer<T> {
+public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     private static final String BASE = "bottom";
     private static final String LID = "lid";
     private static final String LATCH = "lock";
@@ -114,6 +113,7 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & ChestAni
         return TexturedModelData.of(modelData, 64, 64);
     }
 
+    @Override
     public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers,
             int light, int overlay) {
         World world = entity.getWorld();

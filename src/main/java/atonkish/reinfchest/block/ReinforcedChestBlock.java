@@ -93,16 +93,19 @@ public class ReinforcedChestBlock extends ChestBlock {
         return NAME_RETRIEVER_MAP.get(material);
     }
 
+    @Override
     protected Stat<Identifier> getOpenStat() {
         return Stats.CUSTOM.getOrCreateStat(ModStats.OPEN_REINFORCED_CHEST_MAP.get(this.material));
     }
 
+    @Override
     @Nullable
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
         return ((Optional<NamedScreenHandlerFactory>) this.getBlockEntitySource(state, world, pos, false)
                 .apply(NAME_RETRIEVER_MAP.get(this.material))).orElse((NamedScreenHandlerFactory) null);
     }
 
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new ReinforcedChestBlockEntity(this.material, pos, state);
     }
