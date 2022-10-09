@@ -15,7 +15,8 @@
   "environment": "*",
   "entrypoints": {
     "reinfcore": ["atonkish.reinfchest.ReinforcedChestsMod"],
-    "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"]
+    "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
+    "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
   },
   "mixins": ["reinfchest.mixins.json"],
   "depends": {
