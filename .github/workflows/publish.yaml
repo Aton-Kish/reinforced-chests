@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       JAVA_VERSION: 17
-
     steps:
       - name: checkout repository
         uses: actions/checkout@v3
