@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "entity/reinforced_chest/copper",
+      "prefix": "entity/reinforced_chest/copper/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/reinforced_chest/iron",
+      "prefix": "entity/reinforced_chest/iron/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/reinforced_chest/gold",
+      "prefix": "entity/reinforced_chest/gold/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/reinforced_chest/diamond",
+      "prefix": "entity/reinforced_chest/diamond/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/reinforced_chest/netherite",
+      "prefix": "entity/reinforced_chest/netherite/"
+    }
+  ]
+}

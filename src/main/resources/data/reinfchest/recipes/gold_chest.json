@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": ["MMM", "MCM", "MMM"],
   "key": {
     "C": {

@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
@@ -12,12 +13,14 @@ import atonkish.reinfchest.client.render.ModTexturedRenderLayers;
 
 @Environment(EnvType.CLIENT)
 public class ReinforcedChestsClientRegistry {
+    @Deprecated
     public static Identifier registerMaterialAtlasTexture(String namespace, ReinforcingMaterial material) {
-        return ModTexturedRenderLayers.registerMaterialAtlasTexture(namespace, material);
+        return TexturedRenderLayers.CHEST_ATLAS_TEXTURE;
     }
 
+    @Deprecated
     public static RenderLayer registerMaterialRenderLayer(String namespace, ReinforcingMaterial material) {
-        return ModTexturedRenderLayers.registerMaterialRenderLayer(material);
+        return TexturedRenderLayers.getChest();
     }
 
     public static SpriteIdentifier registerMaterialSingleSprite(String namespace, ReinforcingMaterial material) {
