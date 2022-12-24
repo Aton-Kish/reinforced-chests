@@ -24,7 +24,7 @@ jobs:
       - name: setup jdk ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: "microsoft"
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
