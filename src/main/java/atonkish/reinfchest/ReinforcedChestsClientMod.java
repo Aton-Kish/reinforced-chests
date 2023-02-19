@@ -2,7 +2,6 @@ package atonkish.reinfchest;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -10,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -64,7 +64,7 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 			ReinforcedChestsClientRegistry.registerMaterialRightSprite(ReinforcedChestsMod.MOD_ID, material);
 
 			// Block Entity Renderer
-			BlockEntityRendererRegistry
+			BlockEntityRendererFactories
 					.register(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
 							ReinforcedChestBlockEntityRenderer::new);
 
