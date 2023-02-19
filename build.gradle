@@ -1,6 +1,8 @@
 plugins {
-	id 'fabric-loom' version '1.0-SNAPSHOT'
-	id 'maven-publish'
+	id "fabric-loom" version "1.0-SNAPSHOT"
+	id "maven-publish"
+	id "com.matthewprenger.cursegradle" version "1.4.0"
+	id "com.modrinth.minotaur" version "2.+"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -91,4 +93,50 @@ publishing {
 			url "file:/$buildDir/maven"
 		}
 	}
+}
+
+curseforge {
+	apiKey = project.findProperty("curseforge_token") ?: "Missing token"
+
+	project {
+		id = project.curseforge_id
+
+		mainArtifact(remapJar) {
+			displayName = "Reinforced Chests v${project.version}"
+		}
+		releaseType = "release"
+		changelogType = "markdown"
+		changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
+
+		addGameVersion "Fabric"
+		addGameVersion "Java 17"
+		addGameVersion "1.19.3"
+
+		relations {
+			requiredDependency "fabric-api"
+			embeddedLibrary "cloth-config"
+			optionalDependency "modmenu"
+		}
+	}
+}
+
+modrinth {
+    token = project.findProperty("modrinth_token") ?: "Missing token"
+
+    projectId = project.modrinth_id
+
+    uploadFile = remapJar
+    versionNumber = project.version
+	versionName = "Reinforced Chests v${project.version}"
+    versionType = "release"
+	changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
+
+    gameVersions = ["1.19.3"]
+    loaders = ["fabric"]
+
+    dependencies {
+        required.project "fabric-api"
+		embedded.project "cloth-config"
+		optional.project "modmenu"
+    }
 }

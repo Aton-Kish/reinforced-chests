@@ -1,0 +1,32 @@
+name: release
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+*
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    env:
+      JAVA_VERSION: 17
+      ORG_GRADLE_PROJECT_curseforge_token: ${{ secrets.CURSEFORGE_TOKEN }}
+      ORG_GRADLE_PROJECT_modrinth_token: ${{ secrets.MODRINTH_TOKEN }}
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: setup jdk ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: "microsoft"
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: release
+        run: ./gradlew build curseforge modrinth
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Artifacts
+          path: build/libs/
