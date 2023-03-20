@@ -10,7 +10,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -71,7 +71,7 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 			// Item Renderer
 			Block block = ModBlocks.REINFORCED_CHEST_MAP.get(material);
 			BuiltinItemRendererRegistry.INSTANCE.register(block,
-					(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices,
+					(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices,
 							VertexConsumerProvider vertexConsumers, int light, int overlay) -> {
 						BlockEntity blockEntity = new ReinforcedChestBlockEntity(material, BlockPos.ORIGIN,
 								block.getDefaultState().with(ReinforcedChestBlock.FACING, Direction.SOUTH));
