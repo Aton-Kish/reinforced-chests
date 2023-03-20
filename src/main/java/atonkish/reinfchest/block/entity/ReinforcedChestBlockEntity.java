@@ -32,27 +32,30 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
         super(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material), blockPos, blockState);
         this.setInvStackList(DefaultedList.ofSize(material.getSize(), ItemStack.EMPTY));
         this.stateManager = new ViewerCountManager() {
+            @Override
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
                 ReinforcedChestBlockEntity.playSound(world, pos, state, SoundEvents.BLOCK_CHEST_OPEN);
             }
 
+            @Override
             protected void onContainerClose(World world, BlockPos pos, BlockState state) {
                 ReinforcedChestBlockEntity.playSound(world, pos, state, SoundEvents.BLOCK_CHEST_CLOSE);
             }
 
+            @Override
             protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount,
                     int newViewerCount) {
-                ReinforcedChestBlockEntity.this.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
+                ReinforcedChestBlockEntity.this.onViewerCountUpdate(world, pos, state, oldViewerCount, newViewerCount);
             }
 
+            @Override
             protected boolean isPlayerViewing(PlayerEntity player) {
-                if (!(player.currentScreenHandler instanceof ReinforcedStorageScreenHandler)) {
-                    return false;
-                } else {
+                if (player.currentScreenHandler instanceof ReinforcedStorageScreenHandler) {
                     Inventory inventory = ((ReinforcedStorageScreenHandler) player.currentScreenHandler).getInventory();
                     return inventory == ReinforcedChestBlockEntity.this || inventory instanceof DoubleInventory
                             && ((DoubleInventory) inventory).isPart(ReinforcedChestBlockEntity.this);
                 }
+                return false;
             }
         };
         this.cachedMaterial = material;
