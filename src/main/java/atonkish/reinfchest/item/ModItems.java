@@ -38,7 +38,7 @@ public class ModItems {
 
     public static void registerMaterialItemGroupIcon(ReinforcingMaterial material) {
         Item item = REINFORCED_CHEST_MAP.get(material);
-        ModItemGroup.setIcon(ModItemGroups.REINFORCED_STORAGE, item);
+        ModItemGroup.setIcon(Registries.ITEM_GROUP.get(ModItemGroups.REINFORCED_STORAGE), item);
     }
 
     private static Item register(BlockItem item) {
