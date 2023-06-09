@@ -5,12 +5,12 @@ plugins {
 	id "com.modrinth.minotaur" version "2.+"
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
 
 repositories {
 	// Add repositories to retrieve artifacts from in here.
@@ -32,6 +32,17 @@ repositories {
 	// Cloth Config (Reinforced Core deps)
 	maven {
 		url "https://maven.shedaniel.me/"
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"reinfchest" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
 	}
 }
 
@@ -58,7 +69,6 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	it.options.release = 17
 }
 
@@ -67,6 +77,9 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
@@ -110,7 +123,7 @@ curseforge {
 
 		addGameVersion "Fabric"
 		addGameVersion "Java 17"
-		addGameVersion "1.19.4"
+		addGameVersion "1.20"
 
 		relations {
 			requiredDependency "fabric-api"
@@ -121,22 +134,22 @@ curseforge {
 }
 
 modrinth {
-    token = project.findProperty("modrinth_token") ?: "Missing token"
+	token = project.findProperty("modrinth_token") ?: "Missing token"
 
-    projectId = project.modrinth_id
+	projectId = project.modrinth_id
 
-    uploadFile = remapJar
-    versionNumber = project.version
+	uploadFile = remapJar
+	versionNumber = project.version
 	versionName = "Reinforced Chests v${project.version}"
-    versionType = "release"
+	versionType = "release"
 	changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
 
-    gameVersions = ["1.19.4"]
-    loaders = ["fabric"]
+	gameVersions = ["1.20"]
+	loaders = ["fabric"]
 
-    dependencies {
-        required.project "fabric-api"
+	dependencies {
+		required.project "fabric-api"
 		embedded.project "cloth-config"
 		optional.project "modmenu"
-    }
+	}
 }

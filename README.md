@@ -2,9 +2,10 @@
 
 [![Mod Loader: Fabric](https://img.shields.io/static/v1?label=modloader&message=fabric&color=brightgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
-[![Downloads](https://raw.githubusercontent.com/Aton-Kish/mcmod-stats/main/reinforced-chests/downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/reinforced-chests)
+![Version](https://cf.way2muchnoise.eu/versions/529873.svg)
+[![CurseForge](https://cf.way2muchnoise.eu/529873.svg)](https://www.curseforge.com/minecraft/mc-mods/reinforced-chests)
+[![Modrinth](https://img.shields.io/modrinth/dt/FWtAXlpg?color=%2300AF5C&logo=modrinth)](https://modrinth.com/mod/reinforced-chests)
 [![MIT License](https://img.shields.io/static/v1?label=licence&message=MIT&color=blue)](./LICENSE)
-[![build](https://github.com/Aton-Kish/reinforced-chests/actions/workflows/build.yaml/badge.svg?branch=1.19)](https://github.com/Aton-Kish/reinforced-chests/actions/workflows/build.yaml?query=branch:1.19)
 
 # Reinforced Chests
 
