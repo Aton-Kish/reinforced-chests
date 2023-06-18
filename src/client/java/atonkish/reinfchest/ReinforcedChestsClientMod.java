@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,7 @@ import atonkish.reinfchest.block.ReinforcedChestBlock;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntityRenderer;
+import atonkish.reinfchest.mixin.client.BlockEntityRendererFactoriesInvoker;
 import atonkish.reinfchest.util.ReinforcingMaterialSettings;
 
 @Environment(EnvType.CLIENT)
@@ -64,8 +64,8 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 			ReinforcedChestsClientRegistry.registerMaterialRightSprite(ReinforcedChestsMod.MOD_ID, material);
 
 			// Block Entity Renderer
-			BlockEntityRendererFactories
-					.register(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
+			BlockEntityRendererFactoriesInvoker
+					.invokeRegister(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
 							ReinforcedChestBlockEntityRenderer::new);
 
 			// Item Renderer
