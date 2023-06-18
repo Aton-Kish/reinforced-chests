@@ -3,10 +3,7 @@
   "minVersion": "0.8",
   "package": "atonkish.reinfchest.mixin.client",
   "compatibilityLevel": "JAVA_17",
-  "client": [
-    "BlockEntityRendererFactoriesInvoker",
-    "TexturedRenderLayersMixin"
-  ],
+  "client": ["TexturedRenderLayersMixin"],
   "injectors": {
     "defaultRequire": 1
   }
