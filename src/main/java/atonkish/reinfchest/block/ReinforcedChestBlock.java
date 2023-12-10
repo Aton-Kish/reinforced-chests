@@ -56,8 +56,8 @@ public class ReinforcedChestBlock extends ChestBlock {
                                 PlayerEntity playerEntity) {
                             if (chestBlockEntity.checkUnlocked(playerEntity)
                                     && chestBlockEntity2.checkUnlocked(playerEntity)) {
-                                chestBlockEntity.checkLootInteraction(playerInventory.player);
-                                chestBlockEntity2.checkLootInteraction(playerInventory.player);
+                                chestBlockEntity.generateLoot(playerInventory.player);
+                                chestBlockEntity2.generateLoot(playerInventory.player);
                                 return ReinforcedStorageScreenHandler.createDoubleBlockScreen(material, i,
                                         playerInventory, inventory);
                             } else {
