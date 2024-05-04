@@ -20,7 +20,7 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
           path: build/maven
       - name: validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v2
       - name: setup jdk ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
