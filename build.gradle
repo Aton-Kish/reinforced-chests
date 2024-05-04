@@ -1,5 +1,5 @@
 plugins {
-	id "fabric-loom" version "1.4-SNAPSHOT"
+	id "fabric-loom" version "1.6-SNAPSHOT"
 	id "maven-publish"
 	id "com.matthewprenger.cursegradle" version "1.4.0"
 	id "com.modrinth.minotaur" version "2.+"
@@ -91,7 +91,8 @@ jar {
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
 			from components.java
 		}
 	}
