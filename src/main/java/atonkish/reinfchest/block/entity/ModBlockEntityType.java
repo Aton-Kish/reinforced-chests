@@ -3,8 +3,6 @@ package atonkish.reinfchest.block.entity;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -22,7 +20,7 @@ public class ModBlockEntityType {
             ReinforcingMaterial material) {
         if (!REINFORCED_CHEST_MAP.containsKey(material)) {
             String id = material.getName() + "_chest";
-            FabricBlockEntityTypeBuilder<ReinforcedChestBlockEntity> builder = FabricBlockEntityTypeBuilder
+            BlockEntityType.Builder<ReinforcedChestBlockEntity> builder = BlockEntityType.Builder
                     .create(createBlockEntityTypeFactory(material), ModBlocks.REINFORCED_CHEST_MAP.get(material));
             BlockEntityType<ReinforcedChestBlockEntity> blockEntityType = ModBlockEntityType
                     .create(namespace, id, builder);
@@ -33,11 +31,11 @@ public class ModBlockEntityType {
     }
 
     private static BlockEntityType<ReinforcedChestBlockEntity> create(String namespace, String id,
-            FabricBlockEntityTypeBuilder<ReinforcedChestBlockEntity> builder) {
+            BlockEntityType.Builder<ReinforcedChestBlockEntity> builder) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(namespace, id), builder.build(null));
     }
 
-    private static FabricBlockEntityTypeBuilder.Factory<ReinforcedChestBlockEntity> createBlockEntityTypeFactory(
+    private static BlockEntityType.BlockEntityFactory<ReinforcedChestBlockEntity> createBlockEntityTypeFactory(
             ReinforcingMaterial material) {
         return (BlockPos blockPos, BlockState blockState) -> new ReinforcedChestBlockEntity(material, blockPos,
                 blockState);
