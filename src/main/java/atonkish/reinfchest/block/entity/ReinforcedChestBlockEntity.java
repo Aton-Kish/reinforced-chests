@@ -30,7 +30,7 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
 
     public ReinforcedChestBlockEntity(ReinforcingMaterial material, BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material), blockPos, blockState);
-        this.setInvStackList(DefaultedList.ofSize(material.getSize(), ItemStack.EMPTY));
+        this.setHeldStacks(DefaultedList.ofSize(material.getSize(), ItemStack.EMPTY));
         this.stateManager = new ViewerCountManager() {
             @Override
             protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
