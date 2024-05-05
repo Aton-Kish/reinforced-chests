@@ -1,7 +1,6 @@
 package atonkish.reinfchest.util;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.MapColor;
@@ -14,14 +13,14 @@ import atonkish.reinfcore.util.ReinforcingMaterial;
 
 public enum ReinforcingMaterialSettings {
     COPPER(ReinforcedCoreRegistry.registerReinforcingMaterial("copper", 45, Items.COPPER_INGOT),
-            FabricBlockSettings
+            AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.ORANGE)
                     .strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.COPPER),
             new Item.Settings()),
     IRON(ReinforcedCoreRegistry.registerReinforcingMaterial("iron", 54, Items.IRON_INGOT),
-            FabricBlockSettings
+            AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.IRON_GRAY)
                     .instrument(Instrument.IRON_XYLOPHONE)
@@ -29,7 +28,7 @@ public enum ReinforcingMaterialSettings {
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings()),
     GOLD(ReinforcedCoreRegistry.registerReinforcingMaterial("gold", 81, Items.GOLD_INGOT),
-            FabricBlockSettings
+            AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.GOLD)
                     .instrument(Instrument.BELL)
@@ -37,14 +36,14 @@ public enum ReinforcingMaterialSettings {
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings()),
     DIAMOND(ReinforcedCoreRegistry.registerReinforcingMaterial("diamond", 108, Items.DIAMOND),
-            FabricBlockSettings
+            AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.DIAMOND_BLUE)
                     .strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings()),
     NETHERITE(ReinforcedCoreRegistry.registerReinforcingMaterial("netherite", 108, Items.NETHERITE_INGOT),
-            FabricBlockSettings
+            AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.BLACK)
                     .strength(2.5F, 1200.0F)
