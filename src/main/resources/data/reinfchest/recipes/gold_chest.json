@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "reinfchest:gold_chest"
+    "count": 1,
+    "id": "reinfchest:gold_chest"
   }
 }
