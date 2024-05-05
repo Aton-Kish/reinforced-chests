@@ -21,12 +21,7 @@
     "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
     "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
   },
-  "mixins": [
-    {
-      "config": "reinfchest.client.mixins.json",
-      "environment": "client"
-    }
-  ],
+  "mixins": [],
 
   "depends": {
     "fabricloader": ">=0.15.10",
