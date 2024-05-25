@@ -12,6 +12,15 @@ base {
 	archivesName = project.archives_base_name
 }
 
+sourceSets {
+	gametest {
+		compileClasspath += sourceSets.main.compileClasspath
+		runtimeClasspath += sourceSets.main.runtimeClasspath
+		compileClasspath += sourceSets.main.output
+		runtimeClasspath += sourceSets.main.output
+	}
+}
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -42,6 +51,26 @@ loom {
 		"reinfchest" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
+		}
+	}
+
+	runs {
+		serverTest {
+			server()
+			ideConfigGenerated true
+			name "Minecraft Server Test"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/gametest/junit.xml"
+			runDir "build/gametest"
+			source sourceSets.gametest
+		}
+
+		clientTest {
+			client()
+			ideConfigGenerated true
+			name "Minecraft Client Test"
+			runDir "build/gametest"
+			source sourceSets.gametest
 		}
 	}
 }

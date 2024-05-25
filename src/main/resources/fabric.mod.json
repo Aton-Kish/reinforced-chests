@@ -19,7 +19,11 @@
   "entrypoints": {
     "reinfcore": ["atonkish.reinfchest.ReinforcedChestsMod"],
     "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
-    "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
+    "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"],
+    "fabric-gametest": [
+      "atonkish.reinfchest.gametest.testcase.LootTableTests",
+      "atonkish.reinfchest.gametest.testcase.RecipeTests"
+    ]
   },
   "mixins": [],
 
