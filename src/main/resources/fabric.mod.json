@@ -21,6 +21,7 @@
     "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
     "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"],
     "fabric-gametest": [
+      "atonkish.reinfchest.gametest.testcase.AdvancementTests",
       "atonkish.reinfchest.gametest.testcase.LootTableTests",
       "atonkish.reinfchest.gametest.testcase.RecipeTests"
     ]
