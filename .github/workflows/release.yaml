@@ -24,7 +24,7 @@ jobs:
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: release
-        run: ./gradlew build curseforge modrinth
+        run: ./gradlew runServerTest build curseforge modrinth
       - name: capture build artifacts
         uses: actions/upload-artifact@v4
         with:
