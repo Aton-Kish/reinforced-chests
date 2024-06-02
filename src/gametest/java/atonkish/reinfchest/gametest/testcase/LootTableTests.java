@@ -11,7 +11,6 @@ import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.test.GameTest;
-import net.minecraft.test.PositionedException;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -68,7 +67,7 @@ public class LootTableTests {
             try {
                 context.expectBlock(Blocks.AIR, blockPos);
                 context.expectEntitiesAround(EntityType.ITEM, blockPos, shouldDrop ? 1 : 0, 1);
-            } catch (PositionedException e) {
+            } catch (Exception e) {
                 ReinforcedChestsMod.LOGGER.error(e.getMessage());
                 throw e;
             } finally {

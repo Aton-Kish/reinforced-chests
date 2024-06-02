@@ -6,7 +6,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.Stats;
 import net.minecraft.test.GameTest;
-import net.minecraft.test.PositionedException;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -66,7 +65,7 @@ public class StatTests {
             try {
                 context.assertEquals(statMap.get(statMapKeyAfterOpening) - statMap.get(statMapKeyBeforeOpening), 1,
                         String.format("diff %s value", stat.getName()));
-            } catch (PositionedException e) {
+            } catch (Exception e) {
                 ReinforcedChestsMod.LOGGER.error(e.getMessage());
                 throw e;
             } finally {

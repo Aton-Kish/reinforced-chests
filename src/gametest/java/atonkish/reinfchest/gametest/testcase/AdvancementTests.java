@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.test.GameTest;
-import net.minecraft.test.PositionedException;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -64,7 +63,7 @@ public class AdvancementTests {
                         "Expected that advancement %s has not been done yet, but it has been already done.", entry));
                 context.assertTrue(progressMap.get(progressMapKeyAfterHavingItem), String.format(
                         "Expected that advancement %s has been done, but it has not been done yet.", entry));
-            } catch (PositionedException e) {
+            } catch (Exception e) {
                 ReinforcedChestsMod.LOGGER.error(e.getMessage());
                 throw e;
             } finally {
