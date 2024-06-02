@@ -24,6 +24,7 @@
       "atonkish.reinfchest.gametest.testcase.AdvancementTests",
       "atonkish.reinfchest.gametest.testcase.InventoryTests",
       "atonkish.reinfchest.gametest.testcase.LootTableTests",
+      "atonkish.reinfchest.gametest.testcase.PiglinTests",
       "atonkish.reinfchest.gametest.testcase.RecipeTests",
       "atonkish.reinfchest.gametest.testcase.StatTests"
     ]
