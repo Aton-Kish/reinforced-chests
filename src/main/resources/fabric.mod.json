@@ -22,6 +22,7 @@
     "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"],
     "fabric-gametest": [
       "atonkish.reinfchest.gametest.testcase.AdvancementTests",
+      "atonkish.reinfchest.gametest.testcase.InventoryTests",
       "atonkish.reinfchest.gametest.testcase.LootTableTests",
       "atonkish.reinfchest.gametest.testcase.RecipeTests",
       "atonkish.reinfchest.gametest.testcase.StatTests"
