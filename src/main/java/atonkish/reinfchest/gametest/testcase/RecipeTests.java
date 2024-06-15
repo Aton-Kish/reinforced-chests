@@ -3,12 +3,8 @@ package atonkish.reinfchest.gametest.testcase;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import atonkish.reinfchest.ReinforcedChestsMod;
-import atonkish.reinfchest.gametest.ReinforcedChestsModGameTest;
-import atonkish.reinfchest.gametest.util.VoidScreenHander;
-import atonkish.reinfchest.item.ModItems;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.RecipeInputInventory;
@@ -23,90 +19,116 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.test.StructureTestUtil;
 import net.minecraft.test.TestFunction;
 
+import atonkish.reinfchest.ReinforcedChestsMod;
+import atonkish.reinfchest.gametest.util.VoidScreenHander;
+import atonkish.reinfchest.item.ModItems;
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 public class RecipeTests {
-    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>();
+    private static final String BATCH_ID = String.format("%s:RecipeBatch",
+            ReinforcedChestsMod.MOD_ID);
 
-    static {
-        // Copper Chest
-        RecipeTests.register(
-                "Craft Copper Chest",
-                RecipeType.CRAFTING,
-                RecipeTests.create3x3CraftingInventory(
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.CHEST),
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.COPPER_INGOT),
-                        new ItemStack(Items.COPPER_INGOT)),
-                new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper"))));
+    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
+        {
+            // Copper Chest
+            {
+                ItemStack baseChest = new ItemStack(Items.CHEST);
+                ItemStack material = new ItemStack(Items.COPPER_INGOT);
+                ItemStack chest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
 
-        // Iron Chest
-        RecipeTests.register(
-                "Craft Iron Chest",
-                RecipeType.CRAFTING,
-                RecipeTests.create3x3CraftingInventory(
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper"))),
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(Items.IRON_INGOT),
-                        new ItemStack(Items.IRON_INGOT)),
-                new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron"))));
+                add(RecipeTests.createTest(
+                        "Craft Copper Chest",
+                        RecipeType.CRAFTING,
+                        RecipeTests.create3x3CraftingInventory(
+                                material, material, material,
+                                material, baseChest, material,
+                                material, material, material),
+                        chest));
+            }
 
-        // Gold Chest
-        RecipeTests.register(
-                "Craft Gold Chest",
-                RecipeType.CRAFTING,
-                RecipeTests.create3x3CraftingInventory(
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron"))),
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(Items.GOLD_INGOT),
-                        new ItemStack(Items.GOLD_INGOT)),
-                new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold"))));
+            // Iron Chest
+            {
+                ItemStack baseChest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
+                ItemStack material = new ItemStack(Items.IRON_INGOT);
+                ItemStack chest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
 
-        // Diamond Chest
-        RecipeTests.register(
-                "Craft Diamond Chest",
-                RecipeType.CRAFTING,
-                RecipeTests.create3x3CraftingInventory(
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold"))),
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(Items.DIAMOND),
-                        new ItemStack(Items.DIAMOND)),
-                new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond"))));
+                add(RecipeTests.createTest(
+                        "Craft Iron Chest",
+                        RecipeType.CRAFTING,
+                        RecipeTests.create3x3CraftingInventory(
+                                material, material, material,
+                                material, baseChest, material,
+                                material, material, material),
+                        chest));
+            }
 
-        // Netherite Chest
-        RecipeTests.register(
-                "Smithing Netherite Chest",
-                RecipeType.SMITHING,
-                new SimpleInventory(
-                        new ItemStack(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
-                        new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond"))),
-                        new ItemStack(Items.NETHERITE_INGOT)),
-                new ItemStack(ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite"))));
-    }
+            // Gold Chest
+            {
+                ItemStack baseChest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
+                ItemStack material = new ItemStack(Items.GOLD_INGOT);
+                ItemStack chest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")));
 
-    private static <C extends Inventory, T extends Recipe<C>> void register(
-            String name, RecipeType<T> type, C inventory, ItemStack expected) {
-        String testName = String.format("%s: %s", RecipeTests.class.getSimpleName(), name);
-        TEST_FUNCTIONS.add(new TestFunction(
-                ReinforcedChestsModGameTest.BATCH_ID_RECIPE,
+                add(RecipeTests.createTest(
+                        "Craft Gold Chest",
+                        RecipeType.CRAFTING,
+                        RecipeTests.create3x3CraftingInventory(
+                                material, material, material,
+                                material, baseChest, material,
+                                material, material, material),
+                        chest));
+            }
+
+            // Diamond Chest
+            {
+                ItemStack baseChest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")));
+                ItemStack material = new ItemStack(Items.DIAMOND);
+                ItemStack chest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")));
+
+                add(RecipeTests.createTest(
+                        "Craft Diamond Chest",
+                        RecipeType.CRAFTING,
+                        RecipeTests.create3x3CraftingInventory(
+                                material, material, material,
+                                material, baseChest, material,
+                                material, material, material),
+                        chest));
+            }
+
+            // Netherite Chest
+            {
+                ItemStack template = new ItemStack(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
+                ItemStack baseChest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")));
+                ItemStack material = new ItemStack(Items.NETHERITE_INGOT);
+                ItemStack chest = new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")));
+
+                add(RecipeTests.createTest(
+                        "Smithing Netherite Chest",
+                        RecipeType.SMITHING,
+                        new SimpleInventory(template, baseChest, material),
+                        chest));
+            }
+        }
+    };
+
+    private static <C extends Inventory, T extends Recipe<C>> TestFunction createTest(String name, RecipeType<T> type,
+            C inventory, ItemStack expected) {
+        String testName = String.format("%s %s %s",
+                ReinforcedChestsMod.MOD_ID,
+                RecipeTests.class.getSimpleName(),
+                name)
+                .replace(" ", "_");
+
+        return new TestFunction(
+                RecipeTests.BATCH_ID,
                 testName,
                 FabricGameTest.EMPTY_STRUCTURE,
                 StructureTestUtil.getRotation(0),
@@ -129,15 +151,15 @@ public class RecipeTests {
 
                     // Assert
                     try {
-                        context.assertEquals(actual.getItem(), expected.getItem(), "recipe result item");
-                        context.assertEquals(actual.getCount(), expected.getCount(), "recipe result count");
+                        context.assertTrue(ItemStack.areEqual(actual, expected),
+                                "Recipe result differs from expected.");
                     } catch (Exception e) {
                         ReinforcedChestsMod.LOGGER.error("[{}] {}", testName, e.getMessage());
                         throw e;
                     }
 
                     context.complete();
-                }));
+                });
     }
 
     private static RecipeInputInventory create3x3CraftingInventory(

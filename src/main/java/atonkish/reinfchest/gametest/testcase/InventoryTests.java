@@ -3,11 +3,8 @@ package atonkish.reinfchest.gametest.testcase;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import atonkish.reinfchest.ReinforcedChestsMod;
-import atonkish.reinfchest.block.ModBlocks;
-import atonkish.reinfchest.gametest.ReinforcedChestsModGameTest;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.inventory.Inventory;
@@ -15,65 +12,77 @@ import net.minecraft.test.StructureTestUtil;
 import net.minecraft.test.TestFunction;
 import net.minecraft.util.math.BlockPos;
 
+import atonkish.reinfchest.ReinforcedChestsMod;
+import atonkish.reinfchest.block.ModBlocks;
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 public class InventoryTests {
-    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>();
+    private static final String BATCH_ID = String.format("%s:InventoryBatch",
+            ReinforcedChestsMod.MOD_ID);
 
-    static {
-        // Copper Chest
-        InventoryTests.registerSingleChest(
-                "Single Copper Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                45);
-        InventoryTests.registerDoubleChest(
-                "Double Copper Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                90);
+    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
+        {
+            // Copper Chest
+            add(InventoryTests.createTestSingleChest(
+                    "Single Copper Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    45));
+            add(InventoryTests.createTestDoubleChest(
+                    "Double Copper Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    90));
 
-        // Iron Chest
-        InventoryTests.registerSingleChest(
-                "Single Iron Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                54);
-        InventoryTests.registerDoubleChest(
-                "Double Iron Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                108);
+            // Iron Chest
+            add(InventoryTests.createTestSingleChest(
+                    "Single Iron Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
+                    54));
+            add(InventoryTests.createTestDoubleChest(
+                    "Double Iron Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
+                    108));
 
-        // Gold Chest
-        InventoryTests.registerSingleChest(
-                "Single Gold Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                81);
-        InventoryTests.registerDoubleChest(
-                "Double Gold Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                162);
+            // Gold Chest
+            add(InventoryTests.createTestSingleChest(
+                    "Single Gold Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
+                    81));
+            add(InventoryTests.createTestDoubleChest(
+                    "Double Gold Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
+                    162));
 
-        // Diamond Chest
-        InventoryTests.registerSingleChest(
-                "Single Diamond Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                108);
-        InventoryTests.registerDoubleChest(
-                "Double Diamond Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                216);
+            // Diamond Chest
+            add(InventoryTests.createTestSingleChest(
+                    "Single Diamond Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
+                    108));
+            add(InventoryTests.createTestDoubleChest(
+                    "Double Diamond Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
+                    216));
 
-        // Netherite Chest
-        InventoryTests.registerSingleChest(
-                "Single Netherite Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
-                108);
-        InventoryTests.registerDoubleChest(
-                "Double Netherite Chest inventory size",
-                (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
-                216);
-    }
+            // Netherite Chest
+            add(InventoryTests.createTestSingleChest(
+                    "Single Netherite Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
+                    108));
+            add(InventoryTests.createTestDoubleChest(
+                    "Double Netherite Chest inventory size",
+                    (ChestBlock) ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
+                    216));
+        }
+    };
 
-    private static void registerSingleChest(String name, ChestBlock chestBlock, int size) {
-        String testName = String.format("%s: %s", InventoryTests.class.getSimpleName(), name);
-        TEST_FUNCTIONS.add(new TestFunction(
-                ReinforcedChestsModGameTest.BATCH_ID_INVENTORY,
+    private static TestFunction createTestSingleChest(String name, ChestBlock chestBlock, int size) {
+        String testName = String.format("%s %s %s",
+                ReinforcedChestsMod.MOD_ID,
+                InventoryTests.class.getSimpleName(),
+                name)
+                .replace(" ", "_");
+
+        return new TestFunction(
+                InventoryTests.BATCH_ID,
                 testName,
                 FabricGameTest.EMPTY_STRUCTURE,
                 StructureTestUtil.getRotation(0),
@@ -103,13 +112,18 @@ public class InventoryTests {
                     }
 
                     context.complete();
-                }));
+                });
     }
 
-    private static void registerDoubleChest(String name, ChestBlock chestBlock, int size) {
-        String testName = String.format("%s: %s", InventoryTests.class.getSimpleName(), name);
-        TEST_FUNCTIONS.add(new TestFunction(
-                ReinforcedChestsModGameTest.BATCH_ID_INVENTORY,
+    private static TestFunction createTestDoubleChest(String name, ChestBlock chestBlock, int size) {
+        String testName = String.format("%s %s %s",
+                ReinforcedChestsMod.MOD_ID,
+                InventoryTests.class.getSimpleName(),
+                name)
+                .replace(" ", "_");
+
+        return new TestFunction(
+                InventoryTests.BATCH_ID,
                 testName,
                 FabricGameTest.EMPTY_STRUCTURE,
                 StructureTestUtil.getRotation(0),
@@ -142,6 +156,6 @@ public class InventoryTests {
                     }
 
                     context.complete();
-                }));
+                });
     }
 }

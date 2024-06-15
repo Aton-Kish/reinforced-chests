@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-import atonkish.reinfchest.ReinforcedChestsMod;
-import atonkish.reinfchest.block.ModBlocks;
-import atonkish.reinfchest.gametest.ReinforcedChestsModGameTest;
-import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -26,100 +22,113 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
+import atonkish.reinfchest.ReinforcedChestsMod;
+import atonkish.reinfchest.block.ModBlocks;
+import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 public class LootTableTests {
-    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>();
+    private static final String BATCH_ID = String.format("%s:LootTableBatch",
+            ReinforcedChestsMod.MOD_ID);
 
-    static {
-        // Copper Chest
-        LootTableTests.register(
-                "Break Copper Chest with Netherite Axe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                Items.NETHERITE_AXE,
-                true);
-        LootTableTests.register(
-                "Break Copper Chest with Netherite Pickaxe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                Items.NETHERITE_PICKAXE,
-                true);
-        LootTableTests.register(
-                "Break Copper Chest without tools",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                Items.AIR,
-                true);
+    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
+        {
+            // Copper Chest
+            add(LootTableTests.createTest(
+                    "Break Copper Chest with Netherite Axe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    Items.NETHERITE_AXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Copper Chest with Netherite Pickaxe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    Items.NETHERITE_PICKAXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Copper Chest without tools",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    Items.AIR,
+                    true));
 
-        // Iron Chest
-        LootTableTests.register(
-                "Break Iron Chest with Netherite Axe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                Items.NETHERITE_AXE,
-                true);
-        LootTableTests.register(
-                "Break Iron Chest with Netherite Pickaxe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                Items.NETHERITE_PICKAXE,
-                true);
-        LootTableTests.register(
-                "Break Iron Chest without tools",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                Items.AIR,
-                true);
+            // Iron Chest
+            add(LootTableTests.createTest(
+                    "Break Iron Chest with Netherite Axe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
+                    Items.NETHERITE_AXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Iron Chest with Netherite Pickaxe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
+                    Items.NETHERITE_PICKAXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Iron Chest without tools",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
+                    Items.AIR,
+                    true));
 
-        // Gold Chest
-        LootTableTests.register(
-                "Break Gold Chest with Netherite Axe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                Items.NETHERITE_AXE,
-                true);
-        LootTableTests.register(
-                "Break Gold Chest with Netherite Pickaxe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                Items.NETHERITE_PICKAXE,
-                true);
-        LootTableTests.register(
-                "Break Gold Chest without tools",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                Items.AIR,
-                true);
+            // Gold Chest
+            add(LootTableTests.createTest(
+                    "Break Gold Chest with Netherite Axe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
+                    Items.NETHERITE_AXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Gold Chest with Netherite Pickaxe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
+                    Items.NETHERITE_PICKAXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Gold Chest without tools",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
+                    Items.AIR,
+                    true));
 
-        // Diamond Chest
-        LootTableTests.register(
-                "Break Diamond Chest with Netherite Axe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                Items.NETHERITE_AXE,
-                true);
-        LootTableTests.register(
-                "Break Diamond Chest with Netherite Pickaxe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                Items.NETHERITE_PICKAXE,
-                true);
-        LootTableTests.register(
-                "Break Diamond Chest without tools",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                Items.AIR,
-                true);
+            // Diamond Chest
+            add(LootTableTests.createTest(
+                    "Break Diamond Chest with Netherite Axe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
+                    Items.NETHERITE_AXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Diamond Chest with Netherite Pickaxe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
+                    Items.NETHERITE_PICKAXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Diamond Chest without tools",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
+                    Items.AIR,
+                    true));
 
-        // Netherite Chest
-        LootTableTests.register(
-                "Break Netherite Chest with Netherite Axe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
-                Items.NETHERITE_AXE,
-                true);
-        LootTableTests.register(
-                "Break Netherite Chest with Netherite Pickaxe",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
-                Items.NETHERITE_PICKAXE,
-                true);
-        LootTableTests.register(
-                "Break Netherite Chest without tools",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
-                Items.AIR,
-                true);
-    }
+            // Netherite Chest
+            add(LootTableTests.createTest(
+                    "Break Netherite Chest with Netherite Axe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
+                    Items.NETHERITE_AXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Netherite Chest with Netherite Pickaxe",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
+                    Items.NETHERITE_PICKAXE,
+                    true));
+            add(LootTableTests.createTest(
+                    "Break Netherite Chest without tools",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")),
+                    Items.AIR,
+                    true));
+        }
+    };
 
-    private static void register(String name, Block chestBlock, Item tool, boolean shouldDrop) {
-        String testName = String.format("%s: %s", LootTableTests.class.getSimpleName(), name);
-        TEST_FUNCTIONS.add(new TestFunction(
-                ReinforcedChestsModGameTest.BATCH_ID_LOOT_TABLE,
+    private static TestFunction createTest(String name, Block chestBlock, Item tool, boolean shouldDrop) {
+        String testName = String.format("%s %s %s",
+                ReinforcedChestsMod.MOD_ID,
+                LootTableTests.class.getSimpleName(),
+                name)
+                .replace(" ", "_");
+
+        return new TestFunction(
+                LootTableTests.BATCH_ID,
                 testName,
                 FabricGameTest.EMPTY_STRUCTURE,
                 StructureTestUtil.getRotation(0),
@@ -184,6 +193,6 @@ public class LootTableTests {
 
                         context.complete();
                     });
-                }));
+                });
     }
 }

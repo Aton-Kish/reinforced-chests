@@ -6,12 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import atonkish.reinfchest.ReinforcedChestsMod;
-import atonkish.reinfchest.block.ModBlocks;
-import atonkish.reinfchest.gametest.ReinforcedChestsModGameTest;
-import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
@@ -26,40 +22,53 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
+import atonkish.reinfchest.ReinforcedChestsMod;
+import atonkish.reinfchest.block.ModBlocks;
+import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 public class PiglinTests {
-    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>();
+    private static final String BATCH_ID = String.format("%s:PiglinBatch",
+            ReinforcedChestsMod.MOD_ID);
 
-    static {
-        // Copper Chest
-        PiglinTests.register(
-                "Piglin get angry after opening Copper Chest",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
+    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
+        {
+            // Copper Chest
+            add(PiglinTests.createTest(
+                    "Piglin get angry after opening Copper Chest",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper"))));
 
-        // Iron Chest
-        PiglinTests.register(
-                "Piglin get angry after opening Iron Chest",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
+            // Iron Chest
+            add(PiglinTests.createTest(
+                    "Piglin get angry after opening Iron Chest",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron"))));
 
-        // Gold Chest
-        PiglinTests.register(
-                "Piglin get angry after opening Gold Chest",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")));
+            // Gold Chest
+            add(PiglinTests.createTest(
+                    "Piglin get angry after opening Gold Chest",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold"))));
 
-        // Diamond Chest
-        PiglinTests.register(
-                "Piglin get angry after opening Diamond Chest",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")));
+            // Diamond Chest
+            add(PiglinTests.createTest(
+                    "Piglin get angry after opening Diamond Chest",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond"))));
 
-        // Netherite Chest
-        PiglinTests.register(
-                "Piglin get angry after opening Netherite Chest",
-                ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite")));
-    }
+            // Netherite Chest
+            add(PiglinTests.createTest(
+                    "Piglin get angry after opening Netherite Chest",
+                    ModBlocks.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("netherite"))));
+        }
+    };
 
-    private static void register(String name, Block chestBlock) {
-        String testName = String.format("%s: %s", PiglinTests.class.getSimpleName(), name);
-        TEST_FUNCTIONS.add(new TestFunction(
-                ReinforcedChestsModGameTest.BATCH_ID_PIGLIN,
+    private static TestFunction createTest(String name, Block chestBlock) {
+        String testName = String.format("%s %s %s",
+                ReinforcedChestsMod.MOD_ID,
+                PiglinTests.class.getSimpleName(),
+                name)
+                .replace(" ", "_");
+
+        return new TestFunction(
+                PiglinTests.BATCH_ID,
                 testName,
                 FabricGameTest.EMPTY_STRUCTURE,
                 StructureTestUtil.getRotation(0),
@@ -126,6 +135,6 @@ public class PiglinTests {
 
                         context.complete();
                     });
-                }));
+                });
     }
 }

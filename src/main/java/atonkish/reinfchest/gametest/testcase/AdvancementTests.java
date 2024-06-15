@@ -6,12 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import atonkish.reinfchest.ReinforcedChestsMod;
-import atonkish.reinfchest.gametest.ReinforcedChestsModGameTest;
-import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
-import atonkish.reinfchest.item.ModItems;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
 import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.item.Item;
@@ -25,65 +21,78 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
+import atonkish.reinfchest.ReinforcedChestsMod;
+import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
+import atonkish.reinfchest.item.ModItems;
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 public class AdvancementTests {
-    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>();
+    private static final String BATCH_ID = String.format("%s:AdvancementBatch",
+            ReinforcedChestsMod.MOD_ID);
 
-    static {
-        // Copper Chest
-        AdvancementTests.register(
-                "Obtain Copper Chest recipe advancement by having Chest",
-                Items.CHEST,
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest"));
-        AdvancementTests.register(
-                "Obtain Copper Chest recipe advancement by having Copper Ingot",
-                Items.COPPER_INGOT,
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest"));
+    public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
+        {
+            // Copper Chest
+            add(AdvancementTests.createTest(
+                    "Obtain Copper Chest recipe advancement by having Chest",
+                    Items.CHEST,
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
+            add(AdvancementTests.createTest(
+                    "Obtain Copper Chest recipe advancement by having Copper Ingot",
+                    Items.COPPER_INGOT,
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
 
-        // Iron Chest
-        AdvancementTests.register(
-                "Obtain Iron Chest recipe advancement by having Copper Chest",
-                ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest"));
-        AdvancementTests.register(
-                "Obtain Iron Chest recipe advancement by having Iron Ingot",
-                Items.IRON_INGOT,
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest"));
+            // Iron Chest
+            add(AdvancementTests.createTest(
+                    "Obtain Iron Chest recipe advancement by having Copper Chest",
+                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
+            add(AdvancementTests.createTest(
+                    "Obtain Iron Chest recipe advancement by having Iron Ingot",
+                    Items.IRON_INGOT,
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
 
-        // Gold Chest
-        AdvancementTests.register(
-                "Obtain Gold Chest recipe advancement by having Iron Chest",
-                ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest"));
-        AdvancementTests.register(
-                "Obtain Gold Chest recipe advancement by having Gold Ingot",
-                Items.GOLD_INGOT,
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest"));
+            // Gold Chest
+            add(AdvancementTests.createTest(
+                    "Obtain Gold Chest recipe advancement by having Iron Chest",
+                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest")));
+            add(AdvancementTests.createTest(
+                    "Obtain Gold Chest recipe advancement by having Gold Ingot",
+                    Items.GOLD_INGOT,
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest")));
 
-        // Diamond Chest
-        AdvancementTests.register(
-                "Obtain Diamond Chest recipe advancement by having Gold Chest",
-                ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest"));
-        AdvancementTests.register(
-                "Obtain Diamond Chest recipe advancement by having Diamond",
-                Items.DIAMOND,
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest"));
+            // Diamond Chest
+            add(AdvancementTests.createTest(
+                    "Obtain Diamond Chest recipe advancement by having Gold Chest",
+                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest")));
+            add(AdvancementTests.createTest(
+                    "Obtain Diamond Chest recipe advancement by having Diamond",
+                    Items.DIAMOND,
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest")));
 
-        // Netherite Chest
-        AdvancementTests.register(
-                "Obtain Netherite Chest recipe advancement by having Diamond Chest",
-                ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing"));
-        AdvancementTests.register(
-                "Obtain Netherite Chest recipe advancement by having Netherite Ingot",
-                Items.NETHERITE_INGOT,
-                new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing"));
-    }
+            // Netherite Chest
+            add(AdvancementTests.createTest(
+                    "Obtain Netherite Chest recipe advancement by having Diamond Chest",
+                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing")));
+            add(AdvancementTests.createTest(
+                    "Obtain Netherite Chest recipe advancement by having Netherite Ingot",
+                    Items.NETHERITE_INGOT,
+                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing")));
+        }
+    };
 
-    private static void register(String name, Item item, Identifier advancementId) {
-        String testName = String.format("%s: %s", AdvancementTests.class.getSimpleName(), name);
-        TEST_FUNCTIONS.add(new TestFunction(
-                ReinforcedChestsModGameTest.BATCH_ID_ADVANCEMENT,
+    private static TestFunction createTest(String name, Item item, Identifier advancementId) {
+        String testName = String.format("%s %s %s",
+                ReinforcedChestsMod.MOD_ID,
+                AdvancementTests.class.getSimpleName(),
+                name)
+                .replace(" ", "_");
+
+        return new TestFunction(
+                AdvancementTests.BATCH_ID,
                 testName,
                 FabricGameTest.EMPTY_STRUCTURE,
                 StructureTestUtil.getRotation(0),
@@ -144,6 +153,6 @@ public class AdvancementTests {
 
                         context.complete();
                     });
-                }));
+                });
     }
 }

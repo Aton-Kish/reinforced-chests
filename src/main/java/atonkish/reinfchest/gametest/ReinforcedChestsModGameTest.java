@@ -1,51 +1,34 @@
 package atonkish.reinfchest.gametest;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import net.minecraft.test.CustomTestProvider;
+import net.minecraft.test.TestFunction;
 
 import atonkish.reinfchest.gametest.testcase.AdvancementTests;
 import atonkish.reinfchest.gametest.testcase.InventoryTests;
 import atonkish.reinfchest.gametest.testcase.LootTableTests;
+import atonkish.reinfchest.gametest.testcase.OpenTests;
 import atonkish.reinfchest.gametest.testcase.PiglinTests;
 import atonkish.reinfchest.gametest.testcase.RecipeTests;
-import atonkish.reinfchest.gametest.testcase.StatTests;
-import net.minecraft.test.CustomTestProvider;
-import net.minecraft.test.TestFunction;
 
 public class ReinforcedChestsModGameTest {
-    public static final String BATCH_ID_ADVANCEMENT = "advancementBatch";
-    public static final String BATCH_ID_INVENTORY = "inventoryBatch";
-    public static final String BATCH_ID_LOOT_TABLE = "lootTableBatch";
-    public static final String BATCH_ID_PIGLIN = "piglinBatch";
-    public static final String BATCH_ID_RECIPE = "recipeBatch";
-    public static final String BATCH_ID_STAT = "statBatch";
-
     @CustomTestProvider
-    public Collection<TestFunction> registerAdvancementTests() {
-        return AdvancementTests.TEST_FUNCTIONS;
-    }
+    public Collection<TestFunction> registerTests() {
+        Collection<TestFunction> testFunctions = new ArrayList<>();
 
-    @CustomTestProvider
-    public Collection<TestFunction> registerInventoryTests() {
-        return InventoryTests.TEST_FUNCTIONS;
-    }
+        if (System.getProperty(this.getClass().getPackageName()) == null) {
+            return testFunctions;
+        }
 
-    @CustomTestProvider
-    public Collection<TestFunction> registerLootTableTests() {
-        return LootTableTests.TEST_FUNCTIONS;
-    }
+        testFunctions.addAll(AdvancementTests.TEST_FUNCTIONS);
+        testFunctions.addAll(InventoryTests.TEST_FUNCTIONS);
+        testFunctions.addAll(LootTableTests.TEST_FUNCTIONS);
+        testFunctions.addAll(OpenTests.TEST_FUNCTIONS);
+        testFunctions.addAll(PiglinTests.TEST_FUNCTIONS);
+        testFunctions.addAll(RecipeTests.TEST_FUNCTIONS);
 
-    @CustomTestProvider
-    public Collection<TestFunction> registerPiglinTests() {
-        return PiglinTests.TEST_FUNCTIONS;
-    }
-
-    @CustomTestProvider
-    public Collection<TestFunction> registerRecipeTests() {
-        return RecipeTests.TEST_FUNCTIONS;
-    }
-
-    @CustomTestProvider
-    public Collection<TestFunction> registerStatTests() {
-        return StatTests.TEST_FUNCTIONS;
+        return testFunctions;
     }
 }
