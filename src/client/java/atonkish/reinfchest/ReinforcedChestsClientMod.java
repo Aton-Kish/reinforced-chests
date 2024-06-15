@@ -16,9 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
-import atonkish.reinfcore.api.ReinforcedCoreClientRegistry;
-import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfchest.api.ReinforcedChestsClientModInitializer;
 import atonkish.reinfchest.api.ReinforcedChestsClientRegistry;
 import atonkish.reinfchest.block.ModBlocks;
@@ -27,6 +24,9 @@ import atonkish.reinfchest.block.entity.ModBlockEntityType;
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntityRenderer;
 import atonkish.reinfchest.util.ReinforcingMaterialSettings;
+import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
+import atonkish.reinfcore.api.ReinforcedCoreClientRegistry;
+import atonkish.reinfcore.util.ReinforcingMaterial;
 
 @Environment(EnvType.CLIENT)
 public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitializer {
@@ -38,9 +38,10 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 		// init Reinforced Chests
 		initializeReinforcedChestsClient();
 
-		// entrypoint: "reinfchestclient"
+		// entrypoint: "reinfchest-client"
 		FabricLoader.getInstance()
-				.getEntrypoints(ReinforcedChestsMod.MOD_ID + "client", ReinforcedChestsClientModInitializer.class)
+				.getEntrypoints(String.format("%s-client", ReinforcedChestsMod.MOD_ID),
+						ReinforcedChestsClientModInitializer.class)
 				.forEach(ReinforcedChestsClientModInitializer::onInitializeReinforcedChestsClient);
 	}
 
