@@ -22,7 +22,7 @@ public class MockServerPlayerHelper {
     public static ServerPlayerEntity spawn(TestContext context, GameMode gameMode, Vec3d pos) {
         ConnectedClientData data = ConnectedClientData
                 .createDefault(
-                        new GameProfile(UUID.randomUUID(), String.format("mock-player-%d", playerId.getAndIncrement())),
+                        new GameProfile(UUID.randomUUID(), String.format("player-%d", playerId.getAndIncrement())),
                         false);
         ServerPlayerEntity player = new ServerPlayerEntity(context.getWorld().getServer(), context.getWorld(),
                 data.gameProfile(), data.syncedOptions());
