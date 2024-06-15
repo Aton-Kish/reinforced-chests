@@ -18,16 +18,9 @@
   "environment": "*",
   "entrypoints": {
     "reinfcore": ["atonkish.reinfchest.ReinforcedChestsMod"],
-    "reinfcoreclient": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
-    "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"],
-    "fabric-gametest": [
-      "atonkish.reinfchest.gametest.testcase.AdvancementTests",
-      "atonkish.reinfchest.gametest.testcase.InventoryTests",
-      "atonkish.reinfchest.gametest.testcase.LootTableTests",
-      "atonkish.reinfchest.gametest.testcase.PiglinTests",
-      "atonkish.reinfchest.gametest.testcase.RecipeTests",
-      "atonkish.reinfchest.gametest.testcase.StatTests"
-    ]
+    "reinfcore-client": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
+    "reinfcore-gametest": ["atonkish.reinfchest.gametest.ReinforcedChestsModGameTest"],
+    "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
   },
   "mixins": [],
 
