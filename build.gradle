@@ -52,6 +52,7 @@ loom {
 			name "Minecraft Server Test"
 			vmArg "-Dfabric-api.gametest"
 			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/gametest/junit.xml"
+			vmArg "-Datonkish.reinfchest.gametest"
 			runDir "build/gametest"
 		}
 
@@ -59,6 +60,7 @@ loom {
 			client()
 			ideConfigGenerated true
 			name "Minecraft Client Test"
+			vmArg "-Datonkish.reinfchest.gametest"
 			runDir "build/gametest"
 		}
 	}
