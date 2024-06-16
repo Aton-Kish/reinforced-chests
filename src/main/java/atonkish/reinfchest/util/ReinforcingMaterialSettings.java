@@ -2,8 +2,8 @@ package atonkish.reinfchest.util;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.enums.Instrument;
 import net.minecraft.block.MapColor;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
@@ -23,7 +23,7 @@ public enum ReinforcingMaterialSettings {
             AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.IRON_GRAY)
-                    .instrument(Instrument.IRON_XYLOPHONE)
+                    .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
                     .strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings()),
@@ -31,7 +31,7 @@ public enum ReinforcingMaterialSettings {
             AbstractBlock.Settings
                     .create()
                     .mapColor(MapColor.GOLD)
-                    .instrument(Instrument.BELL)
+                    .instrument(NoteBlockInstrument.BELL)
                     .strength(2.5F, 6.0F)
                     .sounds(BlockSoundGroup.METAL),
             new Item.Settings()),
