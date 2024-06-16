@@ -32,6 +32,6 @@ public class ModBlocks {
     }
 
     private static Block register(String namespace, String id, Block block) {
-        return Registry.register(Registries.BLOCK, new Identifier(namespace, id), block);
+        return Registry.register(Registries.BLOCK, Identifier.of(namespace, id), block);
     }
 }

@@ -32,7 +32,7 @@ public class ModBlockEntityType {
 
     private static BlockEntityType<ReinforcedChestBlockEntity> create(String namespace, String id,
             BlockEntityType.Builder<ReinforcedChestBlockEntity> builder) {
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(namespace, id), builder.build(null));
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(namespace, id), builder.build(null));
     }
 
     private static BlockEntityType.BlockEntityFactory<ReinforcedChestBlockEntity> createBlockEntityTypeFactory(

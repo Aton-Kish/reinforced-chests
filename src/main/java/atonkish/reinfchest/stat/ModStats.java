@@ -25,7 +25,7 @@ public class ModStats {
     }
 
     private static Identifier register(String namespace, String id, StatFormatter formatter) {
-        Identifier identifier = new Identifier(namespace, id);
+        Identifier identifier = Identifier.of(namespace, id);
         Registry.register(Registries.CUSTOM_STAT, id, identifier);
         Stats.CUSTOM.getOrCreateStat(identifier, formatter);
         return identifier;

@@ -49,7 +49,7 @@ public class ModTexturedRenderLayers {
 
     private static SpriteIdentifier getReinforcedChestTextureId(String namespace, ReinforcingMaterial material,
             String variant) {
-        Identifier textureId = new Identifier(namespace,
+        Identifier textureId = Identifier.of(namespace,
                 "entity/reinforced_chest/" + material.getName() + "/" + variant);
         return new SpriteIdentifier(TexturedRenderLayers.CHEST_ATLAS_TEXTURE, textureId);
     }

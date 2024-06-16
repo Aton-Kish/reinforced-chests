@@ -36,51 +36,51 @@ public class AdvancementTests {
             add(AdvancementTests.createTest(
                     "Obtain Copper Chest recipe advancement by having Chest",
                     Items.CHEST,
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
             add(AdvancementTests.createTest(
                     "Obtain Copper Chest recipe advancement by having Copper Ingot",
                     Items.COPPER_INGOT,
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
 
             // Iron Chest
             add(AdvancementTests.createTest(
                     "Obtain Iron Chest recipe advancement by having Copper Chest",
                     ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
             add(AdvancementTests.createTest(
                     "Obtain Iron Chest recipe advancement by having Iron Ingot",
                     Items.IRON_INGOT,
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
 
             // Gold Chest
             add(AdvancementTests.createTest(
                     "Obtain Gold Chest recipe advancement by having Iron Chest",
                     ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")),
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest")));
             add(AdvancementTests.createTest(
                     "Obtain Gold Chest recipe advancement by having Gold Ingot",
                     Items.GOLD_INGOT,
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/gold_chest")));
 
             // Diamond Chest
             add(AdvancementTests.createTest(
                     "Obtain Diamond Chest recipe advancement by having Gold Chest",
                     ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("gold")),
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest")));
             add(AdvancementTests.createTest(
                     "Obtain Diamond Chest recipe advancement by having Diamond",
                     Items.DIAMOND,
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/diamond_chest")));
 
             // Netherite Chest
             add(AdvancementTests.createTest(
                     "Obtain Netherite Chest recipe advancement by having Diamond Chest",
                     ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("diamond")),
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing")));
             add(AdvancementTests.createTest(
                     "Obtain Netherite Chest recipe advancement by having Netherite Ingot",
                     Items.NETHERITE_INGOT,
-                    new Identifier(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing")));
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/netherite_chest_smithing")));
         }
     };
 
