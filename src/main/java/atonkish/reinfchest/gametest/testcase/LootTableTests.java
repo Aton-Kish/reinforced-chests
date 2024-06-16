@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -183,7 +182,7 @@ public class LootTableTests {
                     CompletableFuture.allOf(futurePartialAct1, futurePartialAct2).thenRun(() -> {
                         try {
                             context.expectBlock(Blocks.AIR, blockPos);
-                            context.expectEntitiesAround(EntityType.ITEM, blockPos, shouldDrop ? 1 : 0, 1);
+                            context.expectItemsAt(chestBlock.asItem(), blockPos, 1, shouldDrop ? 1 : 0);
                         } catch (Exception e) {
                             ReinforcedChestsMod.LOGGER.error("[{}] {}", testName, e.getMessage());
                             throw e;
