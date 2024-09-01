@@ -3,6 +3,7 @@ package atonkish.reinfchest.block.entity;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -12,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfchest.block.ModBlocks;
+import atonkish.reinfchest.mixin.BlockEntityTypeAccessor;
 
 public class ModBlockEntityType {
     public static final Map<ReinforcingMaterial, BlockEntityType<ReinforcedChestBlockEntity>> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
@@ -20,11 +22,14 @@ public class ModBlockEntityType {
             ReinforcingMaterial material) {
         if (!REINFORCED_CHEST_MAP.containsKey(material)) {
             String id = material.getName() + "_chest";
-            BlockEntityType.Builder<ReinforcedChestBlockEntity> builder = BlockEntityType.Builder
-                    .create(createBlockEntityTypeFactory(material), ModBlocks.REINFORCED_CHEST_MAP.get(material));
-            BlockEntityType<ReinforcedChestBlockEntity> blockEntityType = ModBlockEntityType
-                    .create(namespace, id, builder);
+            Block block = ModBlocks.REINFORCED_CHEST_MAP.get(material);
+            BlockEntityType.Builder<ReinforcedChestBlockEntity> builder = BlockEntityType.Builder.create(
+                    ModBlockEntityType.createBlockEntityTypeFactory(material), block);
+            BlockEntityType<ReinforcedChestBlockEntity> blockEntityType = ModBlockEntityType.create(
+                    namespace, id, builder);
             REINFORCED_CHEST_MAP.put(material, blockEntityType);
+
+            ((BlockEntityTypeAccessor) BlockEntityType.CHEST).getBlocks().add(block);
         }
 
         return REINFORCED_CHEST_MAP.get(material);

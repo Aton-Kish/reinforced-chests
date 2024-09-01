@@ -22,7 +22,7 @@
     "reinfcore-gametest": ["atonkish.reinfchest.gametest.ReinforcedChestsModGameTest"],
     "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
   },
-  "mixins": [],
+  "mixins": ["reinfchest.mixins.json"],
 
   "depends": {
     "fabricloader": ">=0.15.11",
