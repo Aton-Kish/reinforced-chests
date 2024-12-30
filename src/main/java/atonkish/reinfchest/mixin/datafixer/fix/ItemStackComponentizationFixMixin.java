@@ -19,7 +19,7 @@ import atonkish.reinfcore.util.ReinforcingMaterials;
 
 @Mixin(ItemStackComponentizationFix.class)
 public class ItemStackComponentizationFixMixin {
-    @Inject(at = @At("HEAD"), method = "fixBlockEntityData(Lnet/minecraft/datafixer/fix/ItemStackComponentizationFix$StackData;Lcom/mojang/serialization/Dynamic;Ljava/lang/String;)Lcom/mojang/serialization/Dynamic;", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "fixBlockEntityData", cancellable = true)
     private static <T> void fixBlockEntityData(ItemStackComponentizationFix.StackData data, Dynamic<T> dynamic,
             String blockEntityId, CallbackInfoReturnable<Dynamic<T>> cir) {
         Set<String> itemIds = new HashSet<>();

@@ -20,7 +20,7 @@ import atonkish.reinfchest.ReinforcedChestsMod;
 
 @Mixin(Schema1460.class)
 public class Schema1460Mixin {
-    @Inject(at = @At("TAIL"), method = "registerBlockEntities", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "registerBlockEntities", cancellable = true)
     private void registerBlockEntities(Schema schema, CallbackInfoReturnable<Map<String, Supplier<TypeTemplate>>> cir) {
         Map<String, Supplier<TypeTemplate>> map = cir.getReturnValue();
 
@@ -30,7 +30,5 @@ public class Schema1460Mixin {
                 return DSL.optionalFields("Items", DSL.list(TypeReferences.ITEM_STACK.in(schema)));
             });
         }
-
-        cir.setReturnValue(map);
     }
 }
