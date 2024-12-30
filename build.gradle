@@ -37,7 +37,6 @@ repositories {
 
 loom {
 	splitEnvironmentSourceSets()
-	accessWidenerPath = file("src/main/resources/reinfchest.accesswidener")
 
 	mods {
 		"reinfchest" {
@@ -65,6 +64,8 @@ loom {
 			runDir "build/gametest"
 		}
 	}
+
+	accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
 }
 
 dependencies {
