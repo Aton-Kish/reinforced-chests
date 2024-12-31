@@ -64,6 +64,8 @@ loom {
 			runDir "build/gametest"
 		}
 	}
+
+	accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
 }
 
 dependencies {

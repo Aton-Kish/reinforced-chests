@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "atonkish.reinfchest.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "datafixer.fix.ItemStackComponentizationFixMixin",
+    "datafixer.schema.Schema1460Mixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
