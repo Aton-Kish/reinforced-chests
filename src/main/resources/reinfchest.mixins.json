@@ -4,7 +4,10 @@
   "package": "atonkish.reinfchest.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "BlockEntityTypeAccessor"
+    "BlockEntityTypeAccessor",
+
+    "datafixer.fix.ItemStackComponentizationFixMixin",
+    "datafixer.schema.Schema1460Mixin"
   ],
   "injectors": {
     "defaultRequire": 1
