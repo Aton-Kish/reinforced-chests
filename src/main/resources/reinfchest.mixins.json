@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BlockEntityTypeAccessor",
+    "BlockEntityTypeInvoker",
 
     "datafixer.fix.ItemStackComponentizationFixMixin",
     "datafixer.schema.Schema1460Mixin"
