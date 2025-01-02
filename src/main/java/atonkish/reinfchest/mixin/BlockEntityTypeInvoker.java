@@ -13,6 +13,5 @@ public interface BlockEntityTypeInvoker {
     public static <T extends BlockEntity> BlockEntityType<T> create(String id,
             BlockEntityType.BlockEntityFactory<? extends T> blockEntityFactory, Block... blocks) {
         throw new AssertionError();
-    };
-
+    }
 }
