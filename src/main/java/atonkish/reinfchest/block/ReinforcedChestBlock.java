@@ -35,9 +35,10 @@ public class ReinforcedChestBlock extends ChestBlock {
     private static final Map<ReinforcingMaterial, DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>> NAME_RETRIEVER_MAP = new LinkedHashMap<>();
     private final ReinforcingMaterial material;
 
-    protected ReinforcedChestBlock(ReinforcingMaterial material, AbstractBlock.Settings settings,
-            Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
-        super(settings, supplier);
+    protected ReinforcedChestBlock(ReinforcingMaterial material,
+            Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier,
+            AbstractBlock.Settings settings) {
+        super(supplier, settings);
         this.material = material;
 
         registerMaterialNameRetriever(material);

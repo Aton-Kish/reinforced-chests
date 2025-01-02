@@ -22,9 +22,9 @@ public class ModBlocks {
 
         if (!REINFORCED_CHEST_MAP.containsKey(material)) {
             Block block = ModBlocks.register(namespace, material.getName() + "_chest",
-                    new ReinforcedChestBlock(material, REINFORCED_CHEST_SETTINGS_MAP.get(material), () -> {
-                        return ModBlockEntityType.REINFORCED_CHEST_MAP.get(material);
-                    }));
+                    new ReinforcedChestBlock(material,
+                            () -> ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
+                            REINFORCED_CHEST_SETTINGS_MAP.get(material)));
             REINFORCED_CHEST_MAP.put(material, block);
         }
 
