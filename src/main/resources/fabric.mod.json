@@ -19,7 +19,9 @@
   "entrypoints": {
     "reinfcore": ["atonkish.reinfchest.ReinforcedChestsMod"],
     "reinfcore-client": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
-    "reinfcore-gametest": ["atonkish.reinfchest.gametest.ReinforcedChestsModGameTest"],
+    "reinfcore-gametest": [
+      "atonkish.reinfchest.gametest.ReinforcedChestsModGameTest"
+    ],
     "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
   },
   "mixins": ["reinfchest.mixins.json"],
