@@ -3,12 +3,8 @@
   "category": "misc",
   "pattern": ["MMM", "MCM", "MMM"],
   "key": {
-    "C": {
-      "item": "minecraft:chest"
-    },
-    "M": {
-      "item": "minecraft:copper_ingot"
-    }
+    "C": "minecraft:chest",
+    "M": "minecraft:copper_ingot"
   },
   "result": {
     "count": 1,

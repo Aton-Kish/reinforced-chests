@@ -3,12 +3,8 @@
   "category": "misc",
   "pattern": ["MMM", "MCM", "MMM"],
   "key": {
-    "C": {
-      "item": "reinfchest:gold_chest"
-    },
-    "M": {
-      "item": "minecraft:diamond"
-    }
+    "C": "reinfchest:gold_chest",
+    "M": "minecraft:diamond"
   },
   "result": {
     "count": 1,
