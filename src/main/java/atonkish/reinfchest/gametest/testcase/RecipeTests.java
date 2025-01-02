@@ -4,24 +4,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.CraftingRecipeInput;
-import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.recipe.input.RecipeInput;
+import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.test.StructureTestUtil;
 import net.minecraft.test.TestFunction;
 
+import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.item.ModItems;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 
 public class RecipeTests {
     private static final String BATCH_ID = String.format("%s:RecipeBatch",

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -15,9 +14,12 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+
 import atonkish.reinfcore.item.ModItemGroup;
 import atonkish.reinfcore.item.ModItemGroups;
 import atonkish.reinfcore.util.ReinforcingMaterial;
+
 import atonkish.reinfchest.block.ModBlocks;
 
 public class ModItems {

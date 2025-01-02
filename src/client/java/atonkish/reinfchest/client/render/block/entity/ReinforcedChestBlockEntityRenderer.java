@@ -33,9 +33,10 @@ import net.minecraft.world.World;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
+import atonkish.reinfcore.util.ReinforcingMaterial;
+
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.ModTexturedRenderLayers;
-import atonkish.reinfcore.util.ReinforcingMaterial;
 
 @Environment(EnvType.CLIENT)
 public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & LidOpenable> implements BlockEntityRenderer<T> {

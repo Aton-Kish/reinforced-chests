@@ -1,5 +1,12 @@
 package atonkish.reinfchest.gametest.util;
 
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import io.netty.channel.embedded.EmbeddedChannel;
+
+import com.mojang.authlib.GameProfile;
+
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.NetworkSide;
 import net.minecraft.server.network.ConnectedClientData;
@@ -8,13 +15,6 @@ import net.minecraft.test.TestContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
-
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import com.mojang.authlib.GameProfile;
-
-import io.netty.channel.embedded.EmbeddedChannel;
 
 public class MockServerPlayerHelper {
     private static AtomicInteger playerId = new AtomicInteger(1);

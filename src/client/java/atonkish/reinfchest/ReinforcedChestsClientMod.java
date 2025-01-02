@@ -1,10 +1,5 @@
 package atonkish.reinfchest;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.loader.api.FabricLoader;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -16,6 +11,15 @@ import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.loader.api.FabricLoader;
+
+import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
+import atonkish.reinfcore.api.ReinforcedCoreClientRegistry;
+import atonkish.reinfcore.util.ReinforcingMaterial;
+
 import atonkish.reinfchest.api.ReinforcedChestsClientModInitializer;
 import atonkish.reinfchest.api.ReinforcedChestsClientRegistry;
 import atonkish.reinfchest.block.ModBlocks;
@@ -24,9 +28,6 @@ import atonkish.reinfchest.block.entity.ModBlockEntityType;
 import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntityRenderer;
 import atonkish.reinfchest.util.ReinforcingMaterialSettings;
-import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
-import atonkish.reinfcore.api.ReinforcedCoreClientRegistry;
-import atonkish.reinfcore.util.ReinforcingMaterial;
 
 @Environment(EnvType.CLIENT)
 public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitializer {

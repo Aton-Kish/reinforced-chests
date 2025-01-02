@@ -8,6 +8,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
+
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.mixin.BlockEntityTypeAccessor;
 import atonkish.reinfchest.mixin.BlockEntityTypeInvoker;

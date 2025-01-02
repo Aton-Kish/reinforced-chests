@@ -1,14 +1,15 @@
 package atonkish.reinfchest.api;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 import atonkish.reinfcore.util.ReinforcingMaterial;
+
 import atonkish.reinfchest.client.render.ModTexturedRenderLayers;
 
 @Environment(EnvType.CLIENT)
