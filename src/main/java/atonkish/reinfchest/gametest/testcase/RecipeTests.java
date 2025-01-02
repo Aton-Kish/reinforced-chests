@@ -9,8 +9,8 @@ import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.recipe.input.RecipeInput;
@@ -141,7 +141,7 @@ public class RecipeTests {
                 (context) -> {
                     // Arrange
                     ServerWorld world = context.getWorld();
-                    RecipeManager recipeManager = world.getRecipeManager();
+                    ServerRecipeManager recipeManager = world.getRecipeManager();
                     DynamicRegistryManager registryManager = world.getRegistryManager();
                     T recipe = recipeManager.getFirstMatch(type, input, world).orElseThrow().value();
 
