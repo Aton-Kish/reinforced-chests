@@ -6,10 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.ArmorItem;
@@ -22,10 +21,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
+import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 
 public class PiglinTests {
     private static final String BATCH_ID = String.format("%s:PiglinBatch",
@@ -87,7 +89,7 @@ public class PiglinTests {
                     ServerPlayerEntity player = MockServerPlayerHelper.spawn(context,
                             GameMode.SURVIVAL, Vec3d.of(blockPos.south(4)));
                     ArmorItem armor = (ArmorItem) Items.GOLDEN_CHESTPLATE;
-                    player.equipStack(armor.getSlotType(), new ItemStack(armor));
+                    player.equipStack(EquipmentSlot.CHEST, new ItemStack(armor));
 
                     PiglinEntity piglin = context.spawnMob(EntityType.PIGLIN, blockPos.east(1));
 

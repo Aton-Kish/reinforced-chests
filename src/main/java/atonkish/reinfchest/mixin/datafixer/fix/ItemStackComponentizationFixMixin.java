@@ -13,9 +13,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 import atonkish.reinfcore.util.ReinforcingMaterials;
+
+import atonkish.reinfchest.ReinforcedChestsMod;
 
 @Mixin(ItemStackComponentizationFix.class)
 public class ItemStackComponentizationFixMixin {

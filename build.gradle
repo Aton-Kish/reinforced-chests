@@ -1,5 +1,5 @@
 plugins {
-	id "fabric-loom" version "1.7-SNAPSHOT"
+	id "fabric-loom" version "1.9-SNAPSHOT"
 	id "maven-publish"
 	id "com.matthewprenger.cursegradle" version "1.4.0"
 	id "com.modrinth.minotaur" version "2.+"
@@ -146,7 +146,8 @@ curseforge {
 
 		addGameVersion "Fabric"
 		addGameVersion "Java 21"
-		addGameVersion "1.21.1"
+		addGameVersion "1.21.2"
+		addGameVersion "1.21.3"
 
 		relations {
 			requiredDependency "fabric-api"
@@ -167,7 +168,7 @@ modrinth {
 	versionType = "release"
 	changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
 
-	gameVersions = ["1.21.1"]
+	gameVersions = ["1.21.2", "1.21.3"]
 	loaders = ["fabric"]
 
 	dependencies {

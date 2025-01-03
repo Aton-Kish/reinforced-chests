@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -21,10 +19,13 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
+import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 
 public class LootTableTests {
     private static final String BATCH_ID = String.format("%s:LootTableBatch",
@@ -155,7 +156,7 @@ public class LootTableTests {
                     context.runAtTick(tickOrigin, () -> {
                         player.interactionManager.processBlockBreakingAction(
                                 context.getAbsolutePos(blockPos), PlayerActionC2SPacket.Action.START_DESTROY_BLOCK,
-                                Direction.NORTH, context.getWorld().getTopY(), 0);
+                                Direction.NORTH, context.getWorld().getHeight(), 0);
 
                         futurePartialAct1.complete(null);
                     });
@@ -167,7 +168,7 @@ public class LootTableTests {
                         player.interactionManager.processBlockBreakingAction(
                                 context.getAbsolutePos(blockPos),
                                 PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK,
-                                Direction.NORTH, context.getWorld().getTopY(), 0);
+                                Direction.NORTH, context.getWorld().getHeight(), 0);
 
                         futurePartialAct2.complete(null);
                     });

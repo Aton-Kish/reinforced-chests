@@ -19,14 +19,16 @@
   "entrypoints": {
     "reinfcore": ["atonkish.reinfchest.ReinforcedChestsMod"],
     "reinfcore-client": ["atonkish.reinfchest.ReinforcedChestsClientMod"],
-    "reinfcore-gametest": ["atonkish.reinfchest.gametest.ReinforcedChestsModGameTest"],
+    "reinfcore-gametest": [
+      "atonkish.reinfchest.gametest.ReinforcedChestsModGameTest"
+    ],
     "modmenu": ["atonkish.reinfcore.integration.modmenu.ModMenu"]
   },
   "mixins": ["reinfchest.mixins.json"],
 
   "depends": {
-    "fabricloader": ">=0.15.11",
-    "minecraft": "~1.21",
+    "fabricloader": ">=0.16.7",
+    "minecraft": "~1.21.2",
     "java": ">=21",
     "fabric-api": "*"
   },

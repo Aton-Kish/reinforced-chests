@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
 import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.item.Item;
@@ -21,10 +19,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
+import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
+
+import atonkish.reinfcore.util.ReinforcingMaterials;
+
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
 import atonkish.reinfchest.item.ModItems;
-import atonkish.reinfcore.util.ReinforcingMaterials;
 
 public class AdvancementTests {
     private static final String BATCH_ID = String.format("%s:AdvancementBatch",
