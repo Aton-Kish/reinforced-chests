@@ -1,19 +1,9 @@
 package atonkish.reinfchest;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ModelTransformationMode;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 
 import atonkish.reinfcore.api.ReinforcedCoreClientModInitializer;
@@ -22,10 +12,7 @@ import atonkish.reinfcore.util.ReinforcingMaterial;
 
 import atonkish.reinfchest.api.ReinforcedChestsClientModInitializer;
 import atonkish.reinfchest.api.ReinforcedChestsClientRegistry;
-import atonkish.reinfchest.block.ModBlocks;
-import atonkish.reinfchest.block.ReinforcedChestBlock;
 import atonkish.reinfchest.block.entity.ModBlockEntityType;
-import atonkish.reinfchest.block.entity.ReinforcedChestBlockEntity;
 import atonkish.reinfchest.client.render.block.entity.ReinforcedChestBlockEntityRenderer;
 import atonkish.reinfchest.util.ReinforcingMaterialSettings;
 
@@ -69,18 +56,6 @@ public class ReinforcedChestsClientMod implements ReinforcedCoreClientModInitial
 			BlockEntityRendererFactories
 					.register(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
 							ReinforcedChestBlockEntityRenderer::new);
-
-			// Item Renderer
-			Block block = ModBlocks.REINFORCED_CHEST_MAP.get(material);
-			BuiltinItemRendererRegistry.INSTANCE.register(block,
-					(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices,
-							VertexConsumerProvider vertexConsumers, int light, int overlay) -> {
-						BlockEntity blockEntity = new ReinforcedChestBlockEntity(material, BlockPos.ORIGIN,
-								block.getDefaultState().with(ReinforcedChestBlock.FACING, Direction.SOUTH));
-						MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(blockEntity,
-								matrices,
-								vertexConsumers, light, overlay);
-					});
 		}
 	}
 }
