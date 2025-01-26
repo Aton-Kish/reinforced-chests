@@ -1,8 +1,6 @@
 
 package atonkish.reinfchest.client.render.block.entity;
 
-import java.util.Calendar;
-
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 
@@ -21,6 +19,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.block.entity.ChestBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
 import net.minecraft.client.render.block.entity.model.ChestBlockModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
@@ -43,14 +42,9 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & LidOpena
     private final ChestBlockModel singleChest;
     private final ChestBlockModel doubleChestLeft;
     private final ChestBlockModel doubleChestRight;
-    private boolean christmas;
+    private final boolean christmas = ChestBlockEntityRenderer.isAroundChristmas();
 
     public ReinforcedChestBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-        Calendar calendar = Calendar.getInstance();
-        if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26) {
-            this.christmas = true;
-        }
-
         this.singleChest = new ChestBlockModel(context.getLayerModelPart(EntityModelLayers.CHEST));
         this.doubleChestLeft = new ChestBlockModel(context.getLayerModelPart(EntityModelLayers.DOUBLE_CHEST_LEFT));
         this.doubleChestRight = new ChestBlockModel(context.getLayerModelPart(EntityModelLayers.DOUBLE_CHEST_RIGHT));
@@ -70,7 +64,7 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & LidOpena
         if (blockState.getBlock() instanceof AbstractChestBlock<?> abstractChestBlock) {
             boolean bl2 = chestType != ChestType.SINGLE;
             matrices.push();
-            float f = ((Direction) blockState.get(ChestBlock.FACING)).asRotation();
+            float f = ((Direction) blockState.get(ChestBlock.FACING)).getPositiveHorizontalDegrees();
             matrices.translate(0.5F, 0.5F, 0.5F);
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-f));
             matrices.translate(-0.5F, -0.5F, -0.5F);
