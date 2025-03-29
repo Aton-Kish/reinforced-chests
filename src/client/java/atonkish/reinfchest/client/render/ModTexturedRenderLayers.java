@@ -57,8 +57,10 @@ public class ModTexturedRenderLayers {
     public static SpriteIdentifier getReinforcedChestTexture(ReinforcingMaterial material, BlockEntity blockEntity,
             ChestType type, boolean christmas) {
         if (christmas) {
-            return getReinforcedChestTexture(type, TexturedRenderLayers.CHRISTMAS, TexturedRenderLayers.CHRISTMAS_LEFT,
-                    TexturedRenderLayers.CHRISTMAS_RIGHT);
+            return getReinforcedChestTexture(type,
+                    TexturedRenderLayers.CHRISTMAS_CHEST,
+                    TexturedRenderLayers.CHRISTMAS_CHEST_LEFT,
+                    TexturedRenderLayers.CHRISTMAS_CHEST_RIGHT);
         } else {
             SpriteIdentifier single = REINFORCED_CHEST_SINGLE_MAP.get(material);
             SpriteIdentifier left = REINFORCED_CHEST_LEFT_MAP.get(material);

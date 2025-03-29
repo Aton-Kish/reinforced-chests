@@ -1,5 +1,5 @@
 plugins {
-	id "fabric-loom" version "1.9-SNAPSHOT"
+	id "fabric-loom" version "1.10-SNAPSHOT"
 	id "maven-publish"
 	id "com.matthewprenger.cursegradle" version "1.4.0"
 	id "com.modrinth.minotaur" version "2.+"
@@ -45,26 +45,6 @@ loom {
 		}
 	}
 
-	runs {
-		serverTest {
-			server()
-			ideConfigGenerated true
-			name "Minecraft Server Test"
-			vmArg "-Dfabric-api.gametest"
-			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/gametest/junit.xml"
-			vmArg "-Datonkish.reinfchest.gametest"
-			runDir "build/gametest"
-		}
-
-		clientTest {
-			client()
-			ideConfigGenerated true
-			name "Minecraft Client Test"
-			vmArg "-Datonkish.reinfchest.gametest"
-			runDir "build/gametest"
-		}
-	}
-
 	accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
 }
 
@@ -86,7 +66,7 @@ processResources {
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand "version": inputs.properties.version
 	}
 }
 
@@ -106,7 +86,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.base.archivesName.get()}"}
+		rename { "${it}_${inputs.properties.archivesName}"}
 	}
 }
 
