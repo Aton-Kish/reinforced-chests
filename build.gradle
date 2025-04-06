@@ -45,6 +45,24 @@ loom {
 		}
 	}
 
+	runs {
+		serverTest {
+			server()
+			ideConfigGenerated true
+			name "Minecraft Server Test"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/gametest/junit.xml"
+			runDir "build/gametest"
+		}
+
+		clientTest {
+			client()
+			ideConfigGenerated true
+			name "Minecraft Client Test"
+			runDir "build/gametest"
+		}
+	}
+
 	accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
 }
 
