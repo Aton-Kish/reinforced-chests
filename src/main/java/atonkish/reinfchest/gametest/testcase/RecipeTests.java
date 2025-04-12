@@ -14,19 +14,21 @@ import net.minecraft.recipe.input.RecipeInput;
 import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.test.StructureTestUtil;
-import net.minecraft.test.TestFunction;
+import net.minecraft.text.Text;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
+import atonkish.reinfcore.gametest.TestFunction;
 import atonkish.reinfcore.util.ReinforcingMaterials;
 
 import atonkish.reinfchest.ReinforcedChestsMod;
+import atonkish.reinfchest.gametest.util.TestIdentifier;
 import atonkish.reinfchest.item.ModItems;
 
 public class RecipeTests {
-    private static final String BATCH_ID = String.format("%s:RecipeBatch",
+    private static final String TEST_ENVIRONMENT_DEFAULT = String.format("%s:recipe/default",
             ReinforcedChestsMod.MOD_ID);
+    private static final String TEST_STRUCTURE_EMPTY = "fabric-gametest-api-v1:empty";
 
     public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
         {
@@ -121,20 +123,18 @@ public class RecipeTests {
 
     private static <I extends RecipeInput, T extends Recipe<I>> TestFunction createTest(String name,
             RecipeType<T> type, I input, ItemStack expected) {
-        String testName = String.format("%s %s %s",
-                ReinforcedChestsMod.MOD_ID,
-                RecipeTests.class.getSimpleName(),
-                name)
-                .replace(" ", "_");
+        Identifier testIdentifier = TestIdentifier.of(ReinforcedChestsMod.MOD_ID,
+                RecipeTests.class,
+                name);
 
         return new TestFunction(
-                RecipeTests.BATCH_ID,
-                testName,
-                FabricGameTest.EMPTY_STRUCTURE,
-                StructureTestUtil.getRotation(0),
-                100,
-                0L,
+                testIdentifier,
+                RecipeTests.TEST_ENVIRONMENT_DEFAULT,
+                RecipeTests.TEST_STRUCTURE_EMPTY,
+                20,
+                0,
                 true,
+                BlockRotation.NONE,
                 false,
                 1,
                 1,
@@ -152,9 +152,9 @@ public class RecipeTests {
                     // Assert
                     try {
                         context.assertTrue(ItemStack.areEqual(actual, expected),
-                                "Recipe result differs from expected.");
+                                Text.of("Recipe result differs from expected."));
                     } catch (Exception e) {
-                        ReinforcedChestsMod.LOGGER.error("[{}] {}", testName, e.getMessage());
+                        ReinforcedChestsMod.LOGGER.error("[{}] {}", testIdentifier, e.getMessage());
                         throw e;
                     }
 

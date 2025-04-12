@@ -3,8 +3,8 @@ package atonkish.reinfchest.gametest;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.minecraft.test.CustomTestProvider;
-import net.minecraft.test.TestFunction;
+import atonkish.reinfcore.gametest.CustomTestProvider;
+import atonkish.reinfcore.gametest.TestFunction;
 
 import atonkish.reinfchest.gametest.testcase.AdvancementTests;
 import atonkish.reinfchest.gametest.testcase.InventoryTests;

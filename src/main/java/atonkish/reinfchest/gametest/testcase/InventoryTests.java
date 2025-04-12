@@ -6,20 +6,22 @@ import java.util.Collection;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.test.StructureTestUtil;
-import net.minecraft.test.TestFunction;
+import net.minecraft.text.Text;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
+import atonkish.reinfcore.gametest.TestFunction;
 import atonkish.reinfcore.util.ReinforcingMaterials;
 
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.ModBlocks;
+import atonkish.reinfchest.gametest.util.TestIdentifier;
 
 public class InventoryTests {
-    private static final String BATCH_ID = String.format("%s:InventoryBatch",
+    private static final String TEST_ENVIRONMENT_DEFAULT = String.format("%s:inventory/default",
             ReinforcedChestsMod.MOD_ID);
+    private static final String TEST_STRUCTURE_EMPTY = "fabric-gametest-api-v1:empty";
 
     public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
         {
@@ -76,20 +78,18 @@ public class InventoryTests {
     };
 
     private static TestFunction createTestSingleChest(String name, ChestBlock chestBlock, int size) {
-        String testName = String.format("%s %s %s",
-                ReinforcedChestsMod.MOD_ID,
-                InventoryTests.class.getSimpleName(),
-                name)
-                .replace(" ", "_");
+        Identifier testIdentifier = TestIdentifier.of(ReinforcedChestsMod.MOD_ID,
+                InventoryTests.class,
+                name);
 
         return new TestFunction(
-                InventoryTests.BATCH_ID,
-                testName,
-                FabricGameTest.EMPTY_STRUCTURE,
-                StructureTestUtil.getRotation(0),
-                100,
-                0L,
+                testIdentifier,
+                InventoryTests.TEST_ENVIRONMENT_DEFAULT,
+                InventoryTests.TEST_STRUCTURE_EMPTY,
+                20,
+                0,
                 true,
+                BlockRotation.NONE,
                 false,
                 1,
                 1,
@@ -100,15 +100,18 @@ public class InventoryTests {
                     context.setBlockState(blockPos, chestBlock);
 
                     // Act
-                    Inventory inventory = ChestBlock.getInventory(chestBlock, context.getBlockState(blockPos),
-                            context.getWorld(), context.getAbsolutePos(blockPos), false);
+                    Inventory inventory = ChestBlock.getInventory(chestBlock,
+                            context.getBlockState(blockPos),
+                            context.getWorld(),
+                            context.getAbsolutePos(blockPos),
+                            false);
 
                     // Assert
                     try {
                         context.assertEquals(inventory.size(), size,
-                                String.format("%s single inventory size", chestBlock));
+                                Text.of(String.format("%s single inventory size", chestBlock)));
                     } catch (Exception e) {
-                        ReinforcedChestsMod.LOGGER.error("[{}] {}", testName, e.getMessage());
+                        ReinforcedChestsMod.LOGGER.error("[{}] {}", testIdentifier, e.getMessage());
                         throw e;
                     }
 
@@ -117,20 +120,18 @@ public class InventoryTests {
     }
 
     private static TestFunction createTestDoubleChest(String name, ChestBlock chestBlock, int size) {
-        String testName = String.format("%s %s %s",
-                ReinforcedChestsMod.MOD_ID,
-                InventoryTests.class.getSimpleName(),
-                name)
-                .replace(" ", "_");
+        Identifier testIdentifier = TestIdentifier.of(ReinforcedChestsMod.MOD_ID,
+                InventoryTests.class,
+                name);
 
         return new TestFunction(
-                InventoryTests.BATCH_ID,
-                testName,
-                FabricGameTest.EMPTY_STRUCTURE,
-                StructureTestUtil.getRotation(0),
-                100,
-                0L,
+                testIdentifier,
+                InventoryTests.TEST_ENVIRONMENT_DEFAULT,
+                InventoryTests.TEST_STRUCTURE_EMPTY,
+                20,
+                0,
                 true,
+                BlockRotation.NONE,
                 false,
                 1,
                 1,
@@ -144,15 +145,18 @@ public class InventoryTests {
                             chestBlock.getDefaultState().with(ChestBlock.CHEST_TYPE, ChestType.RIGHT));
 
                     // Act
-                    Inventory inventory = ChestBlock.getInventory(chestBlock, context.getBlockState(blockPos),
-                            context.getWorld(), context.getAbsolutePos(blockPos), false);
+                    Inventory inventory = ChestBlock.getInventory(chestBlock,
+                            context.getBlockState(blockPos),
+                            context.getWorld(),
+                            context.getAbsolutePos(blockPos),
+                            false);
 
                     // Assert
                     try {
                         context.assertEquals(inventory.size(), size,
-                                String.format("%s double inventory size", chestBlock));
+                                Text.of(String.format("%s double inventory size", chestBlock)));
                     } catch (Exception e) {
-                        ReinforcedChestsMod.LOGGER.error("[{}] {}", testName, e.getMessage());
+                        ReinforcedChestsMod.LOGGER.error("[{}] {}", testIdentifier, e.getMessage());
                         throw e;
                     }
 

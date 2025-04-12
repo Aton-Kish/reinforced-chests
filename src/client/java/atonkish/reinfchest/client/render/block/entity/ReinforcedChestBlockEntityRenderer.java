@@ -27,6 +27,7 @@ import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import net.fabricmc.api.EnvType;
@@ -51,8 +52,8 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & LidOpena
     }
 
     @Override
-    public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers,
-            int light, int overlay) {
+    public void render(T entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers,
+            int light, int overlay, Vec3d cameraPos) {
         World world = entity.getWorld();
         boolean bl = world != null;
         BlockState blockState = bl
@@ -76,7 +77,7 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & LidOpena
             }
 
             float g = ((Float2FloatFunction) propertySource.apply(ChestBlock.getAnimationProgressRetriever(entity)))
-                    .get(tickDelta);
+                    .get(tickProgress);
             g = 1.0F - g;
             g = 1.0F - g * g * g;
             int i = ((Int2IntFunction) propertySource.apply(new LightmapCoordinatesRetriever<>())).applyAsInt(light);

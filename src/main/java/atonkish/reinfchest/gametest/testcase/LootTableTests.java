@@ -11,25 +11,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.test.StructureTestUtil;
-import net.minecraft.test.TestFunction;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 
-import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
-
+import atonkish.reinfcore.gametest.TestFunction;
 import atonkish.reinfcore.util.ReinforcingMaterials;
 
 import atonkish.reinfchest.ReinforcedChestsMod;
 import atonkish.reinfchest.block.ModBlocks;
 import atonkish.reinfchest.gametest.util.MockServerPlayerHelper;
+import atonkish.reinfchest.gametest.util.TestIdentifier;
 
 public class LootTableTests {
-    private static final String BATCH_ID = String.format("%s:LootTableBatch",
+    private static final String TEST_ENVIRONMENT_DEFAULT = String.format("%s:loot_table/default",
             ReinforcedChestsMod.MOD_ID);
+    private static final String TEST_STRUCTURE_EMPTY = "fabric-gametest-api-v1:empty";
 
     public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
         {
@@ -121,20 +122,18 @@ public class LootTableTests {
     };
 
     private static TestFunction createTest(String name, Block chestBlock, Item tool, boolean shouldDrop) {
-        String testName = String.format("%s %s %s",
-                ReinforcedChestsMod.MOD_ID,
-                LootTableTests.class.getSimpleName(),
-                name)
-                .replace(" ", "_");
+        Identifier testIdentifier = TestIdentifier.of(ReinforcedChestsMod.MOD_ID,
+                LootTableTests.class,
+                name);
 
         return new TestFunction(
-                LootTableTests.BATCH_ID,
-                testName,
-                FabricGameTest.EMPTY_STRUCTURE,
-                StructureTestUtil.getRotation(0),
-                1000,
-                0L,
+                testIdentifier,
+                LootTableTests.TEST_ENVIRONMENT_DEFAULT,
+                LootTableTests.TEST_STRUCTURE_EMPTY,
+                100,
+                0,
                 true,
+                BlockRotation.NONE,
                 false,
                 1,
                 1,
@@ -145,7 +144,8 @@ public class LootTableTests {
                     context.setBlockState(blockPos, chestBlock);
 
                     ServerPlayerEntity player = MockServerPlayerHelper.spawn(context,
-                            GameMode.SURVIVAL, Vec3d.of(blockPos.south(4)));
+                            GameMode.SURVIVAL,
+                            Vec3d.of(blockPos.south(4)));
                     player.setStackInHand(Hand.MAIN_HAND, new ItemStack(tool));
 
                     // Act
@@ -154,27 +154,30 @@ public class LootTableTests {
 
                     long tickOrigin = 0;
                     context.runAtTick(tickOrigin, () -> {
-                        player.interactionManager.processBlockBreakingAction(
-                                context.getAbsolutePos(blockPos), PlayerActionC2SPacket.Action.START_DESTROY_BLOCK,
-                                Direction.NORTH, context.getWorld().getHeight(), 0);
+                        player.interactionManager.processBlockBreakingAction(context.getAbsolutePos(blockPos),
+                                PlayerActionC2SPacket.Action.START_DESTROY_BLOCK,
+                                Direction.NORTH,
+                                context.getWorld().getHeight(),
+                                0);
 
                         futurePartialAct1.complete(null);
                     });
 
-                    long tickBlockBreaking = (long) Math.ceil(
-                            1.0D / context.getBlockState(blockPos).calcBlockBreakingDelta(player,
-                                    context.getWorld(), blockPos));
+                    long tickBlockBreaking = (long) Math.ceil(1.0D / context
+                            .getBlockState(blockPos)
+                            .calcBlockBreakingDelta(player, context.getWorld(), blockPos));
                     context.runAtTick(tickBlockBreaking, () -> {
-                        player.interactionManager.processBlockBreakingAction(
-                                context.getAbsolutePos(blockPos),
+                        player.interactionManager.processBlockBreakingAction(context.getAbsolutePos(blockPos),
                                 PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK,
-                                Direction.NORTH, context.getWorld().getHeight(), 0);
+                                Direction.NORTH,
+                                context.getWorld().getHeight(),
+                                0);
 
                         futurePartialAct2.complete(null);
                     });
 
                     ReinforcedChestsMod.LOGGER.info("[{}] {} can be mined in {} ticks by {}",
-                            testName,
+                            testIdentifier,
                             chestBlock.getName().getString(),
                             tickBlockBreaking,
                             tool.getName().getString());
@@ -185,10 +188,10 @@ public class LootTableTests {
                             context.expectBlock(Blocks.AIR, blockPos);
                             context.expectItemsAt(chestBlock.asItem(), blockPos, 1, shouldDrop ? 1 : 0);
                         } catch (Exception e) {
-                            ReinforcedChestsMod.LOGGER.error("[{}] {}", testName, e.getMessage());
+                            ReinforcedChestsMod.LOGGER.error("[{}] {}", testIdentifier, e.getMessage());
                             throw e;
                         } finally {
-                            MockServerPlayerHelper.destroy(context, player);
+                            // MockServerPlayerHelper.destroy(context, player);
                         }
 
                         context.complete();
