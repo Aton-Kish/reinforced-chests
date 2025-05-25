@@ -1,0 +1,22 @@
+{
+    "container.reinfchest.copperChest": "صندوق نحاسي",
+    "container.reinfchest.ironChest": "صندوق حديدي",
+    "container.reinfchest.goldChest": "صندوق ذهبي",
+    "container.reinfchest.diamondChest": "صندوق الماسي",
+    "container.reinfchest.netheriteChest": "صندوق نيذرايتي",
+    "container.reinfchest.copperChestDouble": "صندوق نحاسي كبير",
+    "container.reinfchest.ironChestDouble": "صندوق حديدي كبير",
+    "container.reinfchest.goldChestDouble": "صندوق ذهبي كبير",
+    "container.reinfchest.diamondChestDouble": "صندوق الماسي كبير",
+    "container.reinfchest.netheriteChestDouble": "صندوق نيذرايتي كبير",
+    "block.reinfchest.copper_chest": "صندوق نحاسي",
+    "block.reinfchest.iron_chest": "صندوق حديدي",
+    "block.reinfchest.gold_chest": "صندوق ذهبي",
+    "block.reinfchest.diamond_chest": "صندوق الماسي",
+    "block.reinfchest.netherite_chest": "صندوق نيذرايتي",
+    "stat.reinfchest.open_copper_chest": "صندوق نحاسي مفتوح",
+    "stat.reinfchest.open_iron_chest": "صندوق حديدي مفتوح",
+    "stat.reinfchest.open_gold_chest": "صندوق ذهبي مفتوح",
+    "stat.reinfchest.open_diamond_chest": "صندوق الماسي مفتوح",
+    "stat.reinfchest.open_netherite_chest": "صندوق نيذرايتي مفتوح"
+  }
