@@ -1,0 +1,22 @@
+{
+  "container.reinfchest.copperChest": "Медный сундук",
+  "container.reinfchest.ironChest": "Железный сундук",
+  "container.reinfchest.goldChest": "Золотой сундук",
+  "container.reinfchest.diamondChest": "Алмазный сундук",
+  "container.reinfchest.netheriteChest": "Незеритовый сундук",
+  "container.reinfchest.copperChestDouble": "Большой медный сундук",
+  "container.reinfchest.ironChestDouble": "Большой железный сундук",
+  "container.reinfchest.goldChestDouble": "Большой золотой сундук",
+  "container.reinfchest.diamondChestDouble": "Большой алмазный сундук",
+  "container.reinfchest.netheriteChestDouble": "Большой незеритовый сундук",
+  "block.reinfchest.copper_chest": "Медный сундук",
+  "block.reinfchest.iron_chest": "Железный сундук",
+  "block.reinfchest.gold_chest": "Золотой сундук",
+  "block.reinfchest.diamond_chest": "Алмазный сундук",
+  "block.reinfchest.netherite_chest": "Незеритовый сундук",
+  "stat.reinfchest.open_copper_chest": "Открыто медных сундуков",
+  "stat.reinfchest.open_iron_chest": "Открыто железных сундуков",
+  "stat.reinfchest.open_gold_chest": "Открыто золотых сундуков",
+  "stat.reinfchest.open_diamond_chest": "Открыто алмазных сундуков",
+  "stat.reinfchest.open_netherite_chest": "Открыто незеритовых сундуков"
+}
