@@ -5,11 +5,66 @@ on:
       - v[0-9]+.[0-9]+.[0-9]+*
 
 jobs:
-  release:
+  build:
+    runs-on: ubuntu-24.04
+    env:
+      JAVA_VERSION: '21'
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+      - name: setup jdk ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew runServerTest build
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifacts
+          path: build/libs/
+      - name: publish test report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          report_paths: build/gametest/junit.xml
+
+  release_curseforge:
+    needs: build
     runs-on: ubuntu-24.04
     env:
       JAVA_VERSION: '21'
       ORG_GRADLE_PROJECT_curseforge_token: ${{ secrets.CURSEFORGE_TOKEN }}
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+      - name: setup jdk ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Artifacts
+          path: build/libs/
+      - name: release
+        run: ./gradlew curseforge
+
+  release_modrinth:
+    needs: build
+    runs-on: ubuntu-24.04
+    env:
+      JAVA_VERSION: '21'
       ORG_GRADLE_PROJECT_modrinth_token: ${{ secrets.MODRINTH_TOKEN }}
     steps:
       - name: checkout repository
@@ -23,10 +78,10 @@ jobs:
           distribution: 'microsoft'
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: release
-        run: ./gradlew runServerTest build curseforge modrinth
-      - name: capture build artifacts
-        uses: actions/upload-artifact@v4
+      - name: download build artifacts
+        uses: actions/download-artifact@v4
         with:
           name: Artifacts
           path: build/libs/
+      - name: release
+        run: ./gradlew modrinth
