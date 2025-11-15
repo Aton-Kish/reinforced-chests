@@ -3,9 +3,9 @@ package atonkish.reinfchest.client.render;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.render.block.entity.state.ChestBlockEntityRenderState;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
@@ -22,7 +22,7 @@ public class ModTexturedRenderLayers {
 
     public static SpriteIdentifier registerMaterialSingleSprite(String namespace, ReinforcingMaterial material) {
         if (!REINFORCED_CHEST_SINGLE_MAP.containsKey(material)) {
-            SpriteIdentifier identifier = getReinforcedChestTextureId(namespace, material, "single");
+            SpriteIdentifier identifier = getReinforcedChestTextureSpriteIdentifier(namespace, material, "single");
             REINFORCED_CHEST_SINGLE_MAP.put(material, identifier);
         }
 
@@ -31,7 +31,7 @@ public class ModTexturedRenderLayers {
 
     public static SpriteIdentifier registerMaterialLeftSprite(String namespace, ReinforcingMaterial material) {
         if (!REINFORCED_CHEST_LEFT_MAP.containsKey(material)) {
-            SpriteIdentifier identifier = getReinforcedChestTextureId(namespace, material, "left");
+            SpriteIdentifier identifier = getReinforcedChestTextureSpriteIdentifier(namespace, material, "left");
             REINFORCED_CHEST_LEFT_MAP.put(material, identifier);
         }
 
@@ -40,36 +40,38 @@ public class ModTexturedRenderLayers {
 
     public static SpriteIdentifier registerMaterialRightSprite(String namespace, ReinforcingMaterial material) {
         if (!REINFORCED_CHEST_RIGHT_MAP.containsKey(material)) {
-            SpriteIdentifier identifier = getReinforcedChestTextureId(namespace, material, "right");
+            SpriteIdentifier identifier = getReinforcedChestTextureSpriteIdentifier(namespace, material, "right");
             REINFORCED_CHEST_RIGHT_MAP.put(material, identifier);
         }
 
         return REINFORCED_CHEST_RIGHT_MAP.get(material);
     }
 
-    private static SpriteIdentifier getReinforcedChestTextureId(String namespace, ReinforcingMaterial material,
+    private static SpriteIdentifier getReinforcedChestTextureSpriteIdentifier(String namespace,
+            ReinforcingMaterial material,
             String variant) {
         Identifier textureId = Identifier.of(namespace,
                 String.format("entity/chest/%s/%s", material.getName(), variant));
         return new SpriteIdentifier(TexturedRenderLayers.CHEST_ATLAS_TEXTURE, textureId);
     }
 
-    public static SpriteIdentifier getReinforcedChestTexture(ReinforcingMaterial material, BlockEntity blockEntity,
-            ChestType type, boolean christmas) {
-        if (christmas) {
-            return getReinforcedChestTexture(type,
-                    TexturedRenderLayers.CHRISTMAS_CHEST,
-                    TexturedRenderLayers.CHRISTMAS_CHEST_LEFT,
-                    TexturedRenderLayers.CHRISTMAS_CHEST_RIGHT);
-        } else {
-            SpriteIdentifier single = REINFORCED_CHEST_SINGLE_MAP.get(material);
-            SpriteIdentifier left = REINFORCED_CHEST_LEFT_MAP.get(material);
-            SpriteIdentifier right = REINFORCED_CHEST_RIGHT_MAP.get(material);
-            return getReinforcedChestTexture(type, single, left, right);
+    public static SpriteIdentifier getReinforcedChestTextureId(ReinforcingMaterial material,
+            ChestBlockEntityRenderState.Variant variant, ChestType type) {
+        switch (variant) {
+            case ChestBlockEntityRenderState.Variant.CHRISTMAS:
+                return getReinforcedChestTextureId(type,
+                        TexturedRenderLayers.CHRISTMAS_CHEST,
+                        TexturedRenderLayers.CHRISTMAS_CHEST_LEFT,
+                        TexturedRenderLayers.CHRISTMAS_CHEST_RIGHT);
+            default:
+                return getReinforcedChestTextureId(type,
+                        REINFORCED_CHEST_SINGLE_MAP.get(material),
+                        REINFORCED_CHEST_LEFT_MAP.get(material),
+                        REINFORCED_CHEST_RIGHT_MAP.get(material));
         }
     }
 
-    private static SpriteIdentifier getReinforcedChestTexture(ChestType type, SpriteIdentifier single,
+    private static SpriteIdentifier getReinforcedChestTextureId(ChestType type, SpriteIdentifier single,
             SpriteIdentifier left, SpriteIdentifier right) {
         switch (type) {
             case LEFT:
