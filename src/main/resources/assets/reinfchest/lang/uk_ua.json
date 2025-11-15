@@ -1,0 +1,23 @@
+{
+  "container.reinfchest.copperChest": "Мідна скриня",
+  "container.reinfchest.ironChest": "Залізна скриня",
+  "container.reinfchest.goldChest": "Золота скриня",
+  "container.reinfchest.diamondChest": "Діамантова скриня",
+  "container.reinfchest.netheriteChest": "Незеритова скрин",
+  "container.reinfchest.copperChestDouble": "Велика мідна скриня",
+  "container.reinfchest.ironChestDouble": "Велика залізна скриня",
+  "container.reinfchest.goldChestDouble": "Велика золота скриня",
+  "container.reinfchest.diamondChestDouble": "Велика діамантова скриня",
+  "container.reinfchest.netheriteChestDouble": "Велика незеритова скриня",
+  "block.reinfchest.copper_chest": "Мідна скриня",
+  "block.reinfchest.iron_chest": "Залізна скриня",
+  "block.reinfchest.gold_chest": "Золота скриня",
+  "block.reinfchest.diamond_chest": "Діамантова скриня",
+  "block.reinfchest.netherite_chest": "Незеритова скриня",
+  "stat.reinfchest.open_copper_chest": "Мідних скринь відчинено",
+  "stat.reinfchest.open_iron_chest": "Залізних скринь відчинено",
+  "stat.reinfchest.open_gold_chest": "Золотих скринь відчинено",
+  "stat.reinfchest.open_diamond_chest": "Діамантових скринь відчинено",
+  "stat.reinfchest.open_netherite_chest": "Незеритових скринь відчинено",
+  "modmenu.descriptionTranslation.reinfchest": "Додає посилені скрині"
+}
