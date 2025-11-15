@@ -10,6 +10,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
 import atonkish.reinfcore.util.ReinforcingMaterial;
@@ -28,6 +29,8 @@ public class ModBlocks {
         if (!REINFORCED_CHEST_MAP.containsKey(material)) {
             Block block = ModBlocks.register(Identifier.of(namespace, material.getName() + "_chest"),
                     (abstractBlockSettings) -> new ReinforcedChestBlock(material,
+                            SoundEvents.BLOCK_CHEST_OPEN,
+                            SoundEvents.BLOCK_CHEST_CLOSE,
                             () -> ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
                             abstractBlockSettings),
                     REINFORCED_CHEST_SETTINGS_MAP.get(material));

@@ -13,6 +13,8 @@ import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.recipe.input.RecipeInput;
 import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.BlockRotation;
@@ -32,6 +34,23 @@ public class RecipeTests {
 
     public static final Collection<TestFunction> TEST_FUNCTIONS = new ArrayList<>() {
         {
+            // Copper Chest (Vanilla)
+            {
+                ItemStack baseChest = new ItemStack(Items.CHEST);
+                ItemStack material = new ItemStack(Items.COPPER_INGOT);
+                ItemStack chest = new ItemStack(Items.COPPER_CHEST);
+
+                add(RecipeTests.createTest(
+                        "Craft Vanilla Copper Chest",
+                        RecipeType.CRAFTING,
+                        CraftingRecipeInput.create(3, 3, List.of(
+                                material, material, material,
+                                material, baseChest, material,
+                                material, material, material)),
+                        Identifier.ofVanilla("copper_chest"),
+                        chest));
+            }
+
             // Copper Chest
             {
                 ItemStack baseChest = new ItemStack(Items.CHEST);
@@ -46,6 +65,7 @@ public class RecipeTests {
                                 material, material, material,
                                 material, baseChest, material,
                                 material, material, material)),
+                        Identifier.of(ReinforcedChestsMod.MOD_ID, "copper_chest"),
                         chest));
             }
 
@@ -64,6 +84,7 @@ public class RecipeTests {
                                 material, material, material,
                                 material, baseChest, material,
                                 material, material, material)),
+                        Identifier.of(ReinforcedChestsMod.MOD_ID, "iron_chest"),
                         chest));
             }
 
@@ -82,6 +103,7 @@ public class RecipeTests {
                                 material, material, material,
                                 material, baseChest, material,
                                 material, material, material)),
+                        Identifier.of(ReinforcedChestsMod.MOD_ID, "gold_chest"),
                         chest));
             }
 
@@ -100,6 +122,7 @@ public class RecipeTests {
                                 material, material, material,
                                 material, baseChest, material,
                                 material, material, material)),
+                        Identifier.of(ReinforcedChestsMod.MOD_ID, "diamond_chest"),
                         chest));
             }
 
@@ -116,13 +139,14 @@ public class RecipeTests {
                         "Smithing Netherite Chest",
                         RecipeType.SMITHING,
                         new SmithingRecipeInput(template, baseChest, material),
+                        Identifier.of(ReinforcedChestsMod.MOD_ID, "netherite_chest_smithing"),
                         chest));
             }
         }
     };
 
     private static <I extends RecipeInput, T extends Recipe<I>> TestFunction createTest(String name,
-            RecipeType<T> type, I input, ItemStack expected) {
+            RecipeType<T> type, I input, Identifier recipeId, ItemStack expected) {
         Identifier testIdentifier = TestIdentifier.of(ReinforcedChestsMod.MOD_ID,
                 RecipeTests.class,
                 name);
@@ -144,7 +168,10 @@ public class RecipeTests {
                     ServerWorld world = context.getWorld();
                     ServerRecipeManager recipeManager = world.getRecipeManager();
                     DynamicRegistryManager registryManager = world.getRegistryManager();
-                    T recipe = recipeManager.getFirstMatch(type, input, world).orElseThrow().value();
+                    T recipe = recipeManager
+                            .getFirstMatch(type, input, world, RegistryKey.of(RegistryKeys.RECIPE, recipeId))
+                            .orElseThrow()
+                            .value();
 
                     // Act
                     ItemStack actual = recipe.craft(input, registryManager);

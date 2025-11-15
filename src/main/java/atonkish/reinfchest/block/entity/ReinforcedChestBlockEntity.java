@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.block.enums.ChestType;
+import net.minecraft.entity.ContainerUser;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.DoubleInventory;
@@ -49,7 +50,7 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
             }
 
             @Override
-            protected boolean isPlayerViewing(PlayerEntity player) {
+            public boolean isPlayerViewing(PlayerEntity player) {
                 if (player.currentScreenHandler instanceof ReinforcedStorageScreenHandler) {
                     Inventory inventory = ((ReinforcedStorageScreenHandler) player.currentScreenHandler).getInventory();
                     return inventory == ReinforcedChestBlockEntity.this || inventory instanceof DoubleInventory
@@ -91,16 +92,18 @@ public class ReinforcedChestBlockEntity extends ChestBlockEntity {
     }
 
     @Override
-    public void onOpen(PlayerEntity player) {
-        if (!this.removed && !player.isSpectator()) {
-            this.stateManager.openContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
+    public void onOpen(ContainerUser user) {
+        if (!this.removed && !user.asLivingEntity().isSpectator()) {
+            this.stateManager.openContainer(user.asLivingEntity(),
+                    this.getWorld(), this.getPos(), this.getCachedState(), user.getContainerInteractionRange());
         }
     }
 
     @Override
-    public void onClose(PlayerEntity player) {
-        if (!this.removed && !player.isSpectator()) {
-            this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
+    public void onClose(ContainerUser user) {
+        if (!this.removed && !user.asLivingEntity().isSpectator()) {
+            this.stateManager.closeContainer(user.asLivingEntity(),
+                    this.getWorld(), this.getPos(), this.getCachedState());
         }
     }
 

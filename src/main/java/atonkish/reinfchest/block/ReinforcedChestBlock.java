@@ -20,6 +20,7 @@ import net.minecraft.inventory.DoubleInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -38,9 +39,11 @@ public class ReinforcedChestBlock extends ChestBlock {
     private final ReinforcingMaterial material;
 
     protected ReinforcedChestBlock(ReinforcingMaterial material,
+            SoundEvent openSound,
+            SoundEvent closeSound,
             Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier,
             AbstractBlock.Settings settings) {
-        super(supplier, settings);
+        super(supplier, openSound, closeSound, settings);
         this.material = material;
 
         registerMaterialNameRetriever(material);

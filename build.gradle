@@ -1,7 +1,6 @@
 plugins {
 	id "fabric-loom" version "${loom_version}"
 	id "maven-publish"
-	id "com.matthewprenger.cursegradle" version "1.4.0"
 	id "com.modrinth.minotaur" version "2.+"
 }
 
@@ -21,17 +20,17 @@ repositories {
 
 	// Reinforced Storage
 	maven {
-		url "https://raw.githubusercontent.com/Aton-Kish/mcmod/maven"
+		url = "https://raw.githubusercontent.com/Aton-Kish/mcmod/maven"
 	}
 
 	// ModMenu (Reinforced Core deps)
 	maven {
-		url "https://maven.terraformersmc.com/releases/"
+		url = "https://maven.terraformersmc.com/releases/"
 	}
 
 	// Cloth Config (Reinforced Core deps)
 	maven {
-		url "https://maven.shedaniel.me/"
+		url = "https://maven.shedaniel.me/"
 	}
 }
 
@@ -126,36 +125,35 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 		maven {
-			url "file:/$buildDir/maven"
+			url = "file://${buildDir}/maven"
 		}
 	}
 }
 
-curseforge {
-	apiKey = project.findProperty("curseforge_token") ?: "Missing token"
+task curseforge(type: Exec) {
+	environment "CURSEFORGE_API_TOKEN", project.findProperty("curseforge_token") ?: "Missing token"
+	commandLine "sh", "-c", """
+		set -eux
 
-	project {
-		id = project.curseforge_id
+		# install
+		MCMOD_RELEASER_VERSION="0.1.0"
+		curl -sL https://github.com/Aton-Kish/mcmod-releaser/releases/download/v\${MCMOD_RELEASER_VERSION}/mcmod-releaser_\${MCMOD_RELEASER_VERSION}_linux_amd64.tar.gz | tar xzf - mcmod-releaser
+		./mcmod-releaser --version
 
-		mainArtifact(remapJar) {
-			displayName = "Reinforced Chests v${project.version}"
-		}
-		releaseType = "release"
-		changelogType = "markdown"
-		changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
-
-		addGameVersion "Fabric"
-		addGameVersion "Java 21"
-		addGameVersion "1.21.6"
-		addGameVersion "1.21.7"
-		addGameVersion "1.21.8"
-
-		relations {
-			requiredDependency "fabric-api"
-			embeddedLibrary "cloth-config"
-			optionalDependency "modmenu"
-		}
-	}
+		# release
+		./mcmod-releaser curseforge \
+		    --file "build/libs/${project.archives_base_name}-${project.version}.jar" \
+		    --project-id "${project.curseforge_id}" \
+		    --release-type "alpha" \
+		    --version "${project.version}" \
+		    --name "Reinforced Chests v${project.version}" \
+		    --changelog "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v${java.net.URLEncoder.encode(project.version, "UTF-8")})" \
+		    --environments "Client,Server" \
+		    --loaders "Fabric" \
+		    --java-versions "Java 21" \
+		    --game-versions "1.21.9,1.21.10" \
+		    --dependencies "fabric-api=required,cloth-config=embedded,modmenu=optional"
+	"""
 }
 
 modrinth {
@@ -166,10 +164,10 @@ modrinth {
 	uploadFile = remapJar
 	versionNumber = project.version
 	versionName = "Reinforced Chests v${project.version}"
-	versionType = "release"
+	versionType = "alpha"
 	changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
 
-	gameVersions = ["1.21.6", "1.21.7", "1.21.8"]
+	gameVersions = ["1.21.9", "1.21.10"]
 	loaders = ["fabric"]
 
 	dependencies {

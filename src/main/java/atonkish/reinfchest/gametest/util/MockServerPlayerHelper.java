@@ -41,6 +41,6 @@ public class MockServerPlayerHelper {
         player.discard();
         player.getInventory().clear();
         player.networkHandler.disconnect(Text.of(String.format("%s (%s) left the game",
-                player.getGameProfile().getName(), player.getUuidAsString())));
+                player.getGameProfile().name(), player.getUuidAsString())));
     }
 }
