@@ -20,15 +20,19 @@ import atonkish.reinfchest.ReinforcedChestsMod;
 
 @Mixin(Schema1460.class)
 public class Schema1460Mixin {
-    @Inject(at = @At("RETURN"), method = "registerBlockEntities", cancellable = true)
-    private void registerBlockEntities(Schema schema, CallbackInfoReturnable<Map<String, Supplier<TypeTemplate>>> cir) {
-        Map<String, Supplier<TypeTemplate>> map = cir.getReturnValue();
+  @Inject(at = @At("RETURN"), method = "registerBlockEntities", cancellable = true)
+  private void registerBlockEntities(
+      Schema schema, CallbackInfoReturnable<Map<String, Supplier<TypeTemplate>>> cir) {
+    Map<String, Supplier<TypeTemplate>> map = cir.getReturnValue();
 
-        // TODO: materials should be able to be resolved dynamically.
-        for (String material : List.of("copper", "iron", "gold", "diamond", "netherite")) {
-            schema.register(map, String.format("%s:%s_chest", ReinforcedChestsMod.MOD_ID, material), () -> {
-                return DSL.optionalFields("Items", DSL.list(TypeReferences.ITEM_STACK.in(schema)));
-            });
-        }
+    // TODO: materials should be able to be resolved dynamically.
+    for (String material : List.of("copper", "iron", "gold", "diamond", "netherite")) {
+      schema.register(
+          map,
+          String.format("%s:%s_chest", ReinforcedChestsMod.MOD_ID, material),
+          () -> {
+            return DSL.optionalFields("Items", DSL.list(TypeReferences.ITEM_STACK.in(schema)));
+          });
     }
+  }
 }

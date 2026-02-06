@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     env:
-      JAVA_VERSION: '21'
+      JAVA_VERSION: "21"
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'microsoft'
+          distribution: "microsoft"
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: build
@@ -38,7 +38,7 @@ jobs:
     needs: build
     runs-on: ubuntu-24.04
     env:
-      JAVA_VERSION: '21'
+      JAVA_VERSION: "21"
       ORG_GRADLE_PROJECT_curseforge_token: ${{ secrets.CURSEFORGE_TOKEN }}
     steps:
       - name: checkout repository
@@ -49,7 +49,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'microsoft'
+          distribution: "microsoft"
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: download build artifacts
@@ -64,7 +64,7 @@ jobs:
     needs: build
     runs-on: ubuntu-24.04
     env:
-      JAVA_VERSION: '21'
+      JAVA_VERSION: "21"
       ORG_GRADLE_PROJECT_modrinth_token: ${{ secrets.MODRINTH_TOKEN }}
     steps:
       - name: checkout repository
@@ -75,7 +75,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'microsoft'
+          distribution: "microsoft"
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: download build artifacts

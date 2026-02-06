@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": ["reinfchest:iron_chest_from_copper_chests"]
+  },
+  "criteria": {
+    "has_copper_chests": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:copper_chest",
+              "minecraft:exposed_copper_chest",
+              "minecraft:weathered_copper_chest",
+              "minecraft:oxidized_copper_chest",
+              "minecraft:waxed_copper_chest",
+              "minecraft:waxed_exposed_copper_chest",
+              "minecraft:waxed_weathered_copper_chest",
+              "minecraft:waxed_oxidized_copper_chest"
+            ]
+          }
+        ]
+      }
+    },
+    "has_iron_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:iron_ingot"]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "reinfchest:iron_chest_from_copper_chests"
+      }
+    }
+  },
+  "requirements": [["has_copper_chests", "has_iron_ingot", "has_the_recipe"]]
+}

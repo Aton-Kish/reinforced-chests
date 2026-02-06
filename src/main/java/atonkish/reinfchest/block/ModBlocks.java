@@ -13,45 +13,54 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
+import atonkish.reinfchest.block.entity.ModBlockEntityType;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 
-import atonkish.reinfchest.block.entity.ModBlockEntityType;
-
 public class ModBlocks {
-    public static final Map<ReinforcingMaterial, Block> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
-    public static final Map<ReinforcingMaterial, Block.Settings> REINFORCED_CHEST_SETTINGS_MAP = new LinkedHashMap<>();
+  public static final Map<ReinforcingMaterial, Block> REINFORCED_CHEST_MAP = new LinkedHashMap<>();
+  public static final Map<ReinforcingMaterial, Block.Settings> REINFORCED_CHEST_SETTINGS_MAP =
+      new LinkedHashMap<>();
 
-    public static Block registerMaterial(String namespace, ReinforcingMaterial material, Block.Settings settings) {
-        if (!REINFORCED_CHEST_SETTINGS_MAP.containsKey(material)) {
-            REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
-        }
-
-        if (!REINFORCED_CHEST_MAP.containsKey(material)) {
-            Block block = ModBlocks.register(Identifier.of(namespace, material.getName() + "_chest"),
-                    (abstractBlockSettings) -> new ReinforcedChestBlock(material,
-                            SoundEvents.BLOCK_CHEST_OPEN,
-                            SoundEvents.BLOCK_CHEST_CLOSE,
-                            () -> ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
-                            abstractBlockSettings),
-                    REINFORCED_CHEST_SETTINGS_MAP.get(material));
-            REINFORCED_CHEST_MAP.put(material, block);
-        }
-
-        return REINFORCED_CHEST_MAP.get(material);
+  public static Block registerMaterial(
+      String namespace, ReinforcingMaterial material, Block.Settings settings) {
+    if (!REINFORCED_CHEST_SETTINGS_MAP.containsKey(material)) {
+      REINFORCED_CHEST_SETTINGS_MAP.put(material, settings);
     }
 
-    private static Block register(RegistryKey<Block> key, Function<AbstractBlock.Settings, Block> factory,
-            AbstractBlock.Settings settings) {
-        Block block = factory.apply(settings.registryKey(key));
-        return Registry.register(Registries.BLOCK, key, block);
+    if (!REINFORCED_CHEST_MAP.containsKey(material)) {
+      Block block =
+          ModBlocks.register(
+              Identifier.of(namespace, material.getName() + "_chest"),
+              (abstractBlockSettings) ->
+                  new ReinforcedChestBlock(
+                      material,
+                      SoundEvents.BLOCK_CHEST_OPEN,
+                      SoundEvents.BLOCK_CHEST_CLOSE,
+                      () -> ModBlockEntityType.REINFORCED_CHEST_MAP.get(material),
+                      abstractBlockSettings),
+              REINFORCED_CHEST_SETTINGS_MAP.get(material));
+      REINFORCED_CHEST_MAP.put(material, block);
     }
 
-    private static RegistryKey<Block> keyOf(Identifier id) {
-        return RegistryKey.of(RegistryKeys.BLOCK, id);
-    }
+    return REINFORCED_CHEST_MAP.get(material);
+  }
 
-    private static Block register(Identifier id, Function<AbstractBlock.Settings, Block> factory,
-            AbstractBlock.Settings settings) {
-        return register(keyOf(id), factory, settings);
-    }
+  private static Block register(
+      RegistryKey<Block> key,
+      Function<AbstractBlock.Settings, Block> factory,
+      AbstractBlock.Settings settings) {
+    Block block = factory.apply(settings.registryKey(key));
+    return Registry.register(Registries.BLOCK, key, block);
+  }
+
+  private static Block register(
+      Identifier id,
+      Function<AbstractBlock.Settings, Block> factory,
+      AbstractBlock.Settings settings) {
+    return register(keyOf(id), factory, settings);
+  }
+
+  private static RegistryKey<Block> keyOf(Identifier id) {
+    return RegistryKey.of(RegistryKeys.BLOCK, id);
+  }
 }

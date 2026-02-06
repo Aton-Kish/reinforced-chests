@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  commands:
+    java:
+      run: ./gradlew check
+    prettier:
+      run: npx -y prettier . --check
