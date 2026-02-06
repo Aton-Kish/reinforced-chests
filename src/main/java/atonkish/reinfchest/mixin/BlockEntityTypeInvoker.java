@@ -9,9 +9,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(BlockEntityType.class)
 public interface BlockEntityTypeInvoker {
-    @Invoker("create")
-    public static <T extends BlockEntity> BlockEntityType<T> create(String id,
-            BlockEntityType.BlockEntityFactory<? extends T> blockEntityFactory, Block... blocks) {
-        throw new AssertionError();
-    }
+  @Invoker("create")
+  public static <T extends BlockEntity> BlockEntityType<T> create(
+      String id,
+      BlockEntityType.BlockEntityFactory<? extends T> blockEntityFactory,
+      Block... blocks) {
+    throw new AssertionError();
+  }
 }

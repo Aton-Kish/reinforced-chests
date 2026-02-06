@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(BlockEntityType.class)
 public interface BlockEntityTypeAccessor {
-    @Accessor
-    Set<Block> getBlocks();
+  @Accessor
+  Set<Block> getBlocks();
 }

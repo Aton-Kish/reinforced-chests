@@ -11,11 +11,7 @@
             "texture": "minecraft:christmas"
           }
         },
-        "when": [
-          "12-24",
-          "12-25",
-          "12-26"
-        ]
+        "when": ["12-24", "12-25", "12-26"]
       }
     ],
     "fallback": {

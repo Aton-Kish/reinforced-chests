@@ -26,102 +26,117 @@ import atonkish.reinfcore.screen.ReinforcedStorageScreenHandler;
 import atonkish.reinfcore.util.ReinforcingMaterial;
 
 public class ReinforcedChestBlockEntity extends ChestBlockEntity {
-    private final ViewerCountManager stateManager;
-    private final ReinforcingMaterial cachedMaterial;
+  private final ViewerCountManager stateManager;
+  private final ReinforcingMaterial cachedMaterial;
 
-    public ReinforcedChestBlockEntity(ReinforcingMaterial material, BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material), blockPos, blockState);
-        this.setHeldStacks(DefaultedList.ofSize(material.getSize(), ItemStack.EMPTY));
-        this.stateManager = new ViewerCountManager() {
-            @Override
-            protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
-                ReinforcedChestBlockEntity.playSound(world, pos, state, SoundEvents.BLOCK_CHEST_OPEN);
-            }
+  public ReinforcedChestBlockEntity(
+      ReinforcingMaterial material, BlockPos blockPos, BlockState blockState) {
+    super(ModBlockEntityType.REINFORCED_CHEST_MAP.get(material), blockPos, blockState);
+    this.setHeldStacks(DefaultedList.ofSize(material.getSize(), ItemStack.EMPTY));
+    this.stateManager =
+        new ViewerCountManager() {
+          @Override
+          protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+            ReinforcedChestBlockEntity.playSound(world, pos, state, SoundEvents.BLOCK_CHEST_OPEN);
+          }
 
-            @Override
-            protected void onContainerClose(World world, BlockPos pos, BlockState state) {
-                ReinforcedChestBlockEntity.playSound(world, pos, state, SoundEvents.BLOCK_CHEST_CLOSE);
-            }
+          @Override
+          protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+            ReinforcedChestBlockEntity.playSound(world, pos, state, SoundEvents.BLOCK_CHEST_CLOSE);
+          }
 
-            @Override
-            protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount,
-                    int newViewerCount) {
-                ReinforcedChestBlockEntity.this.onViewerCountUpdate(world, pos, state, oldViewerCount, newViewerCount);
-            }
+          @Override
+          protected void onViewerCountUpdate(
+              World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+            ReinforcedChestBlockEntity.this.onViewerCountUpdate(
+                world, pos, state, oldViewerCount, newViewerCount);
+          }
 
-            @Override
-            public boolean isPlayerViewing(PlayerEntity player) {
-                if (player.currentScreenHandler instanceof ReinforcedStorageScreenHandler) {
-                    Inventory inventory = ((ReinforcedStorageScreenHandler) player.currentScreenHandler).getInventory();
-                    return inventory == ReinforcedChestBlockEntity.this || inventory instanceof DoubleInventory
-                            && ((DoubleInventory) inventory).isPart(ReinforcedChestBlockEntity.this);
-                }
-                return false;
+          @Override
+          public boolean isPlayerViewing(PlayerEntity player) {
+            if (player.currentScreenHandler instanceof ReinforcedStorageScreenHandler) {
+              Inventory inventory =
+                  ((ReinforcedStorageScreenHandler) player.currentScreenHandler).getInventory();
+              return inventory == ReinforcedChestBlockEntity.this
+                  || inventory instanceof DoubleInventory
+                      && ((DoubleInventory) inventory).isPart(ReinforcedChestBlockEntity.this);
             }
+            return false;
+          }
         };
-        this.cachedMaterial = material;
+    this.cachedMaterial = material;
+  }
+
+  @Override
+  public int size() {
+    return this.cachedMaterial.getSize();
+  }
+
+  @Override
+  protected Text getContainerName() {
+    String namespace = BlockEntityType.getId(this.getType()).getNamespace();
+    return Text.translatable(
+        "container." + namespace + "." + this.cachedMaterial.getName() + "Chest");
+  }
+
+  static void playSound(World world, BlockPos pos, BlockState state, SoundEvent soundEvent) {
+    ChestType chestType = (ChestType) state.get(ChestBlock.CHEST_TYPE);
+    if (chestType != ChestType.LEFT) {
+      double d = (double) pos.getX() + 0.5D;
+      double e = (double) pos.getY() + 0.5D;
+      double f = (double) pos.getZ() + 0.5D;
+      if (chestType == ChestType.RIGHT) {
+        Direction direction = ChestBlock.getFacing(state);
+        d += (double) direction.getOffsetX() * 0.5D;
+        f += (double) direction.getOffsetZ() * 0.5D;
+      }
+
+      world.playSound(
+          (PlayerEntity) null,
+          d,
+          e,
+          f,
+          soundEvent,
+          SoundCategory.BLOCKS,
+          0.5F,
+          world.random.nextFloat() * 0.1F + 0.9F);
     }
+  }
 
-    @Override
-    public int size() {
-        return this.cachedMaterial.getSize();
+  @Override
+  public void onOpen(ContainerUser user) {
+    if (!this.removed && !user.asLivingEntity().isSpectator()) {
+      this.stateManager.openContainer(
+          user.asLivingEntity(),
+          this.getWorld(),
+          this.getPos(),
+          this.getCachedState(),
+          user.getContainerInteractionRange());
     }
+  }
 
-    @Override
-    protected Text getContainerName() {
-        String namespace = BlockEntityType.getId(this.getType()).getNamespace();
-        return Text.translatable(
-                "container." + namespace + "." + this.cachedMaterial.getName() + "Chest");
+  @Override
+  public void onClose(ContainerUser user) {
+    if (!this.removed && !user.asLivingEntity().isSpectator()) {
+      this.stateManager.closeContainer(
+          user.asLivingEntity(), this.getWorld(), this.getPos(), this.getCachedState());
     }
+  }
 
-    static void playSound(World world, BlockPos pos, BlockState state, SoundEvent soundEvent) {
-        ChestType chestType = (ChestType) state.get(ChestBlock.CHEST_TYPE);
-        if (chestType != ChestType.LEFT) {
-            double d = (double) pos.getX() + 0.5D;
-            double e = (double) pos.getY() + 0.5D;
-            double f = (double) pos.getZ() + 0.5D;
-            if (chestType == ChestType.RIGHT) {
-                Direction direction = ChestBlock.getFacing(state);
-                d += (double) direction.getOffsetX() * 0.5D;
-                f += (double) direction.getOffsetZ() * 0.5D;
-            }
+  @Override
+  protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
+    return ReinforcedStorageScreenHandler.createSingleBlockScreen(
+        this.cachedMaterial, syncId, playerInventory, this);
+  }
 
-            world.playSound((PlayerEntity) null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F,
-                    world.random.nextFloat() * 0.1F + 0.9F);
-        }
+  @Override
+  public void onScheduledTick() {
+    if (!this.removed) {
+      this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
     }
+  }
 
-    @Override
-    public void onOpen(ContainerUser user) {
-        if (!this.removed && !user.asLivingEntity().isSpectator()) {
-            this.stateManager.openContainer(user.asLivingEntity(),
-                    this.getWorld(), this.getPos(), this.getCachedState(), user.getContainerInteractionRange());
-        }
-    }
-
-    @Override
-    public void onClose(ContainerUser user) {
-        if (!this.removed && !user.asLivingEntity().isSpectator()) {
-            this.stateManager.closeContainer(user.asLivingEntity(),
-                    this.getWorld(), this.getPos(), this.getCachedState());
-        }
-    }
-
-    @Override
-    protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return ReinforcedStorageScreenHandler.createSingleBlockScreen(this.cachedMaterial, syncId, playerInventory,
-                this);
-    }
-
-    @Override
-    public void onScheduledTick() {
-        if (!this.removed) {
-            this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
-        }
-
-    }
-
-    public ReinforcingMaterial getMaterial() {
-        return this.cachedMaterial;
-    }
+  public ReinforcingMaterial getMaterial() {
+    return this.cachedMaterial;
+  }
 }

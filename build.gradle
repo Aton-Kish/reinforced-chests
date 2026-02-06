@@ -182,17 +182,17 @@ task curseforge(type: Exec) {
 
 		# release
 		./mcmod-releaser curseforge \
-		    --file "build/libs/${project.archives_base_name}-${project.version}.jar" \
-		    --project-id "${project.curseforge_id}" \
-		    --release-type "alpha" \
-		    --version "${project.version}" \
-		    --name "Reinforced Chests v${project.version}" \
-		    --changelog "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v${java.net.URLEncoder.encode(project.version, "UTF-8")})" \
-		    --environments "Client,Server" \
-		    --loaders "Fabric" \
-		    --java-versions "Java 21" \
-		    --game-versions "1.21.9,1.21.10" \
-		    --dependencies "fabric-api=required,cloth-config=embedded,modmenu=optional"
+			--file "build/libs/${project.archives_base_name}-${project.version}.jar" \
+			--project-id "${project.curseforge_id}" \
+			--release-type "alpha" \
+			--version "${project.version}" \
+			--name "Reinforced Chests v${project.version}" \
+			--changelog "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v${java.net.URLEncoder.encode(project.version, "UTF-8")})" \
+			--environments "Client,Server" \
+			--loaders "Fabric" \
+			--java-versions "Java 21" \
+			--game-versions "1.21.9,1.21.10" \
+			--dependencies "fabric-api=required,cloth-config=embedded,modmenu=optional"
 	"""
 }
 
