@@ -17,6 +17,7 @@ import net.minecraft.block.entity.LidOpenable;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.block.entity.ChestBlockEntityRenderer;
@@ -115,7 +116,7 @@ public class ReinforcedChestBlockEntityRenderer<T extends BlockEntity & LidOpena
         SpriteIdentifier spriteIdentifier = ModTexturedRenderLayers.getReinforcedChestTextureId(material,
                 chestBlockEntityRenderState.variant,
                 chestBlockEntityRenderState.chestType);
-        RenderLayer renderLayer = spriteIdentifier.getRenderLayer(RenderLayer::getEntityCutout);
+        RenderLayer renderLayer = spriteIdentifier.getRenderLayer(RenderLayers::entityCutout);
         Sprite sprite = this.materials.getSprite(spriteIdentifier);
         if (chestBlockEntityRenderState.chestType != ChestType.SINGLE) {
             if (chestBlockEntityRenderState.chestType == ChestType.LEFT) {
