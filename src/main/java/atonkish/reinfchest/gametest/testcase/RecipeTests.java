@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
@@ -34,139 +35,61 @@ public class RecipeTests {
         {
           // Iron Chest
           {
-            ItemStack baseChest;
-            ItemStack material = new ItemStack(Items.IRON_INGOT);
-            ItemStack chest =
-                new ItemStack(
-                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
+            {
+              // from Modded Copper Chest (for backward compatible)
+              ItemStack baseChest =
+                  new ItemStack(
+                      ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
+              ItemStack material = new ItemStack(Items.IRON_INGOT);
+              ItemStack chest =
+                  new ItemStack(
+                      ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
 
-            // from Modded Copper Chest (for backward compatible)
-            baseChest =
-                new ItemStack(
-                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
+              add(
+                  RecipeTests.createTest(
+                      "Craft Iron Chest",
+                      RecipeType.CRAFTING,
+                      CraftingRecipeInput.create(
+                          3,
+                          3,
+                          List.of(
+                              material, material, material, material, baseChest, material, material,
+                              material, material)),
+                      chest));
+            }
 
-            // from Copper Chest
-            baseChest = new ItemStack(Items.COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
+            {
+              // from Copper Chests
+              for (Item item :
+                  List.of(
+                      Items.COPPER_CHEST,
+                      Items.EXPOSED_COPPER_CHEST,
+                      Items.WEATHERED_COPPER_CHEST,
+                      Items.OXIDIZED_COPPER_CHEST,
+                      Items.WAXED_COPPER_CHEST,
+                      Items.WAXED_EXPOSED_COPPER_CHEST,
+                      Items.WAXED_WEATHERED_COPPER_CHEST,
+                      Items.WAXED_OXIDIZED_COPPER_CHEST)) {
+                ItemStack baseChest = new ItemStack(item);
+                ItemStack material = new ItemStack(Items.IRON_INGOT);
+                ItemStack chest =
+                    new ItemStack(
+                        ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
 
-            // from Exposed Copper Chest
-            baseChest = new ItemStack(Items.EXPOSED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Exposed Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
-
-            // from Weathered Copper Chest
-            baseChest = new ItemStack(Items.WEATHERED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Weathered Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
-
-            // from Oxidized Copper Chest
-            baseChest = new ItemStack(Items.OXIDIZED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Oxidized Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
-
-            // from Waxed Copper Chest
-            baseChest = new ItemStack(Items.WAXED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Waxed Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
-
-            // from Waxed Exposed Copper Chest
-            baseChest = new ItemStack(Items.WAXED_EXPOSED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Waxed Exposed Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
-
-            // from Waxed Weathered Copper Chest
-            baseChest = new ItemStack(Items.WAXED_WEATHERED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Waxed Weathered Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
-
-            // from Waxed Oxidized Copper Chest
-            baseChest = new ItemStack(Items.WAXED_OXIDIZED_COPPER_CHEST);
-            add(
-                RecipeTests.createTest(
-                    "Craft Iron Chest from Waxed Oxidized Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    chest));
+                add(
+                    RecipeTests.createTest(
+                        String.format(
+                            "Craft Iron Chest from %s", baseChest.getItem().getName().getString()),
+                        RecipeType.CRAFTING,
+                        CraftingRecipeInput.create(
+                            3,
+                            3,
+                            List.of(
+                                material, material, material, material, baseChest, material,
+                                material, material, material)),
+                        chest));
+              }
+            }
           }
 
           // Gold Chest
