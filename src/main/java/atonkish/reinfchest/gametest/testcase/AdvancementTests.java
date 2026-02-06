@@ -34,29 +34,85 @@ public class AdvancementTests {
   public static final Collection<TestFunction> TEST_FUNCTIONS =
       new ArrayList<>() {
         {
-          // Copper Chest
-          add(
-              AdvancementTests.createTest(
-                  "Obtain Copper Chest recipe advancement by having Chest",
-                  Items.CHEST,
-                  Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
-          add(
-              AdvancementTests.createTest(
-                  "Obtain Copper Chest recipe advancement by having Copper Ingot",
-                  Items.COPPER_INGOT,
-                  Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/copper_chest")));
-
           // Iron Chest
-          add(
-              AdvancementTests.createTest(
-                  "Obtain Iron Chest recipe advancement by having Copper Chest",
-                  ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
-                  Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
-          add(
-              AdvancementTests.createTest(
-                  "Obtain Iron Chest recipe advancement by having Iron Ingot",
-                  Items.IRON_INGOT,
-                  Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
+          {
+            // from Modded Copper Chest (for backward compatible)
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest recipe advancement by having Modded Copper Chest",
+                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")),
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest recipe advancement by having Iron Ingot",
+                    Items.IRON_INGOT,
+                    Identifier.of(ReinforcedChestsMod.MOD_ID, "recipes/decorations/iron_chest")));
+
+            // from Copper Chests
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Copper Chest recipe advancement by having Copper Chest",
+                    Items.COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Exposed Copper Chest recipe advancement by having Exposed Copper Chest",
+                    Items.EXPOSED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Weathered Copper Chest recipe advancement by having Weathered Copper Chest",
+                    Items.WEATHERED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Oxidized Copper Chest recipe advancement by having Oxidized Copper Chest",
+                    Items.OXIDIZED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Waxed Copper Chest recipe advancement by having Waxed Copper Chest",
+                    Items.WAXED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Waxed Exposed Copper Chest recipe advancement by having Waxed Exposed Copper Chest",
+                    Items.WAXED_EXPOSED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Waxed Weathered Copper Chest recipe advancement by having Waxed Weathered Copper Chest",
+                    Items.WAXED_WEATHERED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Waxed Oxidized Copper Chest recipe advancement by having Waxed Oxidized Copper Chest",
+                    Items.WAXED_OXIDIZED_COPPER_CHEST,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+            add(
+                AdvancementTests.createTest(
+                    "Obtain Iron Chest from Copper Chest recipe advancement by having Iron Ingot",
+                    Items.IRON_INGOT,
+                    Identifier.of(
+                        ReinforcedChestsMod.MOD_ID,
+                        "recipes/decorations/iron_chest_from_copper_chests")));
+          }
 
           // Gold Chest
           add(

@@ -13,8 +13,6 @@ import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.recipe.input.RecipeInput;
 import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.BlockRotation;
@@ -34,58 +32,18 @@ public class RecipeTests {
   public static final Collection<TestFunction> TEST_FUNCTIONS =
       new ArrayList<>() {
         {
-          // Copper Chest (Vanilla)
-          {
-            ItemStack baseChest = new ItemStack(Items.CHEST);
-            ItemStack material = new ItemStack(Items.COPPER_INGOT);
-            ItemStack chest = new ItemStack(Items.COPPER_CHEST);
-
-            add(
-                RecipeTests.createTest(
-                    "Craft Vanilla Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    Identifier.ofVanilla("copper_chest"),
-                    chest));
-          }
-
-          // Copper Chest
-          {
-            ItemStack baseChest = new ItemStack(Items.CHEST);
-            ItemStack material = new ItemStack(Items.COPPER_INGOT);
-            ItemStack chest =
-                new ItemStack(
-                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
-
-            add(
-                RecipeTests.createTest(
-                    "Craft Copper Chest",
-                    RecipeType.CRAFTING,
-                    CraftingRecipeInput.create(
-                        3,
-                        3,
-                        List.of(
-                            material, material, material, material, baseChest, material, material,
-                            material, material)),
-                    Identifier.of(ReinforcedChestsMod.MOD_ID, "copper_chest"),
-                    chest));
-          }
-
           // Iron Chest
           {
-            ItemStack baseChest =
-                new ItemStack(
-                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
+            ItemStack baseChest;
             ItemStack material = new ItemStack(Items.IRON_INGOT);
             ItemStack chest =
                 new ItemStack(
                     ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("iron")));
 
+            // from Modded Copper Chest (for backward compatible)
+            baseChest =
+                new ItemStack(
+                    ModItems.REINFORCED_CHEST_MAP.get(ReinforcingMaterials.MAP.get("copper")));
             add(
                 RecipeTests.createTest(
                     "Craft Iron Chest",
@@ -96,7 +54,118 @@ public class RecipeTests {
                         List.of(
                             material, material, material, material, baseChest, material, material,
                             material, material)),
-                    Identifier.of(ReinforcedChestsMod.MOD_ID, "iron_chest"),
+                    chest));
+
+            // from Copper Chest
+            baseChest = new ItemStack(Items.COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Exposed Copper Chest
+            baseChest = new ItemStack(Items.EXPOSED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Exposed Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Weathered Copper Chest
+            baseChest = new ItemStack(Items.WEATHERED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Weathered Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Oxidized Copper Chest
+            baseChest = new ItemStack(Items.OXIDIZED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Oxidized Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Waxed Copper Chest
+            baseChest = new ItemStack(Items.WAXED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Waxed Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Waxed Exposed Copper Chest
+            baseChest = new ItemStack(Items.WAXED_EXPOSED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Waxed Exposed Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Waxed Weathered Copper Chest
+            baseChest = new ItemStack(Items.WAXED_WEATHERED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Waxed Weathered Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
+                    chest));
+
+            // from Waxed Oxidized Copper Chest
+            baseChest = new ItemStack(Items.WAXED_OXIDIZED_COPPER_CHEST);
+            add(
+                RecipeTests.createTest(
+                    "Craft Iron Chest from Waxed Oxidized Copper Chest",
+                    RecipeType.CRAFTING,
+                    CraftingRecipeInput.create(
+                        3,
+                        3,
+                        List.of(
+                            material, material, material, material, baseChest, material, material,
+                            material, material)),
                     chest));
           }
 
@@ -120,7 +189,6 @@ public class RecipeTests {
                         List.of(
                             material, material, material, material, baseChest, material, material,
                             material, material)),
-                    Identifier.of(ReinforcedChestsMod.MOD_ID, "gold_chest"),
                     chest));
           }
 
@@ -144,7 +212,6 @@ public class RecipeTests {
                         List.of(
                             material, material, material, material, baseChest, material, material,
                             material, material)),
-                    Identifier.of(ReinforcedChestsMod.MOD_ID, "diamond_chest"),
                     chest));
           }
 
@@ -164,14 +231,13 @@ public class RecipeTests {
                     "Smithing Netherite Chest",
                     RecipeType.SMITHING,
                     new SmithingRecipeInput(template, baseChest, material),
-                    Identifier.of(ReinforcedChestsMod.MOD_ID, "netherite_chest_smithing"),
                     chest));
           }
         }
       };
 
   private static <I extends RecipeInput, T extends Recipe<I>> TestFunction createTest(
-      String name, RecipeType<T> type, I input, Identifier recipeId, ItemStack expected) {
+      String name, RecipeType<T> type, I input, ItemStack expected) {
     Identifier testIdentifier =
         TestIdentifier.of(ReinforcedChestsMod.MOD_ID, RecipeTests.class, name);
 
@@ -192,11 +258,7 @@ public class RecipeTests {
           ServerWorld world = context.getWorld();
           ServerRecipeManager recipeManager = world.getRecipeManager();
           DynamicRegistryManager registryManager = world.getRegistryManager();
-          T recipe =
-              recipeManager
-                  .getFirstMatch(type, input, world, RegistryKey.of(RegistryKeys.RECIPE, recipeId))
-                  .orElseThrow()
-                  .value();
+          T recipe = recipeManager.getFirstMatch(type, input, world).orElseThrow().value();
 
           // Act
           ItemStack actual = recipe.craft(input, registryManager);

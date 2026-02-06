@@ -3,11 +3,11 @@
   "category": "misc",
   "pattern": ["MMM", "MCM", "MMM"],
   "key": {
-    "C": "minecraft:chest",
-    "M": "minecraft:copper_ingot"
+    "C": "#minecraft:copper_chests",
+    "M": "minecraft:iron_ingot"
   },
   "result": {
     "count": 1,
-    "id": "reinfchest:copper_chest"
+    "id": "reinfchest:iron_chest"
   }
 }
