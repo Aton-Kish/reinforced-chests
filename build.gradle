@@ -2,6 +2,8 @@ plugins {
 	id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
 	id "maven-publish"
 	id "com.modrinth.minotaur" version "2.+"
+	id 'checkstyle'
+	id "com.diffplug.spotless" version "8.2.1"
 }
 
 version = project.mod_version
@@ -127,6 +129,44 @@ publishing {
 		maven {
 			url = "file://${buildDir}/maven"
 		}
+	}
+}
+
+checkstyle {
+	toolVersion = "13.0.0"
+	configFile = file("${rootProject.projectDir}/checkstyle.xml")
+
+	configProperties = [
+		'org.checkstyle.google.severity': 'error'
+	]
+}
+
+spotless {
+	format 'misc', {
+		target '*.gradle', 'gradle.properties'
+
+		trimTrailingWhitespace()
+		leadingSpacesToTabs()
+		endWithNewline()
+	}
+
+	java {
+		googleJavaFormat()
+		importOrder(
+			'java',
+			'javax',
+			'org.slf4j',
+			'com.mojang',
+			'net.minecraft',
+			'net.fabricmc',
+			'org.spongepowered',
+			'',
+			'atonkish'
+		)
+		removeUnusedImports()
+		formatAnnotations()
+		trimTrailingWhitespace()
+		endWithNewline()
 	}
 }
 
