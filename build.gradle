@@ -176,7 +176,7 @@ task curseforge(type: Exec) {
 		set -eux
 
 		# install
-		MCMOD_RELEASER_VERSION="0.1.0"
+		MCMOD_RELEASER_VERSION="0.1.1"
 		curl -sL https://github.com/Aton-Kish/mcmod-releaser/releases/download/v\${MCMOD_RELEASER_VERSION}/mcmod-releaser_\${MCMOD_RELEASER_VERSION}_linux_amd64.tar.gz | tar xzf - mcmod-releaser
 		./mcmod-releaser --version
 
