@@ -184,14 +184,14 @@ task curseforge(type: Exec) {
 		./mcmod-releaser curseforge \
 			--file "build/libs/${project.archives_base_name}-${project.version}.jar" \
 			--project-id "${project.curseforge_id}" \
-			--release-type "alpha" \
+			--release-type "beta" \
 			--version "${project.version}" \
 			--name "Reinforced Chests v${project.version}" \
 			--changelog "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v${java.net.URLEncoder.encode(project.version, "UTF-8")})" \
 			--environments "Client,Server" \
 			--loaders "Fabric" \
 			--java-versions "Java 21" \
-			--game-versions "1.21.9,1.21.10" \
+			--game-versions "1.21.11" \
 			--dependencies "fabric-api=required,cloth-config=embedded,modmenu=optional"
 	"""
 }
@@ -204,10 +204,10 @@ modrinth {
 	uploadFile = remapJar
 	versionNumber = project.version
 	versionName = "Reinforced Chests v${project.version}"
-	versionType = "alpha"
+	versionType = "beta"
 	changelog = "[v${project.version}](https://github.com/Aton-Kish/reinforced-chests/releases/tag/v" + java.net.URLEncoder.encode(project.version, "UTF-8") + ")"
 
-	gameVersions = ["1.21.9", "1.21.10"]
+	gameVersions = ["1.21.11"]
 	loaders = ["fabric"]
 
 	dependencies {
